@@ -186,7 +186,7 @@ Logo.Image = "rbxassetid://12511245920"
 	Hub.Position = UDim2.new(0, 150, 0, 0)
 	Hub.Size = UDim2.new(0, 81, 0, 27)
 	Hub.Font = Enum.Font.GothamSemibold
-	Hub.Text = "BEM VINDO! - BOM USO!"
+	Hub.Text = "FAÇA UM BOM USO!"
 	Hub.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Hub.TextSize = 14.000
 	Hub.TextXAlignment = Enum.TextXAlignment.Left
@@ -3801,7 +3801,7 @@ end)
 
  
 --------------------------------------------------------------------
-local Library = Update:Window("  PLUG'S HUB ","")
+local Library = Update:Window("   PLUG'S HUB ","")
 ------------------------------------------
 
 spawn(function()
@@ -4232,7 +4232,7 @@ local Misc = Library:Tab("Misc","rbxassetid://11447063791")
 local Op = Library:Tab("Status", "rbxassetid://7040410130")
 --------------------------------------------------------------------
 
-Setting:Label("Entre em meu Discord!!!")
+Setting:Label("get free premeum!!!")
 
 Setting:Line()
 
@@ -5803,9 +5803,9 @@ local NotificationHolder = loadstring(game:HttpGet("https://raw.githubuserconten
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
 wait(1)
 Notification:Notify(
-   {Title = "t7gfy hub ", Description = "You Have Max Observation"},
+   {Title = "PLUG'S HUB ", Description = "Você tem o nível máximo do Haki da Observação"},
    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
-   {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
+   {Image = "http://www.roblox.com/asset/?id=15837870311", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
 )
                     else
                         if World2 then
