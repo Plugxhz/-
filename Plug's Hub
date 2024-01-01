@@ -348,11 +348,11 @@ end)
 	timecock.TextSize = 13.000
 
     function setTime()
-        local Tempo de Jogo = math.floor(workspace.Distributed Tempo de Jogo+0.5)
-        local Horas = math.floor(Tempo de Jogo/(60^2))%24
-        local Minutos = math.floor(Tempo de Jogo/(60^1))%60
-        local Segundos = math.floor(Tempo de Jogo/(60^0))%60
-        timecock.Text = ("Hr(s) : "..Horas.." Min(s) : "..Minutos.." Sec(s) : "..Segundos)
+        local GameTime = math.floor(workspace.DistributedGameTime+0.5)
+        local Hour = math.floor(GameTime/(60^2))%24
+        local Minute = math.floor(GameTime/(60^1))%60
+        local Second = math.floor(GameTime/(60^0))%60
+        timecock.Text = ("Hr(s) : "..Hour.." Min(s) : "..Minute.." Sec(s) : "..Second)
     end
     
     spawn(function()
