@@ -33,7 +33,7 @@ local ThunderImageUI = Instance.new("ImageLabel")
         ThunderImageUI.BorderSizePixel = 0
         ThunderImageUI.Position = UDim2.new(0.0, 0, 0.0, 0)
         ThunderImageUI.Size = UDim2.new(0, 50, 0, 50)
-        ThunderImageUI.Image = "http://www.roblox.com/asset/?id=15837870311"
+        ThunderImageUI.Image = "http://www.roblox.com/asset/?id=12511245920"
 
 local SOMEXHUB = {}
 local UserInputService = game:GetService("UserInputService")
@@ -4232,17 +4232,17 @@ local Misc = Library:Tab("Misc","rbxassetid://11447063791")
 local Op = Library:Tab("Status", "rbxassetid://7040410130")
 --------------------------------------------------------------------
 
-Setting:Label("get free premeum!!!")
+Setting:Label("SEM IDEIA DO QUE ESCREVER")
 
 Setting:Line()
 
-Setting:Button(" MY YT FOLOW FOR PREMEUM!!! ",function()
+Setting:Button(" LINK DO MEU SERVIDOR DO DISCORD ",function()
  
- setclipboard("https://www.youtube.com/@t_7_g_f_y")
+ setclipboard("https://discord.gg/4a3SznvyYY")
  end)
 
-Setting:Seperator(" Setting ")
-Setting:Toggle("Auto Set Spawn Points",true,function(value)
+Setting:Seperator(" Configurar ")
+Setting:Toggle("Auto Setar Ponto de Spawn",true,function(value)
  _G.AutoSetSpawn = value
  end)
 
@@ -4264,18 +4264,18 @@ Setting:Toggle("Anti AFK",true,function(value)
 
 if not game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService").KeyboardEnabled == false then
 _G.DistanceMob = 20
-Setting:Slider("Farm Distance",1,100,20,function(value)
+Setting:Slider("Distancia do Farm",1,100,20,function(value)
  _G.DistanceMob = value
  end)
 else
  _G.DistanceMob = 20
-Setting:Slider1("Farm Distance",1,100,20,function(value)
+Setting:Slider1("Distancia do Farm",1,100,20,function(value)
  _G.DistanceMob = value
  end)
 end
 
-Setting:Dropdown("Select Farm Method", {
- "Behind","Below","Upper"
+Setting:Dropdown("Selecionar Método de Farm", {
+ "Atrás","Abaixo","Acima"
 },function(value)
  _G.Method = value
 end)
@@ -4283,11 +4283,11 @@ end)
 spawn(function()
  while wait() do
  pcall(function()
-  if _G.Method == "Behind" then
+  if _G.Method == "Atrás" then
   MethodFarm = CFrame.new(0,0,_G.DistanceMob)
-  elseif _G.Method == "Below" then
+  elseif _G.Method == "Abaixo" then
   MethodFarm = CFrame.new(0,-_G.DistanceMob,0) * CFrame.Angles(math.rad(90),0,0)
-  elseif _G.Method == "Upper" then
+  elseif _G.Method == "Acima" then
   MethodFarm = CFrame.new(0,_G.DistanceMob,0) * CFrame.Angles(math.rad(-90),0,0)
   else
    MethodFarm = CFrame.new(0,_G.DistanceMob,0)
@@ -4417,7 +4417,7 @@ if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn
 	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
 end
 
-Setting:Toggle("Bring Mob [Normal]",true,function(value)
+Setting:Toggle("Aglomerar Mobs [Normal]",true,function(value)
  _G.BringNormal = value
 end)
 
@@ -4441,7 +4441,7 @@ spawn(function()
     end)
 	end)
 	
-Setting:Toggle("Bring Mob [Extra+Lag]",false,function(value)
+Setting:Toggle("Aglomerar Mobs [Muito+Lag]",false,function(value)
  _G.BringExtra = value
 end)
 
@@ -4478,11 +4478,11 @@ end)
 			end
 		end)
 
-Setting:Toggle("Fast Attack [New]",true,function(value)
+Setting:Toggle("Attack Rápido [NOVO]",true,function(value)
  _G.FastAttack = value
 end)
 
--- [[ Fast Attack Fixed / Shadow Hub / Dont edit , or ur will be messed up! ]]
+-- [[ Fast Attack Fixed / Plug Hub / Dont edit , or ur will be messed up! ]]
 
 -- [[ Properties ]]
 
@@ -4513,7 +4513,7 @@ spawn(function()
     end)
 end)
 
-Setting:Toggle("Auto Ken Haki",_G.Auto_Ken,function(vu)
+Setting:Toggle("Auto Ativar Haki da Observação",_G.Auto_Ken,function(vu)
 	_G.Auto_Ken = vu
 end)
 spawn(function()
@@ -4531,7 +4531,7 @@ Setting:Toggle("Auto Click",false,function(value)
  _G.click = value
 end)
 
-Setting:Toggle("Disabled Damage Text",_G.DisableDamage,function(value)
+Setting:Toggle("Desligar Texto de Dano",_G.DisableDamage,function(value)
  _G.DisableDamage = value
 end)
 
@@ -4547,7 +4547,7 @@ spawn(function()
  end
  end)
 
-Setting:Toggle("White Screen [ Booster FPS ]",_G.WhiteScreen,function(value)
+Setting:Toggle("Tela Branca [ Aumenta FPS ]",_G.WhiteScreen,function(value)
  _G.WhiteScreen = value
 
  if _G.WhiteScreen == true then
@@ -4558,7 +4558,7 @@ Setting:Toggle("White Screen [ Booster FPS ]",_G.WhiteScreen,function(value)
 end)
 
 
-    Setting:Button("FPS Boost",function()
+    Setting:Button("FPS BOOST",function()
         pcall(function()
             game:GetService("Lighting").FantasySky:Destroy()
             local g = game
@@ -4607,30 +4607,30 @@ end)
     end)
 
 
-Setting:Seperator(" Settings Mastery ")
+Setting:Seperator(" Configurações de Maestria ")
 
 if not game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService").KeyboardEnabled == false then
 _G.Kill_At = 25
-Setting:Slider("Kill Health [For Mastery]",1,100,25,function(value)
+Setting:Slider("Vida Para Matar [Maestria]",1,100,25,function(value)
  _G.Kill_At = value
 end)
 else
 _G.Kill_At = 25
-Setting:Slider1("Kill Health [For Mastery]",1,100,25,function(value)
+Setting:Slider1("Vida Para Matar [Maestria]",1,100,25,function(value)
  _G.Kill_At = value
 end)
 end
 
-Setting:Toggle("Skill Z",true,function(a)
+Setting:Toggle("Habilidade Z",true,function(a)
 		_G.SkillZ = a
 	end)
-	Setting:Toggle("Skill X",true,function(a)
+	Setting:Toggle("Habilidade X",true,function(a)
 		_G.SkillX = a
 	end)
-	Setting:Toggle("Skill C",true,function(a)
+	Setting:Toggle("Habilidade C",true,function(a)
 		_G.SkillC = a
 	end)
-	Setting:Toggle("Skill V",true,function(a)
+	Setting:Toggle("Habilidade V",true,function(a)
 		_G.SkillV = a
 	end)
 
@@ -5805,7 +5805,7 @@ wait(1)
 Notification:Notify(
    {Title = "PLUG'S HUB ", Description = "Você tem o nível máximo do Haki da Observação"},
    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
-   {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
+   {Image = "http://www.roblox.com/asset/?id=15837870311", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
 )
                     else
                         if World2 then
@@ -6046,7 +6046,7 @@ end)
  
  if World3 then
 
-Weapon:Seperator(" Item & Quest ")
+Weapon:Seperator(" Itens & Missões ")
 
 local Total_Elite_Hunter = Weapon:Label("Elite Hunter")
 
@@ -6057,9 +6057,9 @@ local Elite_Hunter_Status = Weapon:Label("Status")
 		while wait() do
 			pcall(function()
 				if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo [Lv. 1750]") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre [Lv. 1750]") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Urban [Lv. 1750]") then
-					Elite_Hunter_Status:Set("Status : Elite Spawn!")	
+					Elite_Hunter_Status:Set("Status : Chefe Elite Spawnado!")	
 				else
-					Elite_Hunter_Status:Set("Status : Elite Not Spawn")	
+					Elite_Hunter_Status:Set("Status : Chefe Elite Not Spawn")	
 				end
 			end)
 		end
@@ -6067,17 +6067,17 @@ local Elite_Hunter_Status = Weapon:Label("Status")
 
 	spawn(function()
 		while wait() do
-			Total_Elite_Hunter:Set("Total Elite Hunter : "..game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress"))
+			Total_Elite_Hunter:Set("Total de Elite Hunter Farmados : "..game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress"))
 		end
 	end)
 	
-	Weapon:Toggle("Auto Elite Hunter",_G.Auto_Elite_Hunter,function(value)
+	Weapon:Toggle("Auto Farm Elite Hunter",_G.Auto_Elite_Hunter,function(value)
  _G.Auto_Elite_Hunter = value
 StopTween(_G.Auto_Elite_Hunter)
 end)
 
 	
-	Weapon:Toggle("Auto Elite Hunter Hop",_G.Auto_Elite_Hunter_Hop,function(value)
+	Weapon:Toggle("Auto Farm Elite Hunter Hop",_G.Auto_Elite_Hunter_Hop,function(value)
  _G.Auto_Elite_Hunter_Hop = value
 end)
 
@@ -6127,7 +6127,7 @@ end)
 		end
 	end)
 	
-	Weapon:Seperator(" Dough Boss ")
+	Weapon:Seperator(" Dough Chefe ")
 
 local Mob_Kill_Cake_Prince = Weapon:Label("Total")
 
@@ -6135,26 +6135,26 @@ local Mob_Kill_Cake_Prince = Weapon:Label("Total")
 		while wait() do
 			pcall(function()
 				if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
-					Mob_Kill_Cake_Prince:Set("Killed : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41).." : Kill More")
+					Mob_Kill_Cake_Prince:Set("Mortos : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41).." : Matar Mais")
 				elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
-					Mob_Kill_Cake_Prince:Set("Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40).." : Kill More")
+					Mob_Kill_Cake_Prince:Set("Matar : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40).." : Matar Mais")
 				elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
-					Mob_Kill_Cake_Prince:Set("Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39).." : More")
+					Mob_Kill_Cake_Prince:Set("Matar : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39).." : Mais")
 				else
-					Mob_Kill_Cake_Prince:Set("Boss Is Spawned")
+					Mob_Kill_Cake_Prince:Set("Chefe Spawnado!")
 				end
 			end)
 		end
 	end)
 
-Weapon:Toggle("Auto Cake Prince",_G.Auto_Cake_Prince,function(value)
+Weapon:Toggle("Auto Farm Cake Prince",_G.Auto_Cake_Prince,function(value)
  _G.Auto_Cake_Prince = value
 StopTween(_G.Auto_Cake_Prince)
 end)
 	
 	
 	
-	Weapon:Toggle("Auto Open Dough Dungeon",_G.Auto_Open_Dough_Dungeon,function(value)
+	Weapon:Toggle("Auto Iniciar Dough Raid",_G.Auto_Open_Dough_Dungeon,function(value)
  _G.Auto_Open_Dough_Dungeon = value
 StopTween(_G.Auto_Open_Dough_Dungeon)
 end)
@@ -6374,9 +6374,9 @@ Weapon:Toggle("Auto Soul Guitar + Hop",false,function(value)
   _G.soulGuitarhop = value    
  end)
 
-Weapon:Seperator(" Dual Curse Katana ")
+Weapon:Seperator(" Dual Cursed Katana ")
 
-Weapon:Toggle("Auto CDK Quest(Not Working)",_G.AutoCdk,function(value)
+Weapon:Toggle("Auto CDK (ARRUMAR*)",_G.AutoCdk,function(value)
  _G.AutoCdk = value
 end)
 
