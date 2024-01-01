@@ -4232,8 +4232,7 @@ local Misc = Library:Tab("Misc","rbxassetid://11447063791")
 local Op = Library:Tab("Status", "rbxassetid://7040410130")
 --------------------------------------------------------------------
 
-Setting:Label("Entre em meu Discord!!!"),
-"https://discord.gg/4a3SznvyYY"
+Setting:Label("Entre em meu Discord!!!")
 
 Setting:Line()
 
