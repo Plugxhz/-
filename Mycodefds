@@ -164,7 +164,7 @@ function Update:Window(text,logo,keybind)
  Logo.BackgroundTransparency = 1.000
  Logo.Position = UDim2.new(-0.01, 0,-0.170, 0)
  Logo.Size = UDim2.new(0, 55,0, 45)
-Logo.Image = "rbxassetid://12511245920"
+Logo.Image = "rbxassetid://15837870311"
 
 	local Name = Instance.new("TextLabel")
 	Name.Name = "Name"
@@ -186,7 +186,7 @@ Logo.Image = "rbxassetid://12511245920"
 	Hub.Position = UDim2.new(0, 150, 0, 0)
 	Hub.Size = UDim2.new(0, 81, 0, 27)
 	Hub.Font = Enum.Font.GothamSemibold
-	Hub.Text = "SEJA BEM VINDO & BOM USO!"
+	Hub.Text = "FAÇA UM BOM USO!!"
 	Hub.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Hub.TextSize = 14.000
 	Hub.TextXAlignment = Enum.TextXAlignment.Left
@@ -804,7 +804,7 @@ local postog12 = Instance.new("UIStroke")
  ImageLabel.BorderSizePixel = 0
  ImageLabel.Position = UDim2.new(-0.018, 0,-0.252, 0)
  ImageLabel.Size = UDim2.new(0, 45,0, 45)
- ImageLabel.Image = "rbxassetid://12511245920"
+ ImageLabel.Image = "rbxassetid://15837870311"
  ImageLabel.ImageColor3 = Color3.fromRGB(224,224,224)
  
  Space.Name = "Space"
@@ -838,7 +838,7 @@ local postog12 = Instance.new("UIStroke")
  ImageButton.Position = UDim2.new(0, 340, 0, 4)
  ImageButton.Size = UDim2.new(0, 23, 0, 23)
  ImageButton.ZIndex = 2
- ImageButton.Image = "rbxassetid://3926311105"
+ ImageButton.Image = "rbxassetid://15837870311"
  ImageButton.ImageColor3 = Color3.fromRGB(224,224,224)
  ImageButton.ImageRectOffset = Vector2.new(940, 784)
  ImageButton.ImageRectSize = Vector2.new(48, 48)
@@ -943,7 +943,7 @@ function main:Dropdown(text,option,callback)
  DropImage.Position = UDim2.new(0, 320, 0, 6)
  DropImage.Rotation = 180.000
  DropImage.Size = UDim2.new(0, 20, 0, 20)
- DropImage.Image = "rbxassetid://6031090990"
+ DropImage.Image = "rbxassetid://15837870311"
  
  DropButton.Name = "DropButton"
  DropButton.Parent = Dropdown
@@ -1155,7 +1155,7 @@ ImageLabel.BackgroundTransparency = 1.000
 ImageLabel.BorderSizePixel = 0
 ImageLabel.Position = UDim2.new(0, -5, 0, -5)
 ImageLabel.Size = UDim2.new(0, 45, 0, 45)
-ImageLabel.Image = "rbxassetid://12511245920"
+ImageLabel.Image = "rbxassetid://15837870311"
 ImageLabel.ImageColor3 = Color3.fromRGB(224,224,224)
 
 Space.Name = "Space"
@@ -3619,7 +3619,7 @@ end
                 inf.Rotation = NumberRange.new(0, 0)
                 inf.Speed = NumberRange.new(30, 30)
                 inf.SpreadAngle = Vector2.new(0,0,0,0)
-                inf.Texture = "rbxassetid://243098098"
+                inf.Texture = "rbxassetid://15837870311"
                 inf.VelocityInheritance = 0
                 inf.ZOffset = 2
                 inf.Transparency = NumberSequence.new(0)
@@ -5805,7 +5805,7 @@ wait(1)
 Notification:Notify(
    {Title = "PLUG'S HUB ", Description = "Você tem o nível máximo do Haki da Observação"},
    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
-   {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
+   {Image = "http://www.roblox.com/asset/?id=15837870311", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
 )
                     else
                         if World2 then
@@ -8902,7 +8902,7 @@ tween:Play()
 
 local SoundSFX = Instance.new("Sound")
 SoundSFX.Parent = workspace
-SoundSFX.SoundId = "rbxassetid://1904813041"
+SoundSFX.SoundId = "rbxassetid://15837870311"
 SoundSFX:Play()
 SoundSFX.Name = "POwfpxzxzfFfFF"
 game:GetService("Workspace").Map["Temple of Time"].Lever.Prompt:FindFirstChild("ProximityPrompt"):Remove()
