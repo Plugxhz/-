@@ -4232,17 +4232,17 @@ local Misc = Library:Tab("Misc","rbxassetid://11447063791")
 local Op = Library:Tab("Status", "rbxassetid://7040410130")
 --------------------------------------------------------------------
 
-Setting:Label("get free premeum!!!")
+Setting:Label("SEM IDEIA DO QUE ESCREVER")
 
 Setting:Line()
 
-Setting:Button(" MY YT FOLOW FOR PREMEUM!!! ",function()
+Setting:Button(" LINK DO MEU SERVIDOR DO DISCORD ",function()
  
- setclipboard("https://www.youtube.com/@t_7_g_f_y")
+ setclipboard("https://discord.gg/4a3SznvyYY")
  end)
 
-Setting:Seperator(" Setting ")
-Setting:Toggle("Auto Set Spawn Points",true,function(value)
+Setting:Seperator(" Configurar ")
+Setting:Toggle("Auto Setar Ponto de Spawn",true,function(value)
  _G.AutoSetSpawn = value
  end)
 
@@ -4264,18 +4264,18 @@ Setting:Toggle("Anti AFK",true,function(value)
 
 if not game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService").KeyboardEnabled == false then
 _G.DistanceMob = 20
-Setting:Slider("Farm Distance",1,100,20,function(value)
+Setting:Slider("Distancia do Farm",1,100,20,function(value)
  _G.DistanceMob = value
  end)
 else
  _G.DistanceMob = 20
-Setting:Slider1("Farm Distance",1,100,20,function(value)
+Setting:Slider1("Distancia do Farm",1,100,20,function(value)
  _G.DistanceMob = value
  end)
 end
 
-Setting:Dropdown("Select Farm Method", {
- "Behind","Below","Upper"
+Setting:Dropdown("Selecionar Método de Farm", {
+ "Atrás","Abaixo","Acima"
 },function(value)
  _G.Method = value
 end)
@@ -4283,11 +4283,11 @@ end)
 spawn(function()
  while wait() do
  pcall(function()
-  if _G.Method == "Behind" then
+  if _G.Method == "Atrás" then
   MethodFarm = CFrame.new(0,0,_G.DistanceMob)
-  elseif _G.Method == "Below" then
+  elseif _G.Method == "Abaixo" then
   MethodFarm = CFrame.new(0,-_G.DistanceMob,0) * CFrame.Angles(math.rad(90),0,0)
-  elseif _G.Method == "Upper" then
+  elseif _G.Method == "Acima" then
   MethodFarm = CFrame.new(0,_G.DistanceMob,0) * CFrame.Angles(math.rad(-90),0,0)
   else
    MethodFarm = CFrame.new(0,_G.DistanceMob,0)
@@ -4417,7 +4417,7 @@ if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn
 	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
 end
 
-Setting:Toggle("Bring Mob [Normal]",true,function(value)
+Setting:Toggle("Aglomerar Mobs [Normal]",true,function(value)
  _G.BringNormal = value
 end)
 
@@ -4441,7 +4441,7 @@ spawn(function()
     end)
 	end)
 	
-Setting:Toggle("Bring Mob [Extra+Lag]",false,function(value)
+Setting:Toggle("Aglomerar Mobs [Muito+Lag]",false,function(value)
  _G.BringExtra = value
 end)
 
@@ -4478,11 +4478,11 @@ end)
 			end
 		end)
 
-Setting:Toggle("Fast Attack [New]",true,function(value)
+Setting:Toggle("Attack Rápido [NOVO]",true,function(value)
  _G.FastAttack = value
 end)
 
--- [[ Fast Attack Fixed / Shadow Hub / Dont edit , or ur will be messed up! ]]
+-- [[ Fast Attack Fixed / Plug Hub / Dont edit , or ur will be messed up! ]]
 
 -- [[ Properties ]]
 
@@ -4513,7 +4513,7 @@ spawn(function()
     end)
 end)
 
-Setting:Toggle("Auto Ken Haki",_G.Auto_Ken,function(vu)
+Setting:Toggle("Auto Ativar Haki da Observação",_G.Auto_Ken,function(vu)
 	_G.Auto_Ken = vu
 end)
 spawn(function()
@@ -4531,7 +4531,7 @@ Setting:Toggle("Auto Click",false,function(value)
  _G.click = value
 end)
 
-Setting:Toggle("Disabled Damage Text",_G.DisableDamage,function(value)
+Setting:Toggle("Desligar Texto de Dano",_G.DisableDamage,function(value)
  _G.DisableDamage = value
 end)
 
@@ -4547,7 +4547,7 @@ spawn(function()
  end
  end)
 
-Setting:Toggle("White Screen [ Booster FPS ]",_G.WhiteScreen,function(value)
+Setting:Toggle("Tela Branca [ Aumenta FPS ]",_G.WhiteScreen,function(value)
  _G.WhiteScreen = value
 
  if _G.WhiteScreen == true then
@@ -4558,7 +4558,7 @@ Setting:Toggle("White Screen [ Booster FPS ]",_G.WhiteScreen,function(value)
 end)
 
 
-    Setting:Button("FPS Boost",function()
+    Setting:Button("FPS BOOST",function()
         pcall(function()
             game:GetService("Lighting").FantasySky:Destroy()
             local g = game
@@ -4607,30 +4607,30 @@ end)
     end)
 
 
-Setting:Seperator(" Settings Mastery ")
+Setting:Seperator(" Configurações de Maestria ")
 
 if not game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService").KeyboardEnabled == false then
 _G.Kill_At = 25
-Setting:Slider("Kill Health [For Mastery]",1,100,25,function(value)
+Setting:Slider("Vida Para Matar [Maestria]",1,100,25,function(value)
  _G.Kill_At = value
 end)
 else
 _G.Kill_At = 25
-Setting:Slider1("Kill Health [For Mastery]",1,100,25,function(value)
+Setting:Slider1("Vida Para Matar [Maestria]",1,100,25,function(value)
  _G.Kill_At = value
 end)
 end
 
-Setting:Toggle("Skill Z",true,function(a)
+Setting:Toggle("Habilidade Z",true,function(a)
 		_G.SkillZ = a
 	end)
-	Setting:Toggle("Skill X",true,function(a)
+	Setting:Toggle("Habilidade X",true,function(a)
 		_G.SkillX = a
 	end)
-	Setting:Toggle("Skill C",true,function(a)
+	Setting:Toggle("Habilidade C",true,function(a)
 		_G.SkillC = a
 	end)
-	Setting:Toggle("Skill V",true,function(a)
+	Setting:Toggle("Habilidade V",true,function(a)
 		_G.SkillV = a
 	end)
 
@@ -6046,7 +6046,7 @@ end)
  
  if World3 then
 
-Weapon:Seperator(" Item & Quest ")
+Weapon:Seperator(" Itens & Missões ")
 
 local Total_Elite_Hunter = Weapon:Label("Elite Hunter")
 
@@ -6057,9 +6057,9 @@ local Elite_Hunter_Status = Weapon:Label("Status")
 		while wait() do
 			pcall(function()
 				if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo [Lv. 1750]") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre [Lv. 1750]") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre [Lv. 1750]") or game:GetService("Workspace").Enemies:FindFirstChild("Urban [Lv. 1750]") then
-					Elite_Hunter_Status:Set("Status : Elite Spawn!")	
+					Elite_Hunter_Status:Set("Status : Chefe Elite Spawnado!")	
 				else
-					Elite_Hunter_Status:Set("Status : Elite Not Spawn")	
+					Elite_Hunter_Status:Set("Status : Chefe Elite Not Spawn")	
 				end
 			end)
 		end
@@ -6067,17 +6067,17 @@ local Elite_Hunter_Status = Weapon:Label("Status")
 
 	spawn(function()
 		while wait() do
-			Total_Elite_Hunter:Set("Total Elite Hunter : "..game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress"))
+			Total_Elite_Hunter:Set("Total de Elite Hunter Farmados : "..game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress"))
 		end
 	end)
 	
-	Weapon:Toggle("Auto Elite Hunter",_G.Auto_Elite_Hunter,function(value)
+	Weapon:Toggle("Auto Farm Elite Hunter",_G.Auto_Elite_Hunter,function(value)
  _G.Auto_Elite_Hunter = value
 StopTween(_G.Auto_Elite_Hunter)
 end)
 
 	
-	Weapon:Toggle("Auto Elite Hunter Hop",_G.Auto_Elite_Hunter_Hop,function(value)
+	Weapon:Toggle("Auto Farm Elite Hunter Hop",_G.Auto_Elite_Hunter_Hop,function(value)
  _G.Auto_Elite_Hunter_Hop = value
 end)
 
@@ -6127,7 +6127,7 @@ end)
 		end
 	end)
 	
-	Weapon:Seperator(" Dough Boss ")
+	Weapon:Seperator(" Dough Chefe ")
 
 local Mob_Kill_Cake_Prince = Weapon:Label("Total")
 
@@ -6135,26 +6135,26 @@ local Mob_Kill_Cake_Prince = Weapon:Label("Total")
 		while wait() do
 			pcall(function()
 				if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
-					Mob_Kill_Cake_Prince:Set("Killed : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41).." : Kill More")
+					Mob_Kill_Cake_Prince:Set("Mortos : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41).." : Matar Mais")
 				elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
-					Mob_Kill_Cake_Prince:Set("Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40).." : Kill More")
+					Mob_Kill_Cake_Prince:Set("Matar : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40).." : Matar Mais")
 				elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
-					Mob_Kill_Cake_Prince:Set("Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39).." : More")
+					Mob_Kill_Cake_Prince:Set("Matar : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39).." : Mais")
 				else
-					Mob_Kill_Cake_Prince:Set("Boss Is Spawned")
+					Mob_Kill_Cake_Prince:Set("Chefe Spawnado!")
 				end
 			end)
 		end
 	end)
 
-Weapon:Toggle("Auto Cake Prince",_G.Auto_Cake_Prince,function(value)
+Weapon:Toggle("Auto Farm Cake Prince",_G.Auto_Cake_Prince,function(value)
  _G.Auto_Cake_Prince = value
 StopTween(_G.Auto_Cake_Prince)
 end)
 	
 	
 	
-	Weapon:Toggle("Auto Open Dough Dungeon",_G.Auto_Open_Dough_Dungeon,function(value)
+	Weapon:Toggle("Auto Iniciar Dough Raid",_G.Auto_Open_Dough_Dungeon,function(value)
  _G.Auto_Open_Dough_Dungeon = value
 StopTween(_G.Auto_Open_Dough_Dungeon)
 end)
@@ -6374,9 +6374,9 @@ Weapon:Toggle("Auto Soul Guitar + Hop",false,function(value)
   _G.soulGuitarhop = value    
  end)
 
-Weapon:Seperator(" Dual Curse Katana ")
+Weapon:Seperator(" Dual Cursed Katana ")
 
-Weapon:Toggle("Auto CDK Quest(Not Working)",_G.AutoCdk,function(value)
+Weapon:Toggle("Auto CDK (ARRUMAR*)",_G.AutoCdk,function(value)
  _G.AutoCdk = value
 end)
 
@@ -7462,13 +7462,13 @@ elseif World3 then
 
 	Weapon:Seperator(" Soul Reaper ")
 
-Weapon:Toggle("Auto Soul Reaper",_G.Auto_Soul_Reaper,function(value)
+Weapon:Toggle("Auto Farmar Soul Reaper",_G.Auto_Soul_Reaper,function(value)
  _G.Auto_Soul_Reaper = value
 StopTween(_G.Auto_Soul_Reaper)
 end)
 
 
-Weapon:Toggle("Auto Soul Reaper Hop",_G.Auto_Soul_Reaper_Hop,function(value)
+Weapon:Toggle("Auto Farmar Soul Reaper Hop",_G.Auto_Soul_Reaper_Hop,function(value)
  _G.Auto_Soul_Reaper_Hop = value
 StopTween(_G.Auto_Soul_Reaper_Hop)
 end)
@@ -7623,7 +7623,7 @@ end)
 	
 		Weapon:Seperator(" Yama ")
 	
-	Weapon:Toggle("Auto Yama",_G.Auto_Yama,function(value)
+	Weapon:Toggle("Pegar Yama Automático",_G.Auto_Yama,function(value)
 	 _G.Auto_Yama = value
  	StopTween(_G.Auto_Yama)
 end)
@@ -7641,15 +7641,15 @@ end)
 		end
 	end)
 	
-		Weapon:Seperator(" Rainbow Haki ")
+		Weapon:Seperator(" Haki RGB ")
 	
-	Weapon:Toggle("Auto Rainbow Haki",_G.Auto_Rainbow_Haki,function(value)
+	Weapon:Toggle("Auto Pegar RGB Haki",_G.Auto_Rainbow_Haki,function(value)
  _G.Auto_Rainbow_Haki = value
 StopTween(_G.Auto_Rainbow_Haki)
 end)
 
 	
-	Weapon:Toggle("Auto Rainbow Haki Hop",_G.Auto_Rainbow_Haki_Hop,function(value)
+	Weapon:Toggle("Auto RGB Haki Hop",_G.Auto_Rainbow_Haki_Hop,function(value)
  _G.Auto_Rainbow_Haki_Hop = value
 StopTween(_G.Auto_Rainbow_Haki_Hop)
 end)
@@ -7806,13 +7806,13 @@ end)
 	
 		Weapon:Seperator(" Canvander ")
 
-	Weapon:Toggle("Auto Canvander",_G.Auto_Canvander,function(value)
+	Weapon:Toggle("Pegar Canvander Automático",_G.Auto_Canvander,function(value)
  _G.Auto_Canvander = value
 StopTween(_G.Auto_Canvander)
 end)
 
 	
-	Weapon:Toggle("Auto Canvander Hop",_G.Auto_Canvander_Hop,function(value)
+	Weapon:Toggle("Pegar Canvander Automático Hop",_G.Auto_Canvander_Hop,function(value)
  _G.Auto_Canvander_Hop = value
 StopTween(_G.Auto_Canvander_Hop)
 end)
@@ -7850,13 +7850,13 @@ end)
 	
 		Weapon:Seperator(" Twin Hook ")
 	
-	Weapon:Toggle("Auto Twin Hook",_G.Auto_Twin_Hook,function(value)
+	Weapon:Toggle("Pegar Twin Hook Automático",_G.Auto_Twin_Hook,function(value)
  _G.Auto_Twin_Hook = value
 StopTween(_G.Auto_Twin_Hook)
 end)
 
 	
-	Weapon:Toggle("Auto Twin Hook Hop",_G.Auto_Twin_Hook_Hop,function(value)
+	Weapon:Toggle("Pegar Twin Hook Automático Hop",_G.Auto_Twin_Hook_Hop,function(value)
  _G.Auto_Twin_Hook_Hop = value
 StopTween(_G.Auto_Twin_Hook_Hop)
 end)
@@ -7894,13 +7894,13 @@ end)
 	
 		Weapon:Seperator(" Serpent Bow ")
 
-Weapon:Toggle("Auto Serpent Bow",_G.Auto_Serpent_Bow,function(value)
+Weapon:Toggle("Pegar Serpent Bow Automático",_G.Auto_Serpent_Bow,function(value)
  _G.Auto_Serpent_Bow = value
 StopTween(_G.Auto_Serpent_Bow)
 end)
 
 	
-	Weapon:Toggle("Auto Serpent Bow Hop",_G.Auto_Serpent_Bow_Hop,function(value)
+	Weapon:Toggle("Pegar Serpent Bow Automático Hop",_G.Auto_Serpent_Bow_Hop,function(value)
  _G.Auto_Serpent_Bow_Hop = value
 StopTween(_G.Auto_Serpent_Bow_Hop)
 end)
@@ -7938,7 +7938,7 @@ end)
 
 Weapon:Seperator(" Tushita ")
 
-Weapon:Toggle("Auto Tushita Sword",_G.Autotushita,function(value)
+Weapon:Toggle("Pegar Espada Tushita Automático",_G.Autotushita,function(value)
  _G.Autotushita = value
 	end)
 	
@@ -7976,7 +7976,7 @@ spawn(function()
 				end
 		end)
 
-Weapon:Toggle("Auto Holy Torch",_G.Auto_Holy_Torch,function(value)
+Weapon:Toggle("Auto Tocha Sagrada",_G.Auto_Holy_Torch,function(value)
  _G.Auto_Holy_Torch = value
 StopTween(_G.Auto_Holy_Torch)
 end)
@@ -7984,9 +7984,9 @@ end
 
 if World3 then
 
-Weapon:Seperator(" Observation Haki V2 ")
+Weapon:Seperator(" Haki da Observação V2 ")
 
-Weapon:Toggle("Auto Observation Haki V2",_G.AutoObservationHakiV2,function(x)
+Weapon:Toggle("Pegar Haki da Observação V2 Automático",_G.AutoObservationHakiV2,function(x)
 		_G.AutoObservationHakiV2 = x
 	end)
 
@@ -8283,7 +8283,7 @@ if World3 then
 
 Weapon:Seperator(" Musketeer Hat ")
 
-Weapon:Toggle("Auto Musketeer Hat",_G.Auto_Musketeer_Hat,function(value)
+Weapon:Toggle("Pegar Musketeer Hat Automático",_G.Auto_Musketeer_Hat,function(value)
  _G.Auto_Musketeer_Hat = value
 StopTween(_G.Auto_Musketeer_Hat)
 end)
@@ -8408,12 +8408,12 @@ if World2 then
 
 	Weapon:Seperator(" Superhuman ")
 	
-Weapon:Toggle("Auto Superhuman",_G.Auto_Superhuman,function(value)
+Weapon:Toggle("Pegar Superhuman Automatico",_G.Auto_Superhuman,function(value)
  _G.Auto_Superhuman = value
 end)
 
 
-Weapon:Toggle("Auto Fully Superhuman",_G.Auto_Fully_Superhuman,function(value)
+Weapon:Toggle("Masterizar Superhuman Automático",_G.Auto_Fully_Superhuman,function(value)
  _G.Auto_Fully_Superhuman = value
 end)
 
@@ -8525,7 +8525,7 @@ end)
 
 Weapon:Seperator(" Death Step ")
 
-Weapon:Toggle("Auto Death Step",_G.Auto_Death_Step,function(value)
+Weapon:Toggle("Pegar Death Step Automático",_G.Auto_Death_Step,function(value)
  _G.Auto_Death_Step = value
 StopTween(_G.Auto_Death_Step)
 end)
@@ -8553,7 +8553,7 @@ spawn(function()
 	end
 end)
 
-Weapon:Toggle("Auto Fully Death Step",_G.Auto_Fully_Death_Step,function(value)
+Weapon:Toggle("Masterizar Death Step Automático",_G.Auto_Fully_Death_Step,function(value)
  _G.Auto_Fully_Death_Step = value
 end)
 
@@ -8611,7 +8611,7 @@ end)
 
 Weapon:Seperator(" Sharkman Karate ")
 
-Weapon:Toggle("Auto Sharkman Karate",_G.Auto_SharkMan_Karate,function(value)
+Weapon:Toggle("Pegar Sharkman Karate Automático",_G.Auto_SharkMan_Karate,function(value)
  _G.Auto_SharkMan_Karate = value
 StopTween(_G.Auto_SharkMan_Karate)
 end)
@@ -8639,7 +8639,7 @@ spawn(function()
 	end
 end)
 
-Weapon:Toggle("Auto Fully Sharkman Karate",_G.Auto_Fully_SharkMan_Karate,function(value)
+Weapon:Toggle("Masterizar Sharkman Karate Automático",_G.Auto_Fully_SharkMan_Karate,function(value)
  _G.Auto_Fully_SharkMan_Karate = value
 end)
 
@@ -8699,7 +8699,7 @@ if World3 then
 
 Weapon:Seperator(" Electric Claw ")
 
-Weapon:Toggle("Auto Electric Claw",_G.Auto_Electric_Claw,function(value)
+Weapon:Toggle("Pegar Electric Claw Automático",_G.Auto_Electric_Claw,function(value)
  _G.Auto_Electric_Claw = value
 end)
 
@@ -8728,7 +8728,7 @@ end)
 
 Weapon:Seperator(" Dragon Talon ")
 
-Weapon:Toggle("Auto Dragon Talon",_G.Auto_Dragon_Talon,function(value)
+Weapon:Toggle("Pegar Dragon Talon Automático",_G.Auto_Dragon_Talon,function(value)
  _G.Auto_Dragon_Talon = value
 end)
 
@@ -8845,25 +8845,25 @@ spawn(function()
 end)
 
 if World1 or World2 then
-    Race:Label("Only Available At Sea 3")
+    Race:Label("Disponível Apenas No 3° Mundo")
 end
 
 if World3 then
-Race:Seperator("Race V4")
+Race:Seperator("Raça V4")
     
-    Race:Button("Teleport To Timple Of Time",function()
+    Race:Button("Teleportar Para o Templo do Tempo",function()
   Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
     end)
     
-Race:Button("Teleport To Lever Pull",function()
+Race:Button("Teleportar Para Puxar a Alavanca",function()
   topos(CFrame.new(28575.181640625, 14936.6279296875, 72.31636810302734))
 end)
 
-Race:Button("Teleport To Acient One (Must Be in Temple Of Time!)",function()
+Race:Button("Teleportar Para Ancient One (Esteja no Templo!)",function()
   topos(CFrame.new(28981.552734375, 14888.4267578125, -120.245849609375))
 end)
    
-   Race:Button("Unlock Lever.", function()
+   Race:Button("Desbloquear Alavanca.", function()
 venyx:Notify("Unlocked")
 if game:GetService("Workspace").Map["Temple of Time"].Lever.Prompt:FindFirstChild("ProximityPrompt") then
     game:GetService("Workspace").Map["Temple of Time"].Lever.Prompt:FindFirstChild("ProximityPrompt"):Remove()
@@ -8916,54 +8916,54 @@ end
 ProximityPrompt.Triggered:Connect(onProximity)
 end)
 
-Race:Button("Clock Acces.", function()
+Race:Button("Acesso ao Relógio.", function()
     game:GetService("Workspace").Map["Temple of Time"].DoNotEnter:Remove()
     game:GetService("Workspace").Map["Temple of Time"].ClockRoomExit:Remove()
 end)
 
-Race:Toggle("Disabled Inf Stairs", nil, function(value)
+Race:Toggle("Desabilitar Escadas Infinitas", nil, function(value)
 	game.Players.LocalPlayer.Character.InfiniteStairs.Disabled = value
 end)
    Race:Line()
  
-  Race:Button("Teleport Cyborg Door (Must Be in Temple Of Time!)",function()
+  Race:Button("Teleportar Para Porta Cyborg (Esteja no Templo!)",function()
   topos(CFrame.new(28492.4140625, 14894.4267578125, -422.1100158691406))
   end)
   
-  Race:Button("Teleport Fish Door (Must Be in Temple Of Time!)",function()
+  Race:Button("Teleportar Para Porta Fish (Esteja no Templo!)",function()
   topos(CFrame.new(28224.056640625, 14889.4267578125, -210.5872039794922))
   end)
   
-  Race:Button("Teleport Ghoul Door (Must Be in Temple Of Time!)",function()
+  Race:Button("Teleportar Para Porta Ghoul (Esteja no Templo!)",function()
   topos(CFrame.new(28672.720703125, 14889.1279296875, 454.5961608886719))
   end)
   
-  Race:Button("Teleport Human Door (Must Be in Temple Of Time!)",function()
+  Race:Button("Teleportar Para Porta Humano (Esteja no Templo!)",function()
   topos(CFrame.new(29237.294921875, 14889.4267578125, -206.94955444335938))
   end)
   
-  Race:Button("Teleport Mink Door (Must Be in Temple Of Time!)",function()
+  Race:Button("Teleportar Para Porta Mink (Esteja no Templo!)",function()
   topos(CFrame.new(29020.66015625, 14889.4267578125, -379.2682800292969))
   end)
   
-  Race:Button("Teleport Sky Door (Must Be in Temple Of Time!)",function()
+  Race:Button("Teleportar Para Porta Sky (Esteja no Templo!)",function()
   topos(CFrame.new(28967.408203125, 14918.0751953125, 234.31198120117188))
   end)
   
   Race:Line()
   
-  Race:Button("Teleport To Safe Zone When Pvp (Must Be in Temple Of Time!)",function()
+  Race:Button("Teleportar Para Zona Segura (PvP) (Esteja no Templo!)",function()
   topos(CFrame.new(28273.0859375, 14896.5078125, 157.42063903808594))
   end)
   
-  Race:Button("Teleport Pvp Zone (Must Be in Temple Of Time!)",function()
+  Race:Button("Teleportar Para Zona PvP(Esteja no Templo!)",function()
   topos(CFrame.new(28766.681640625, 14967.1455078125, -164.13290405273438))
   end)
   end
 
-Stats:Seperator(" Auto Stats ")
+Stats:Seperator(" Distribuir Pontos Automáticamente ")
 
-Stats:Toggle("Auto Stats Melee",_G.Auto_Stats_Melee,function(value)
+Stats:Toggle("Distribuir em Melee",_G.Auto_Stats_Melee,function(value)
  _G.Auto_Stats_Melee = value
 end)
 
@@ -8982,7 +8982,7 @@ spawn(function()
 	end
 end)
 
-Stats:Toggle("Auto Stats Defense",_G.Auto_Stats_Defense,function(value)
+Stats:Toggle("Distribuir em Defense",_G.Auto_Stats_Defense,function(value)
  _G.Auto_Stats_Defense = value
 end)
 
@@ -9001,7 +9001,7 @@ spawn(function()
 	end
 end)
 
-Stats:Toggle("Auto Stats Sword",_G.Auto_Stats_Sword,function(value)
+Stats:Toggle("Distribuir em Sword",_G.Auto_Stats_Sword,function(value)
  _G.Auto_Stats_Sword = value
 end)
 
@@ -9020,7 +9020,7 @@ spawn(function()
 	end
 end)
 
-Stats:Toggle("Auto Stats Gun",_G.Auto_Stats_Gun,function(value)
+Stats:Toggle("Distribuir em Gun",_G.Auto_Stats_Gun,function(value)
  _G.Auto_Stats_Gun = value
 end)
 
@@ -9038,7 +9038,7 @@ spawn(function()
 	end
 end)
 
-Stats:Toggle("Auto Stats Devil Fruit",_G.Auto_Stats_Devil_Fruit,function(value)
+Stats:Toggle("Distribuir em Devil Fruit",_G.Auto_Stats_Devil_Fruit,function(value)
  _G.Auto_Stats_Devil_Fruit = value
 end)
 
@@ -9057,23 +9057,23 @@ spawn(function()
 	end
 end)
 
-Stats:Button("Stat Refund",function()
+Stats:Button("Resetar Pontos de Status",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Buy",1,2)
   end)
 
-Stats:Slider("Select Point",1,100,1,function(value)
+Stats:Slider("Selecionar Pontos para Distribuir",1,100,1,function(value)
 _G.Point = value
 return "Point : " .. tostring(value)
 end)
 
-P:Seperator(" Combats ")
+P:Seperator(" Funções Para Combate ")
 
-P:Slider("Select Size Fov",1,1000,200,function(value)
+P:Slider("Selecinar Tamanho do Fov",1,1000,200,function(value)
 _G.Select_Size_Fov = value
 return "Size Fov : " .. tostring(value)
 end)
 
-P:Toggle("Show Fov",_G.Show_Fov,function(value)
+P:Toggle("Mostrar Fov",_G.Show_Fov,function(value)
  _G.Show_Fov = value
 end)
 
@@ -9081,7 +9081,7 @@ P:Toggle("Aimbot Skill Fov",_G.Aimbot_Skill_Fov,function(value)
  _G.Aimbot_Skill_Fov = value
 end)
 
-P:Seperator(" Kill Player ")
+P:Seperator(" Matar Jogador ")
 
 
 Playerslist = {}
@@ -9090,11 +9090,11 @@ Playerslist = {}
         table.insert(Playerslist,v.Name)
     end
     
-    local SelectedPly = P:Dropdown("Select Players",Playerslist,function(value)
+    local SelectedPly = P:Dropdown("Selecionar Jogadores",Playerslist,function(value)
         _G.Select_Player = value
     end)
     
-    P:Button("Refresh Player",function()
+    P:Button("Atualizar lista de Jogadores",function()
         Playerslist = {}
         SelectedPly:Clear()
         for i,v in pairs(game:GetService("Players"):GetChildren()) do  
@@ -9102,7 +9102,7 @@ Playerslist = {}
         end
     end)
 
-P:Toggle("Spectate Player",_G.Spectate_Player,function(value)
+P:Toggle("Espectar Jogador",_G.Spectate_Player,function(value)
  _G.Spectate_Player = value
 end)
 
@@ -9121,7 +9121,7 @@ spawn(function()
 	end
 end)
 
-P:Toggle("Teleport to Player",_G.Teleport_to_Player,function(value)
+P:Toggle("Teleportar Para Jogador",_G.Teleport_to_Player,function(value)
  _G.Teleport_to_Player = value
 StopTween(_G.Teleport_to_Player)
 end)
@@ -9139,7 +9139,7 @@ spawn(function()
 	end
 end)
 
-P:Toggle("Auto Kill Player [Melee]",_G.Auto_Kill_Player_Melee,function(value)
+P:Toggle("Matar Jogador Automático [Melee]",_G.Auto_Kill_Player_Melee,function(value)
  _G.Auto_Kill_Player_Melee = value
 StopTween(_G.Auto_Kill_Player_Melee)
 end)
@@ -9171,7 +9171,7 @@ spawn(function()
 	end
 end)
 
-P:Toggle("Auto Kill Player [Gun]",_G.Auto_Kill_Player_Gun,function(value)
+P:Toggle("Matar Jogador Automático [Gun]",_G.Auto_Kill_Player_Gun,function(value)
  _G.Auto_Kill_Player_Gun = value
 StopTween(_G.Auto_Kill_Player_Gun)
 end)
@@ -9209,22 +9209,22 @@ spawn(function()
 	end
 end)
 
-Teleport:Seperator(" WORLD ")
+Teleport:Seperator(" MUNDOS ")
  
- Teleport:Button("Teleport To Old World",function()
+ Teleport:Button("Teleportar Para Primeiro Mundo",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
   end)
  
- Teleport:Button("Teleport To Second Sea",function()
+ Teleport:Button("Teleportar Para Segundo Mundo",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
  end)
 
  
- Teleport:Button("Teleport To Third Sea",function()
+ Teleport:Button("Teleportar Para Terceiro Mundo",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
   end)
  
- Teleport:Button("Teleport to Seabeast",function()
+ Teleport:Button("Teleportar Para Besta do Mar",function()
   for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
   if v:FindFirstChild("HumanoidRootPart") then
   topos(v.HumanoidRootPart.CFrame*CFrame.new(0,100,0))
@@ -9232,10 +9232,10 @@ Teleport:Seperator(" WORLD ")
   end
  end)
  
- Teleport:Seperator(" Island ")
+ Teleport:Seperator(" ILHAS ")
  
  if World1 then
- Teleport:Dropdown("Select Island", {
+ Teleport:Dropdown("Selecionar Ilha", {
   "WindMill",
   "Marine",
   "Middle Town",
@@ -9301,7 +9301,7 @@ Teleport:Seperator(" WORLD ")
   end)
  end
  
- Teleport:Toggle("Teleport",false,function(value)
+ Teleport:Toggle("Teleportar",false,function(value)
   _G.TeleportIsland = value
   if _G.TeleportIsland == true then
   repeat wait()
@@ -9403,7 +9403,7 @@ Teleport:Seperator(" WORLD ")
   StopTween(_G.TeleportIsland)
  end)
  
- Teleport:Button("Instant Teleport",function()
+ Teleport:Button("Teleportar Instantaneo (Pode Falhar)",function()
 		 _G.Instant = true
         if _G.Instant == true then
 	     if _G.SelectIsland == "Port Town" then 
@@ -9699,11 +9699,11 @@ Teleport:Seperator(" WORLD ")
 end)
 
 if World1 then
-    Dungeon:Label("Dungeon Raid Only Available At Sea 2 and 3")
+    Dungeon:Label("Dungeon Raid Disponível Apenas No 1° e 2° Mundo")
 end
 
 if World2 or World3 then
-Dungeon:Seperator("Use in Dungeon Only!")
+Dungeon:Seperator("Use Apenas em Dungeons")
 
 chip = {
 	"Flame", 
@@ -9719,11 +9719,11 @@ chip = {
 	"Bird: Phoenix"
 }
 
-Dungeon:Dropdown("Select Dungeon",chip,function(value)
+Dungeon:Dropdown("Selecionar Dungeon",chip,function(value)
  _G.Select_Dungeon = value
 end)
 
-Dungeon:Toggle("Auto Buy Chip Dungeon",_G.Auto_Buy_Chips_Dungeon,function(value)
+Dungeon:Toggle("Comprar Chip da Dungeon Automático",_G.Auto_Buy_Chips_Dungeon,function(value)
  _G.Auto_Buy_Chips_Dungeon = value
 end)
 
@@ -9745,7 +9745,7 @@ spawn(function()
 end)
 
 
-Dungeon:Toggle("Auto Start Dungeon",_G.Auto_StartRaid,function(value)
+Dungeon:Toggle("Iniciar Dungeon Automático",_G.Auto_StartRaid,function(value)
  _G.Auto_StartRaid = value
 end)
 
@@ -9767,7 +9767,7 @@ spawn(function()
     end
     end)
 
-Dungeon:Toggle("Auto Next Island",_G.Auto_Next_Island,function(value)
+Dungeon:Toggle("Próxima Ilha Automático",_G.Auto_Next_Island,function(value)
  _G.Auto_Next_Island = value
 end)
 
@@ -9813,7 +9813,7 @@ spawn(function()
     end
 end)
 
-Dungeon:Toggle("Auto Awake",_G.Auto_Awake,function(value)
+Dungeon:Toggle("Despertar Fruta Automático",_G.Auto_Awake,function(value)
  _G.Auto_Awake = value 
 end)
 
@@ -9839,7 +9839,7 @@ spawn(function()
 end)
 
   
-  Dungeon:Button("Next Island",function()
+  Dungeon:Button("Próxima Ilha",function()
    pcall(function()
     if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
     topos(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5").CFrame*CFrame.new(0,70,100))
@@ -9897,7 +9897,7 @@ end
 
 Dungeon:Seperator("\\\\\  Law Dungeon  //")
 
-Dungeon:Toggle("Auto Buy Law Chip",_G.Auto_Buy_Law_Chip,function(value)
+Dungeon:Toggle("Comprar Chip Law Automático",_G.Auto_Buy_Law_Chip,function(value)
  _G.Auto_Buy_Law_Chip = value
 end)
 
@@ -9920,7 +9920,7 @@ spawn(function()
 	end
 end)
 
-Dungeon:Toggle("Auto Start Law Dungeon",_G.Auto_Start_Law_Dungeon,function(value)
+Dungeon:Toggle("Iniciar Law Dungeon Automático",_G.Auto_Start_Law_Dungeon,function(value)
  _G.Auto_Start_Law_Dungeon = value
 end)
 
@@ -9937,7 +9937,7 @@ spawn(function()
 	end
 end)
 
-Dungeon:Toggle("Auto Kill Law",_G.Auto_Kill_Law,function(value)
+Dungeon:Toggle("Matar Law Automático",_G.Auto_Kill_Law,function(value)
 _G.Auto_Kill_Law = value
 end)
 
@@ -9966,7 +9966,7 @@ spawn(function()
 end)
 end
  
- DevilFruit:Seperator(" Sniper ")
+ DevilFruit:Seperator(" Fruta Desejada ")
  
  FruitList = {
   "Bomb-Bomb",
@@ -10005,21 +10005,21 @@ end
  }
  
  _G.SelectFruit = ""
- DevilFruit:Dropdown("Select Fruits Sniper",FruitList,function(value)
+ DevilFruit:Dropdown("Selecione a Fruta Desejada",FruitList,function(value)
   _G.SelectFruit = value
   end)
  
- DevilFruit:Toggle("Auto Buy Fruit Sniper",_G.AutoBuyFruitSniper,function(value)
+ DevilFruit:Toggle("Comprar Fruta Desejada Automático",_G.AutoBuyFruitSniper,function(value)
   _G.AutoBuyFruitSniper = value
   end)
  
- DevilFruit:Seperator(" Others ")
+ DevilFruit:Seperator(" Outros ")
  
- DevilFruit:Dropdown("Select Fruits Eat",FruitList,function(value)
+ DevilFruit:Dropdown("Selecionar Frutas Para Comer",FruitList,function(value)
   _G.SelectFruitEat = value
   end)
  
- DevilFruit:Toggle("Auto Eat Fruit",_G.AutoEatFruit,function(value)
+ DevilFruit:Toggle("Comer Fruta Automatico",_G.AutoEatFruit,function(value)
   _G.AutoEatFruit = value
   end)
  
@@ -10045,7 +10045,7 @@ end
    end)
   end)
  
- DevilFruit:Toggle("Auto Random Fruit",_G.Random_Auto,function(value)
+ DevilFruit:Toggle("Comprar Fruta Aleatoria Automático",_G.Random_Auto,function(value)
   _G.Random_Auto = value
   end)
  
@@ -10059,12 +10059,12 @@ end
    end)
   end)
  
- DevilFruit:Button("Random Fruit",function()
+ DevilFruit:Button("Comprar Fruta Aleatória",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin","Buy")
   end)
  
  
- DevilFruit:Toggle("Auto Drop Fruit",_G.DropFruit,function(value)
+ DevilFruit:Toggle("Soltar Fruta Automático",_G.DropFruit,function(value)
   _G.DropFruit = value
   end)
  
@@ -10099,7 +10099,7 @@ end
   end
   end)
  
- DevilFruit:Toggle("Auto Store Fruit",_G.AutoStoreFruit,function(value)
+ DevilFruit:Toggle("Guardar Fruta Automático",_G.AutoStoreFruit,function(value)
   _G.AutoStoreFruit = value
   end)
  
@@ -10120,7 +10120,7 @@ end
 		end)
  
  
- DevilFruit:Toggle("Grab Fruit",_G.BringFruit,function(value)
+ DevilFruit:Toggle("Pegar Fruta",_G.BringFruit,function(value)
   _G.BringFruit = value
   pcall(function()
    while _G.BringFruit do wait(.1)
@@ -10137,7 +10137,7 @@ end
    end)
  end)
  
- DevilFruit:Toggle("Teleport To Spawn Fruit",false,function(value)
+ DevilFruit:Toggle("Teleportar Para Spawn de Fruta",false,function(value)
  _G.Grabfruit = value
 end)
 
@@ -10152,7 +10152,7 @@ spawn(function()
 				end
 end
 end)
- DevilFruit:Toggle("Bring All Fruit 75% Kick System",_G.BringFruitBF,function(value)
+ DevilFruit:Toggle("Atrair Todas as Frutas (75% Kick)",_G.BringFruitBF,function(value)
   _G.BringFruitBF = value
   end)
  
@@ -10372,7 +10372,7 @@ function UpdateIslandESP()
  end
  end
  
- DevilFruit:Seperator(" ESP ")
+ DevilFruit:Seperator(" Funções ESP ")
   
 if World2 then
 		DevilFruit:Button("TP Flower Red",function()
@@ -10558,25 +10558,25 @@ if World2 then
 			end)
 		end
 	end
-	DevilFruit:Toggle("ESP Player",false,function(a)
+	DevilFruit:Toggle("ESP Jogadores",false,function(a)
 		ESPPlayer = a
 		while ESPPlayer do wait()
 			UpdatePlayerChams()
 		end
 	end)
-	DevilFruit:Toggle("ESP Chest",false,function(a)
+	DevilFruit:Toggle("ESP Baús",false,function(a)
 		ChestESP = a
 		while ChestESP do wait()
 			UpdateChestChams() 
 		end
 	end)
-	DevilFruit:Toggle("ESP Devil Fruit",false,function(a)
+	DevilFruit:Toggle("ESP Blox Fruits",false,function(a)
 		DevilFruitESP = a
 		while DevilFruitESP do wait()
 			UpdateDevilChams() 
 		end
 	end)
-	DevilFruit:Toggle("ESP Flower",false,function(a)
+	DevilFruit:Toggle("ESP Flores (2° Mundo)",false,function(a)
 		FlowerESP = a
 		while FlowerESP do wait()
 			UpdateFlowerChams() 
@@ -10584,153 +10584,153 @@ if World2 then
 	end)
 	
  
- Shop:Seperator(" Abilities ")
+ Shop:Seperator(" Habilidades ")
  
- Shop:Button("Buy Geppo",function()
+ Shop:Button("Comprar Geppo",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Geppo")
   end)
  
- Shop:Button("Buy Buso Haki",function()
+ Shop:Button("Comprar Haki do Armamento",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Buso")
   end)
  
- Shop:Button("Buy Soru",function()
+ Shop:Button("Comprar Soru",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Soru")
   end)
  
- Shop:Button("Buy Observation(Ken) Haki",function()
+ Shop:Button("Comprar Haki da Observação",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("KenTalk","Buy")
   end)
  
- Shop:Seperator(" Fighting Style ")
+ Shop:Seperator(" Estilos de Luta ")
  
- Shop:Button("Buy Black Leg",function()
+ Shop:Button("Comprar Black Leg",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
   end)
  
- Shop:Button("Buy Electro",function()
+ Shop:Button("Comprar Electro",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
   end)
  
- Shop:Button("Buy Fishman Karate",function()
+ Shop:Button("Comprar Fishman Karate",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
   end)
  
- Shop:Button("Buy Dragon Claw",function()
+ Shop:Button("Comprar Dragon Claw",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2")
   end)
  
- Shop:Button("Buy Superhuman",function()
+ Shop:Button("Comprar Superhuman",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
   end)
  
- Shop:Button("Buy Death Step",function()
+ Shop:Button("Comprar Death Step",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDeathStep")
   end)
  
- Shop:Button("Buy Sharkman Karate",function()
+ Shop:Button("Comprar Sharkman Karate",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate",true)
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate")
   end)
  
- Shop:Button("Buy Electric Claw",function()
+ Shop:Button("Comprar Electric Claw",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
   end)
  
- Shop:Button("Buy Dragon Talon",function()
+ Shop:Button("Comprar Dragon Talon",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
   end)
- Shop:Button("Buy GodHuman",function()
+ Shop:Button("Comprar GodHuman",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
   end)
  -----Shop----------------
- Shop:Seperator(" Accessory ")
+ Shop:Seperator(" Acessórios / Equipamentos ")
  
- Shop:Button("Tomoe Ring",function()
+ Shop:Button("Comprar Tomoe Ring",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Tomoe Ring")
   end)
  
- Shop:Button("Black Cape",function()
+ Shop:Button("Comprar Black Cape",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Black Cape")
   end)
  
- Shop:Button("Swordsman Hat",function()
+ Shop:Button("Comprar Swordsman Hat",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Swordsman Hat")
   end)
  
- Shop:Seperator(" Sword ")
+ Shop:Seperator(" Espadas ")
  
- Shop:Button("Cutlass",function()
+ Shop:Button("Comprar Cutlass",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cutlass")
   end)
  
- Shop:Button("Katana",function()
+ Shop:Button("Comprar Katana",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Katana")
   end)
  
- Shop:Button("Iron Mace",function()
+ Shop:Button("Comprar Iron Mace",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Iron Mace")
   end)
  
- Shop:Button("Duel Katana",function()
+ Shop:Button("Comprar Duel Katana",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Duel Katana")
   end)
  
- Shop:Button("Triple Katana", function()
+ Shop:Button("Comprar Triple Katana", function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Triple Katana")
   end)
  
- Shop:Button("Pipe",function()
+ Shop:Button("Comprar Pipe",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Pipe")
   end)
  
- Shop:Button("Dual Headed Blade",function()
+ Shop:Button("Comprar Dual Headed Blade",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Dual-Headed Blade")
   end)
  
- Shop:Button("Bisento",function()
+ Shop:Button("Comprar Bisento",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Bisento")
   end)
  
- Shop:Button("Soul Cane",function()
+ Shop:Button("Comprar Soul Cane",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Soul Cane")
   end)
  
  Shop:Seperator(" Gun ")
  
- Shop:Button("Slingshot",function()
+ Shop:Button("Comprar Slingshot",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Slingshot")
   end)
  
- Shop:Button("Musket",function()
+ Shop:Button("Comprar Musket",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Musket")
   end)
  
- Shop:Button("Flintlock",function()
+ Shop:Button("Comprar Flintlock",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Flintlock")
   end)
  
- Shop:Button("Refined Flintlock",function()
+ Shop:Button("Comprar Refined Flintlock",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Refined Flintlock")
   end)
  
- Shop:Button("Cannon",function()
+ Shop:Button("Comprar Cannon",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cannon")
   end)
  
- Shop:Button("Kabucha",function()
+ Shop:Button("Comprar Kabucha",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","1")
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","2")
  end)
  
- Shop:Button("Race Reroll",function()
+ Shop:Button("COMPRAR TROCA DE RAÇAS",function()
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Buy",1,3)
  end)
  
- Misc:Seperator(" Joins ")
+ Misc:Seperator(" Alterações ")
  
- Misc:Button("Join Pirates Team",function()
+ Misc:Button("Entrar Time Pirata",function()
  		local args = {
 			[1] = "SetTeam",
 			[2] = "Pirates"
@@ -10743,7 +10743,7 @@ if World2 then
 end)
  
 
-Misc:Button("Join Marines Team",function()
+Misc:Button("Entrar Time Marinha",function()
  local args = {
 			[1] = "SetTeam",
 			[2] = "Marines"
@@ -10756,16 +10756,16 @@ Misc:Button("Join Marines Team",function()
 end)
 
 
-Misc:Button("Rejoin",function()
+Misc:Button("Reentrar",function()
  local ts = game:GetService("TeleportService")
 		local p = game:GetService("Players").LocalPlayer
 		ts:Teleport(game.PlaceId, p)
 end)
 
-Misc:Button("Sever Hop",function()
+Misc:Button("Saltar Servidores",function()
  hop()
 end)
-    Misc:Button("Hop To Lower Player",function()
+    Misc:Button("Saltar Para Servidor com Poucos Jogadores",function()
         local maxplayers, gamelink, goodserver, data_table = math.huge, "https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
 		if not _G.FailedServerID then _G.FailedServerID = {} end
 
@@ -10804,14 +10804,10 @@ end)
 		game:GetService"TeleportService":TeleportToPlaceInstance(game.PlaceId, goodserver)
     end)
 
-Misc:Seperator(" Open Menu ")
+Misc:Seperator(" Menu de Utilidades ")
 
-Misc:Button("Inventory",function()
- game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventoryWeapons")
-		game.Players.localPlayer.PlayerGui.Main.Inventory.Visible = true
-end)
 
-Misc:Button("Devil Fruit Shop",function()
+Misc:Button("Abrir Loja de Frutas",function()
  local args = {
 			[1] = "GetFruits"
 		}
@@ -10820,7 +10816,7 @@ Misc:Button("Devil Fruit Shop",function()
 end)
 
 
-Misc:Button("Title Name",function()
+Misc:Button("Alterar Titúlo",function()
  local args = {
 			[1] = "getTitles"
 		}
@@ -10829,14 +10825,19 @@ Misc:Button("Title Name",function()
 end)
 
 
-Misc:Button("Color Haki",function()
+Misc:Button("Alterar Cor do Haki",function()
  game.Players.localPlayer.PlayerGui.Main.Colors.Visible = true
 end)
 
-Misc:Seperator(" Codes ")
+Misc:Seperator(" Códigos ")
     
     
 local x2Code = {
+
+ "SUB2CAPTAINMAUI",
+ "ADMIN_TROLL",
+ "SECRET_ADMIN",
+ "NEWTROLL",
  "EXP_5B",
  "CONTROL",
  "UPDATE11",
@@ -10870,7 +10871,7 @@ local x2Code = {
  "Enyu_is_Pro"
 }
     
-    Misc:Button("Redeem All Codes",function()
+    Misc:Button("Resgatar Todos os Códigos",function()
         function RedeemCode(value)
             game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(value)
         end
@@ -10879,23 +10880,23 @@ local x2Code = {
         end
     end)
     
-    Misc:Dropdown("Selected Codes",{"1MLIKES_RESET","THIRDSEA","SUB2GAMERROBOT_RESET1","SUB2UNCLEKIZARU"},function(value)
+    Misc:Dropdown("Selecionar Códigos de Reset Status",{"1MLIKES_RESET","THIRDSEA","SUB2GAMERROBOT_RESET1","SUB2UNCLEKIZARU", "KITT_RESET"},function(value)
         _G.CodeSelect = value
     end)
     
-    Misc:Button("Redeem Code",function()
+    Misc:Button("Resgatar Código Selecionado",function()
         game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(_G.CodeSelect)
     end)
 
 
-Misc:Seperator(" Player Misc ")
+Misc:Seperator(" Jogador Misc ")
     
     
-    Misc:Dropdown("Select Haki State",{"State 0","State 1","State 2","State 3","State 4","State 5"},function(value)
+    Misc:Dropdown("Selecionar Estágio do Haki",{"State 0","State 1","State 2","State 3","State 4","State 5"},function(value)
         _G.SelectStateHaki = value
     end)
     
-    Misc:Button("Change Buso Haki State",function()
+    Misc:Button("Mudar Estágio do Haki",function()
         if _G.SelectStateHaki == "State 0" then
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ChangeBusoStage",0)
         elseif _G.SelectStateHaki == "State 1" then
@@ -10971,12 +10972,12 @@ end)
         end)
     end)
 
-Misc:Toggle("Dodge No Cooldown",false,function(value)
+Misc:Toggle("Dash Sem Cooldown",false,function(value)
         nododgecool = value
         NoDodgeCool()
     end)
     
-    Misc:Toggle("Auto Active Race",_G.AutoAgility,function(value)
+    Misc:Toggle("Ativar Raça Automático",_G.AutoAgility,function(value)
         _G.AutoAgility = value
     end)
     
@@ -10990,7 +10991,7 @@ Misc:Toggle("Dodge No Cooldown",false,function(value)
         end)
     end)
     
-    Misc:Toggle("Infinite Ability",false,function(value)
+    Misc:Toggle("Habilidade V3 Mink Infinita",false,function(value)
         InfAbility = value
         if value == false then
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Agility"):Destroy()
@@ -11005,7 +11006,7 @@ Misc:Toggle("Dodge No Cooldown",false,function(value)
         end
     end)
     
-    Misc:Toggle("Infinite Obversation Range",getgenv().InfiniteObRange,function(value)
+    Misc:Toggle("Distancia Infinita do Haki da Observação",getgenv().InfiniteObRange,function(value)
         getgenv().InfiniteObRange = value
         local VS = game:GetService("Players").LocalPlayer.VisionRadius.Value
         while getgenv().InfiniteObRange do
@@ -11024,7 +11025,7 @@ Misc:Toggle("Dodge No Cooldown",false,function(value)
         end
     end)
     
-    Misc:Toggle("Infinite Geppo",getgenv().InfGeppo,function(value)
+    Misc:Toggle("Geppo Infinito",getgenv().InfGeppo,function(value)
         getgenv().InfGeppo = value
     end)
     
@@ -11050,7 +11051,7 @@ Misc:Toggle("Dodge No Cooldown",false,function(value)
         end
     end)
     
-    Misc:Toggle("Infinite Soru",getgenv().InfSoru,function(value)
+    Misc:Toggle("Soru Infinito",getgenv().InfSoru,function(value)
         getgenv().InfSoru = value
     end)
     
@@ -11076,12 +11077,12 @@ Misc:Toggle("Dodge No Cooldown",false,function(value)
         end
     end)
     
-    Misc:Toggle("Walk on Water",true,function(value)
+    Misc:Toggle("Andar Na Água",true,function(value)
         _G.WalkWater = value
     end)
     
     if World2 then
-		Misc:Button("Remove Lava",function()
+		Misc:Button("Remover Lava",function()
 			for i,v in pairs(game.Workspace:GetDescendants()) do
 				if v.Name == "Lava" then   
 					v:Destroy()
@@ -11106,7 +11107,7 @@ spawn(function()
 				end)
 			end
 		end)
-    Misc:Toggle("Fly",false,function(value)
+    Misc:Toggle("Voar (Descontinuado)",false,function(value)
         Fly = value
     end)
     
@@ -11121,10 +11122,10 @@ spawn(function()
     end)
     
         
-    Misc:Button("Unlock FPS",function()
+    Misc:Button("Desbloquear FPS",function()
         setfpscap(100)
     end)
-Misc:Button("Invisible",function()
+    Misc:Button("Invisible",function()
         game:GetService("Players").LocalPlayer.Character.LowerTorso:Destroy()
     end)
 
