@@ -4232,7 +4232,8 @@ local Misc = Library:Tab("Misc","rbxassetid://11447063791")
 local Op = Library:Tab("Status", "rbxassetid://7040410130")
 --------------------------------------------------------------------
 
-Setting:Label("get free premeum!!!")
+Setting:Label("Entre em meu Discord!!!"),
+"https://discord.gg/4a3SznvyYY"
 
 Setting:Line()
 
@@ -4739,13 +4740,13 @@ Main:Button("Parar Teleporte",function()
 
 Main:Seperator(" Main ")
 
-Main:Dropdown("Select Mode Farm", {
- "Level Farm","Fast Mode","No Quest","Near Farm Mode"
+Main:Dropdown("Selecionar Modo de Farm", {
+ "Farmar Level","Farm Rápido","Sem Quest","Farmar Mob Próximo"
 },function(value)
  _G.Select_Mode_Farm = value
 end)
 
-Main:Toggle("Start Auto Farm",_G.Auto_Farm_Level,function(value)
+Main:Toggle("Iniciar Auto Farm",_G.Auto_Farm_Level,function(value)
  _G.Auto_Farm_Level = value
  StopTween(_G.Auto_Farm_Level)
 end)
@@ -4846,13 +4847,13 @@ tableMon = {
 }
 end
 
-Main:Seperator(" Other ")
+Main:Seperator(" Outros ")
 
-Main:Dropdown("Select Monster", tableMon, function(vu)
+Main:Dropdown("Selecionar Monstro", tableMon, function(vu)
  SelectMonster = vu
  end)
 
-Main:Toggle("Farm Selected Monster",_G.AutoFarmSelectMonster,function(vu)
+Main:Toggle("Farmar Monstro Selecionado",_G.AutoFarmSelectMonster,function(vu)
  _G.AutoFarmSelectMonster = vu
 end)
 
@@ -4896,9 +4897,9 @@ spawn(function()
  end
 end)
 
-Main:Seperator(" Mastery ")
+Main:Seperator(" Maestria ")
  
-Main:Toggle("Auto BF Mastery",_G.AutoFarmFruitMastery,function(value)
+Main:Toggle("Auto BF Maestria",_G.AutoFarmFruitMastery,function(value)
   _G.AutoFarmFruitMastery = value
   StopTween(_G.AutoFarmFruitMastery)
   if _G.AutoFarmFruitMastery == false then
@@ -5239,7 +5240,7 @@ Main:Toggle("Auto BF Mastery",_G.AutoFarmFruitMastery,function(value)
  end)
 
  
-Main:Seperator(" Bosses ")
+Main:Seperator(" Chefes ")
 
 local Boss = {}
     
@@ -5252,11 +5253,11 @@ local Boss = {}
         end
     end
     
-    local BossName = Main:Dropdown("Select Boss",Boss,function(value)
+    local BossName = Main:Dropdown("Selecionar Chefe",Boss,function(value)
        _G.Select_Boss = value
     end)
     
-    Main:Button("Refresh Boss",function()
+    Main:Button("Atualizar Chefes",function()
         BossName:Clear()
             for i, v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
             if string.find(v.Name, "Boss") then
@@ -5265,11 +5266,11 @@ local Boss = {}
         end
     end)
 
-Main:Toggle("Auto Farm Boss",_G.Auto_Farm_Boss,function(value)
+Main:Toggle("Auto Farmar Chefe",_G.Auto_Farm_Boss,function(value)
  _G.Auto_Farm_Boss = value
  end)
 
-Main:Toggle("Auto Quest Boss",true,function(value)
+Main:Toggle("Auto Quest Chefe",true,function(value)
  _G.Auto_Quest_Boss = value
 end)
 
@@ -5356,7 +5357,7 @@ spawn(function()
 	end
 end)
 
-Main:Toggle("Auto Farm All Boss",_G.Auto_Farm_All_Boss,function(value)
+Main:Toggle("Auto Farmar Todos Os Chefes",_G.Auto_Farm_All_Boss,function(value)
  _G.Auto_Farm_All_Boss = value
 StopTween(_G.Auto_Farm_All_Boss)
 end)
@@ -5505,13 +5506,13 @@ MaterialMethod = {
  }
  end
  
-Main:Seperator(" Materials ")
+Main:Seperator(" Materiais ")
  
- local SelectMaterial = Main:Dropdown("Select Material",MaterialMethod,function(value)
+ local SelectMaterial = Main:Dropdown("Selecionar Material",MaterialMethod,function(value)
  _G.SelectMaterial = value
 end)
 
-Main:Toggle("Farm Selected Material",_G.AutoFarmMaterial,function(t)
+Main:Toggle("Farm Material Selecionado",_G.AutoFarmMaterial,function(t)
 			_G.AutoFarmMaterial = t
 			StopTween(_G.AutoFarmMaterial)
 end)
@@ -5651,9 +5652,9 @@ spawn(function()
 			end
 end)
 
-Main:Seperator(" Mirage Island ")
+Main:Seperator(" Ilha da Miragem ")
 
-Main:Toggle("Auto Mirage Island",false,function(value)
+Main:Toggle("Auto Ilha da Miragem",false,function(value)
  if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
                            topos(game:GetService("Workspace").Map:FindFirstChild("MysticIsland").HumanoidRootPart.CFrame * CFrame.new(0,500,-100))
                     else
@@ -5663,13 +5664,13 @@ end
 end
 end)
 
-Main:Toggle("Auto Mirage Island Hop",false,function(value)
+Main:Toggle("Auto Ilha da Miragem Hop",false,function(value)
  _G.Mystichop = value
 end)
 
-Main:Seperator(" Chest ")
+Main:Seperator(" Baús ")
 
-Main:Toggle("Auto Chest Fast",false,function(vu)
+Main:Toggle("Auto Farm Baús Rápido",false,function(vu)
 	_G.ChestBypass = vu
 end)
 
@@ -5707,25 +5708,25 @@ if _G.ChestBypass then
 end
 end)
 
-Main:Toggle("Auto Chest Tween",_G.Grab_Chest,function(vu)
+Main:Toggle("Auto Farm Baús Normal",_G.Grab_Chest,function(vu)
 	Grab_Chest = vu
     StopTween(Grab_Chest)
 	_G.Grab_Chest = vu
 end)
 
-Main:Button("Instant Tp Chest (Risk)",function()
+Main:Button("Teleporte Instantaneo de Baús (Arriscado)",function()
  loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptpastebin/raw/main/Chest_onoff"))()
  end)
 
 if World3 then
-Main:Seperator(" Bones ")
+Main:Seperator(" Ossos ")
 
-Main:Toggle("Auto Farm Bone",_G.Auto_Farm_Bone,function(value)
+Main:Toggle("Auto Farmar Ossos",_G.Auto_Farm_Bone,function(value)
  _G.Auto_Farm_Bone = value
  StopTween(_G.Auto_Farm_Bone)
  end)
 
-Main:Toggle("Auto Trade Bone",_G.Auto_Trade_Bone,function(value)
+Main:Toggle("Auto Trocar Ossos",_G.Auto_Trade_Bone,function(value)
  _G.Auto_Trade_Bone = value
  end)
 
@@ -5744,7 +5745,7 @@ spawn(function()
  end
  end)
 
-Main:Button("Check Bone", function()
+Main:Button("Checar Ossos", function()
  game.StarterGui:SetCore("SendNotification", {
   Title = "Checking Bone",
   Text = ("Your Bone : "..(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Check")))
@@ -5753,7 +5754,7 @@ Main:Button("Check Bone", function()
 end)
 end
 
-Main:Seperator(" Observation ")
+Main:Seperator(" Haki da Observação ")
 	
 local ObservationLevel = Main:Label("")
 
@@ -5764,11 +5765,11 @@ spawn(function()
 		else
 			value = math.round(game.Players.LocalPlayer.VisionRadius.value)
 		end
-		ObservationLevel:Set("Observation Haki Level : "..tostring(value))
+		ObservationLevel:Set("Nível Haki da Observação : "..tostring(value))
 	end
 end)
     
-       Main:Toggle("Auto Farm Observation",_G.AutoObservation,function(value)
+       Main:Toggle("Auto Farmar Haki da Observação",_G.AutoObservation,function(value)
         _G.AutoObservation = value
         StopTween(_G.AutoObservation)
     end)
@@ -5790,7 +5791,7 @@ end)
         end
     end)
     
-    Main:Toggle("Auto Farm Observation Hop",_G.AutoObservation_Hop,function(value)
+    Main:Toggle("Auto Farmar Haki da Observação Hop",_G.AutoObservation_Hop,function(value)
         _G.AutoObservation_Hop = value
     end)
     
@@ -5869,10 +5870,10 @@ Notification:Notify(
         end)
     end)
 
-Main:Seperator(" Fake Race V4 ")
+Main:Seperator(" Falsa Raça V4 ")
 
 
-Main:Button("Mink Fake Transform",function()
+Main:Button("Falsa Transformação Mink",function()
  require(game:GetService("ReplicatedStorage").Notification).new("Mink V4!"):Display();
  wait()
  setthreadcontext(5)
@@ -5896,7 +5897,7 @@ Main:Button("Mink Fake Transform",function()
   end)
 
  end)
-Main:Button("Fishman Fake Transform",function()
+Main:Button("Falsa Transformação Fishman",function()
  require(game:GetService("ReplicatedStorage").Notification).new("Fishman V4!"):Display();
  wait()
  setthreadcontext(5)
@@ -5920,7 +5921,7 @@ Main:Button("Fishman Fake Transform",function()
   end)
 
  end)
-Main:Button("Skypeian Fake Transform",function()
+Main:Button("Falsa Transformação Skypeian",function()
  require(game:GetService("ReplicatedStorage").Notification).new("Skypeian V4!"):Display();
  wait()
  setthreadcontext(5)
@@ -5944,7 +5945,7 @@ Main:Button("Skypeian Fake Transform",function()
   end)
 
  end)
-Main:Button("Ghoul Fake Transform",function()
+Main:Button("Falsa Transformação Ghoul",function()
  require(game:GetService("ReplicatedStorage").Notification).new("Ghoul V4!"):Display();
  wait()
  setthreadcontext(5)
@@ -5969,7 +5970,7 @@ Main:Button("Ghoul Fake Transform",function()
 
 
  end)
-Main:Button("Cyborg Fake Transform",function()
+Main:Button("Falsa Transformação Cyborg",function()
  require(game:GetService("ReplicatedStorage").Notification).new("Cyborg V4!"):Display();
  wait()
  setthreadcontext(5)
@@ -5993,7 +5994,7 @@ Main:Button("Cyborg Fake Transform",function()
   end)
 
  end)
-Main:Button("Human Fake Transform",function()
+Main:Button("Falsa Transformação Humano",function()
  require(game:GetService("ReplicatedStorage").Notification).new("Human V4!"):Display();
  wait()
  setthreadcontext(5)
@@ -6018,7 +6019,7 @@ Main:Button("Human Fake Transform",function()
 
  end)
 
-Main:Button("Fake Mink Dash Animation",function()
+Main:Button("Falsa Animação Mink Dash",function()
  local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
  local Player = game:GetService("Players").LocalPlayer
