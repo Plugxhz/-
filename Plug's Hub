@@ -348,11 +348,11 @@ end)
 	timecock.TextSize = 13.000
 
     function setTime()
-        local GameTime = math.floor(workspace.DistributedGameTime+0.5)
-        local Hour = math.floor(GameTime/(60^2))%24
-        local Minute = math.floor(GameTime/(60^1))%60
-        local Second = math.floor(GameTime/(60^0))%60
-        timecock.Text = ("Hr(s) : "..Hour.." Min(s) : "..Minute.." Sec(s) : "..Second)
+        local Tempo de Jogo = math.floor(workspace.Distributed Tempo de Jogo+0.5)
+        local Horas = math.floor(Tempo de Jogo/(60^2))%24
+        local Minutos = math.floor(Tempo de Jogo/(60^1))%60
+        local Segundos = math.floor(Tempo de Jogo/(60^0))%60
+        timecock.Text = ("Hr(s) : "..Horas.." Min(s) : "..Minutos.." Sec(s) : "..Segundos)
     end
     
     spawn(function()
@@ -3801,7 +3801,7 @@ end)
 
  
 --------------------------------------------------------------------
-local Library = Update:Window("PLUG'S HUB ","")
+local Library = Update:Window("  PLUG'S HUB ","")
 ------------------------------------------
 
 spawn(function()
@@ -4710,11 +4710,11 @@ if v:IsA("Tool") then
 table.insert(WeaponList ,v.Name)
 end
 end
-local SelectWeapona = Main:Dropdown("Select Weapon",WeaponList,function(value)
+local SelectWeapona = Main:Dropdown("Selecionar Arma",WeaponList,function(value)
  _G.Select_Weapon = value
  end)
 
-Main:Button("Refresh Weapon",function()
+Main:Button("Atualizar Armas",function()
  SelectWeapona:Clear()
  for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
  SelectWeapona:Add(v.Name)
@@ -4732,7 +4732,7 @@ spawn(function()
     end)
 end)
 
-Main:Button("Stop Teleport",function()
+Main:Button("Parar Teleporte",function()
   topos(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
   _G.Clip = false
   end)
