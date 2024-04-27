@@ -6,7 +6,7 @@ if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
         
     wait(1)
 
-do local GUI = game.CoreGui:FindFirstChild("PLUGHUB");if GUI then GUI:Destroy();end;if _G.Color == nil then
+do local GUI = game.CoreGui:FindFirstChild("SOMEXHUB");if GUI then GUI:Destroy();end;if _G.Color == nil then
        _G.Color = Color3.fromRGB(153,51,255)
    end 
 end
