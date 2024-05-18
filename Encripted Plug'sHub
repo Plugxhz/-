@@ -13688,5 +13688,5 @@ wait(3)
 game.StarterGui:SetCore("SendNotification", {
       Icon = "http://www.roblox.com/asset/?id=9999999";
       Title = "Plug Hub", 
-      Text = "made by @miidraayeerng อยาก Yed Owner Zps วะ";
+      Text = "made by @plugslk";
 })
