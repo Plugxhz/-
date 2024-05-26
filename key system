@@ -19,33 +19,47 @@ local Tabs = {
 
 local Options = Fluent.Options
 
--- Adicionando uma entrada para a chave
-local KeyInput = Tabs.Main:AddInput("KeyInput", {
-    Title = "Key Input",
-    Default = "",  -- Pode definir uma chave padrão aqui se preferir
-    Placeholder = "Insira sua chave aqui",
-    Callback = function(Value)
-        print("Chave atualizada para:", Value)
-        -- Aqui você pode adicionar lógica para verificar a chave ou salvá-la, conforme necessário
-        if Value == "123456" then
-            Fluent:Notify({
-                Title = "Success",
-                Content = "Chave válida! Acesso concedido."
-            })
-        else
-            Fluent:Notify({
-                Title = "Error",
-                Content = "Chave inválida. Tente novamente."
-            })
-        end
-    end
-})
+-- Função para obter a chave a partir de um link
+local function GetKeyFromLink(link)
+    local httpService = game:GetService("HttpService")
+    local response = httpService:GetAsync(link)
+    return response
+end
 
 -- Adicionando uma notificação para orientar o usuário
 Fluent:Notify({
     Title = "Info",
-    Content = "Por favor, insira sua chave para acessar.",
+    Content = "Por favor, clique no botão 'Pegar Key' para obter sua chave.",
     Duration = 5
+})
+
+-- Adicionando um botão para pegar a chave do link
+Tabs.Main:AddButton({
+    Title = "Pegar Key",
+    Description = "Clique aqui para obter sua chave",
+    Callback = function()
+        local linkToKey = "https://pastebin.com/raw/01PR1erP"  -- Link para pegar a chave
+        local key = GetKeyFromLink(linkToKey)
+        if key and key ~= "" then
+            print("Chave obtida:", key)
+            if key == "123456" then
+                -- Executar script se a chave estiver correta
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/Plugxhz/-/main/Plug's%20Hub"))()
+            else
+                -- Se a chave estiver incorreta, exibir uma mensagem de erro
+                Fluent:Notify({
+                    Title = "Error",
+                    Content = "Chave incorreta. Por favor, revise."
+                })
+            end
+        else
+            print("Falha ao obter a chave do link.")
+            Fluent:Notify({
+                Title = "Error",
+                Content = "Falha ao obter a chave do link. Por favor, tente novamente mais tarde."
+            })
+        end
+    end
 })
 
 -- Hand the library over to our managers
@@ -72,7 +86,7 @@ Window:SelectTab(1)
 
 Fluent:Notify({
     Title = "Fluent",
-    Content = "The script has been loaded.",
+    Content = "O script foi carregado.",
     Duration = 8
 })
 
