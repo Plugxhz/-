@@ -3728,7 +3728,7 @@ coroutine.wrap(YTZCAJC_fake_script)()
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local Window = Fluent:CreateWindow({
   Title = "PLUG HUB",
-  SubTitle = " -- Blox Fruit  // Discord Server: https://discord.gg/4a3SznvyYY",
+  SubTitle = " -- Blox Fruit  // @enzokkj",
   TabWidth = 160,
   Size = UDim2.fromOffset(450, 350),
   Acrylic = false,
