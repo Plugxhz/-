@@ -9562,4 +9562,3 @@ object.GetKey.MouseButton1Click:Connect(function()
     object.TextBox.Text = link
     setclipboard(link)
 end)
-
