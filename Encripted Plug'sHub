@@ -25,7 +25,7 @@ getgenv().clonefunc = nil
 local Notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/x9PSwiftz/Panda/main/Notification.lua"))() 
 local instance = {obj = {}}
 local object = instance.obj
-local HubName = "Tsuo Hub"
+local HubName = "Plug's Hub"
 function instance.new(class, properties)
     local inst = Instance.new(class)
     for property, value in next, properties do
@@ -602,7 +602,7 @@ local function wl(key)
         end
         --- Hub Values ---
         Hub = {}
-        Hub.Name = "Tsuo Hub"
+        Hub.Name = "Plug's Hub"
         Hub.Game = "Blox Fruits"
         ---- Settings -----
         HttpService = game:GetService("HttpService")
@@ -814,7 +814,7 @@ local function wl(key)
         local Window =
             Fluent:CreateWindow(
             {
-                Title = "Tsuo Hub Update 20",
+                Title = "Plug's Hub Update 20",
                 SubTitle = "Dev By VMH09",
                 TabWidth = 160,
                 Size = UDim2.fromOffset(Size11, Size22),
@@ -829,7 +829,7 @@ local function wl(key)
             domain = newmm
             function newmm:NewParagraph(cf)
                 local paragraphnew
-                newTitle = cf.Title or "Tsuo Hub"
+                newTitle = cf.Title or "Plug's Hub"
                 newContent = cf.Content or "MMB"
                 paragraphnew =
                     domain:AddParagraph(
@@ -839,7 +839,7 @@ local function wl(key)
                     }
                 )
                 function paragraphnew:Set(cf2)
-                    newTitle = cf2.Title or "Tsuo Hub"
+                    newTitle = cf2.Title or "Plug's Hub"
                     newContent = cf2.Content or "MMB"
                     paragraphnew:SetTitle(newTitle)
                     paragraphnew:SetDesc(newContent)
@@ -1048,7 +1048,7 @@ local function wl(key)
         end 
         SettingTab = Window:NewTab({Title = "Setting",Icon = getRandomIcon()})
         function CreateUiNotify(cf)
-            newtitle = cf.Title or "Tsuo Hub"
+            newtitle = cf.Title or "Plug's Hub"
             newcontent = cf.Content or "Nothing"
             newduration = cf.Duration or 10
             newsubcontent = cf.SubContent or ""
@@ -5323,7 +5323,7 @@ local function wl(key)
         end
         function Notify(v1, v2, v3) 
             if tostring(v1) == "nil" then 
-                v1 = "Tsuo Hub" 
+                v1 = "Plug's Hub" 
             end
             CreateUiNotify(
                 {
@@ -6251,10 +6251,10 @@ local function wl(key)
         
         function SaveSettings2()
             local HttpService = game:GetService("HttpService")
-            if not isfolder("Tsuo Hub") then
-                makefolder("Tsuo Hub")
+            if not isfolder("Plug's Hub") then
+                makefolder("Plug's Hub")
             end
-            writefile("Tsuo Hub/" .. SaveFileName2, HttpService:JSONEncode(Settings2))
+            writefile("Plug's Hub/" .. SaveFileName2, HttpService:JSONEncode(Settings2))
         end
         
         function ReadSetting2()
@@ -6262,10 +6262,10 @@ local function wl(key)
                 pcall(
                 function()
                     local HttpService = game:GetService("HttpService")
-                    if not isfolder("Tsuo Hub") then
-                        makefolder("Tsuo Hub")
+                    if not isfolder("Plug's Hub") then
+                        makefolder("Plug's Hub")
                     end
-                    return HttpService:JSONDecode(readfile("Tsuo Hub/" .. SaveFileName2))
+                    return HttpService:JSONDecode(readfile("Plug's Hub/" .. SaveFileName2))
                 end
             )
             if s then
@@ -9508,8 +9508,8 @@ local function wl(key)
         Window:SelectTab(1)
         Fluent:Notify(
             {
-                Title = "Tsuo Hub",
-                Content = "The script has been loaded successful.",
+                Title = "Plug's Hub",
+                Content = "O script foi carregado com sucesso.",
                 Duration = 15
             }
         )
