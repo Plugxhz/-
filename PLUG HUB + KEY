@@ -68,7 +68,7 @@ local CheckKeyButton = Tabs.Main:AddButton({
         if enteredKey == "CHAVE090807060504030201" then
             print("Carregando script...")
             wait(6) -- Tempo de carregamento
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Plugxhz/-/main/Plug's%20Hub"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Plugxhz/-/main/Plug%20Source"))()
             -- Notificação de chave correta
             Fluent:Notify({
                 Title = "Sucesso",
