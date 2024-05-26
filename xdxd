@@ -9533,33 +9533,33 @@ local function wl(key)
     end
 end
 
-spawn(function()
-    local KEY = ReadKey()
-    if KEY and #KEY >= 2 then
-        object.Desc.Text = 'Succesfully loaded key!'
-        Notify.New("Succesfully loaded key!", 5)
-        wl(KEY)
-    end
-end)
+-- Função para ler a chave de um link
+function ReadKeyFromLink(link)
+    local http = game:GetService("HttpService")
+    local response = http:GetAsync(link)
+    return response
+end
 
-object.CheckKey.MouseButton1Click:Connect(function()
-    if not GetKeyText() or #GetKeyText() < 10 then
-        object.Desc.Text = 'Please input your key';
-        spawn(function()
-            delay(5, function()
-                object.Desc.Text = "Clique no botão 'Pegar Key' para conseguir sua key!"
-            end);
-        end)
-        return
-    end
-    wl(GetKeyText())
-end)
- 
+-- Link para pegar a chave
+local linkToKey = "https://pastebin.com/raw/ZCWiK6E2"
+
+-- Função para definir a chave
+function SetKey(key)
+    object.Desc.Text = 'Successfully loaded key!'
+    Notify.New("Successfully loaded key!", 5)
+    wl(key)
+end
+
+-- Modificando o evento de clique do botão para pegar a chave do link
 object.GetKey.MouseButton1Click:Connect(function()
     print('Pegar Key')
-    --object.Desc.Text = 'cccc'
-    local link = "https://www.youtube.com/watch?v=r5xniCC7aGk"
-    object.TextBox.Text = link
-    setclipboard(link)
+    local key = ReadKeyFromLink(linkToKey)
+    if key and #key >= 2 then
+        object.TextBox.Text = key
+        setclipboard(key)
+        SetKey(key)
+    else
+        print("Falha ao obter a chave do link.")
+    end
 end)
 
