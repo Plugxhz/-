@@ -66,7 +66,7 @@ object.GetKey = instance.new("TextButton", {
     Parent = object.Main;
     Position = UDim2.new(0.51810205, 0, 0.742947996, 0);
     Size = UDim2.new(0, 173, 0, 39);
-    Text = "Get Key";
+    Text = "Pegar Key";
     TextColor3 = Color3.fromRGB(225, 225, 225);
     TextSize = 14.000;
 })
@@ -90,7 +90,7 @@ object.TextBox = instance.new("TextBox", {
     Font = Enum.Font.SourceSans;
     Parent = object.Main;
     PlaceholderColor3 = Color3.fromRGB(178, 178, 178);
-    PlaceholderText = "Enter your key here..";
+    PlaceholderText = "Insira sua Key aqui..";
     Position = UDim2.new(0.0331600793, 0, 0.414063871, 0);
     Size = UDim2.new(0, 357, 0, 50);
     Text = "";
@@ -155,7 +155,7 @@ object.TextLabel = instance.new("TextLabel", {
     Parent = object.TopBar;
     Position = UDim2.new(0, 0, 0, 0);
     Size = UDim2.new(1, 0, 1, 0);
-    Text = HubName.." Key System";
+    Text = HubName.." Sistema de Key";
     TextColor3 = Color3.fromRGB(186, 186, 186);
     TextSize = 14.000;
 })
@@ -176,11 +176,11 @@ object.CheckKey = instance.new("TextButton", {
     BorderColor3 = Color3.fromRGB(0, 0, 0);
     BorderSizePixel = 0;
     Font = Enum.Font.Gotham;
-    Name = "Check Key";
+    Name = "Checar Key";
     Parent = object.Main;
     Position = UDim2.new(0.0305285007, 0, 0.742947996, 0);
     Size = UDim2.new(0, 173, 0, 39);
-    Text = "Check Key";
+    Text = "Checar Key";
     TextColor3 = Color3.fromRGB(225, 225, 225);
     TextSize = 14.000;
 })
@@ -208,7 +208,7 @@ object.Desc = instance.new("TextLabel", {
     Parent = object.Main;
     Position = UDim2.new(0.17368421, 0, 0.165000007, 0);
     Size = UDim2.new(0, 247, 0, 50);
-    Text = "Click 'Get Key' button to get your key!";
+    Text = "Clique no botão 'Pegar Key' para conseguir your key!";
     TextColor3 = Color3.fromRGB(61, 71, 85);
     TextSize = 14.000;
 })
@@ -448,7 +448,7 @@ local function REQS(...)
         object.Desc.Text = decode_response.message
         spawn(function()
             delay(5, function()
-                object.Desc.Text = "Click 'Get Key' button to get your key!"
+                object.Desc.Text = "Clique no botão 'Pegar Key' para conseguir your key!"
             end);
         end)
         print(decode_response.message)
@@ -548,7 +548,7 @@ local function wl(key)
         object.Desc.Text = 'Fail to verify signature'
         spawn(function()
             delay(5, function()
-                object.Desc.Text = "Click 'Get Key' button to get your key!"
+                object.Desc.Text = "Clique no botão 'Pegar Key' para conseguir your key!"
             end);
         end)
         return
@@ -9547,7 +9547,7 @@ object.CheckKey.MouseButton1Click:Connect(function()
         object.Desc.Text = 'Please input your key';
         spawn(function()
             delay(5, function()
-                object.Desc.Text = "Click 'Get Key' button to get your key!"
+                object.Desc.Text = "Clique no botão 'Pegar Key' para conseguir your key!"
             end);
         end)
         return
@@ -9556,9 +9556,10 @@ object.CheckKey.MouseButton1Click:Connect(function()
 end)
  
 object.GetKey.MouseButton1Click:Connect(function()
-    print('get key')
+    print('Pegar Key')
     --object.Desc.Text = 'cccc'
     local link = (URL..'getkey?hwid=%s'):format(REQ({Url = URL..'api/hwid', Method = 'GET'}).Body)
     object.TextBox.Text = link
     setclipboard(link)
 end)
+
