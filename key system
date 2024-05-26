@@ -3,8 +3,8 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Fluent " .. Fluent.Version,
-    SubTitle = "by dawid",
+    Title = "PLUG HUB " .. Fluent.Version,
+    SubTitle = "KEY SYSTEM",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = true,
@@ -26,6 +26,9 @@ local function GetKeyFromLink(link)
     return response
 end
 
+-- Link para obter a chave
+local linkToKey = "https://link-target.net/1078704/plug-hub-key"
+
 -- Adicionando uma notificação para orientar o usuário
 Fluent:Notify({
     Title = "Info",
@@ -34,33 +37,59 @@ Fluent:Notify({
 })
 
 -- Adicionando um botão para pegar a chave do link
-Tabs.Main:AddButton({
+local GetKeyButton = Tabs.Main:AddButton({
     Title = "Pegar Key",
-    Description = "Clique aqui para obter sua chave",
+    Description = "Clique aqui para obter sua chave!",
     Callback = function()
-        local linkToKey = "https://pastebin.com/raw/01PR1erP"  -- Link para pegar a chave
-        local key = GetKeyFromLink(linkToKey)
-        if key and key ~= "" then
-            print("Chave obtida:", key)
-            if key == "123456" then
-                -- Executar script se a chave estiver correta
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/Plugxhz/-/main/Plug's%20Hub"))()
-            else
-                -- Se a chave estiver incorreta, exibir uma mensagem de erro
-                Fluent:Notify({
-                    Title = "Error",
-                    Content = "Chave incorreta. Por favor, revise."
-                })
-            end
+        -- Copiar o link para a área de transferência
+        setclipboard(linkToKey)
+        -- Exibir uma notificação informando que o link foi copiado
+        Fluent:Notify({
+            Title = "Info",
+            Content = "O link para pegar a chave foi copiado para a área de transferência!",
+            Duration = 5
+        })
+    end
+})
+
+-- Adicionando um campo para inserir a chave manualmente
+local KeyInput = Tabs.Main:AddInput("KeyInput", {
+    Title = "Inserir Chave",
+    Default = "",  -- Pode definir uma chave padrão aqui se preferir
+    Placeholder = "Insira sua chave aqui!"
+})
+
+-- Adicionando um botão para verificar a chave manualmente
+local CheckKeyButton = Tabs.Main:AddButton({
+    Title = "Checar Chave",
+    Description = "Clique aqui para verificar a chave!",
+    Callback = function()
+        local enteredKey = KeyInput.Value -- Corrigido
+        if enteredKey == "CHAVE090807060504030201" then
+            print("Carregando script...")
+            wait(6) -- Tempo de carregamento
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Plugxhz/-/main/Plug's%20Hub"))()
+            -- Notificação de chave correta
+            Fluent:Notify({
+                Title = "Sucesso",
+                Content = "Chave correta! O HUB foi carregado!",
+                Duration = 2 -- Alterado para 2 segundos
+            })
+            -- Fechar a interface após a notificação desaparecer
+            task.spawn(function()
+                wait(2) -- Tempo para a notificação desaparecer
+                Fluent.Destroy(Window)
+            end)
         else
-            print("Falha ao obter a chave do link.")
+            print("Chave incorreta.")
             Fluent:Notify({
                 Title = "Error",
-                Content = "Falha ao obter a chave do link. Por favor, tente novamente mais tarde."
+                Content = "Chave incorreta. Por favor, tente novamente."
             })
         end
     end
 })
+
 
 -- Hand the library over to our managers
 SaveManager:SetLibrary(Fluent)
@@ -85,7 +114,7 @@ SaveManager:BuildConfigSection(Tabs.Settings)
 Window:SelectTab(1)
 
 Fluent:Notify({
-    Title = "Fluent",
+    Title = "PLUG'S HUB",
     Content = "O script foi carregado.",
     Duration = 8
 })
