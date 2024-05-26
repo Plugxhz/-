@@ -1,0 +1,81 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "Fluent " .. Fluent.Version,
+    SubTitle = "by dawid",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+local Options = Fluent.Options
+
+-- Adicionando uma entrada para a chave
+local KeyInput = Tabs.Main:AddInput("KeyInput", {
+    Title = "Key Input",
+    Default = "",  -- Pode definir uma chave padrão aqui se preferir
+    Placeholder = "Insira sua chave aqui",
+    Callback = function(Value)
+        print("Chave atualizada para:", Value)
+        -- Aqui você pode adicionar lógica para verificar a chave ou salvá-la, conforme necessário
+        if Value == "123456" then
+            Fluent:Notify({
+                Title = "Success",
+                Content = "Chave válida! Acesso concedido."
+            })
+        else
+            Fluent:Notify({
+                Title = "Error",
+                Content = "Chave inválida. Tente novamente."
+            })
+        end
+    end
+})
+
+-- Adicionando uma notificação para orientar o usuário
+Fluent:Notify({
+    Title = "Info",
+    Content = "Por favor, insira sua chave para acessar.",
+    Duration = 5
+})
+
+-- Hand the library over to our managers
+SaveManager:SetLibrary(Fluent)
+InterfaceManager:SetLibrary(Fluent)
+
+-- Ignore keys that are used by ThemeManager.
+-- (we dont want configs to save themes, do we?)
+SaveManager:IgnoreThemeSettings()
+
+-- You can add indexes of elements the save manager should ignore
+SaveManager:SetIgnoreIndexes({})
+
+-- use case for doing it this way:
+-- a script hub could have themes in a global folder
+-- and game configs in a separate folder per game
+InterfaceManager:SetFolder("FluentScriptHub")
+SaveManager:SetFolder("FluentScriptHub/specific-game")
+
+InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+SaveManager:BuildConfigSection(Tabs.Settings)
+
+Window:SelectTab(1)
+
+Fluent:Notify({
+    Title = "Fluent",
+    Content = "The script has been loaded.",
+    Duration = 8
+})
+
+-- You can use the SaveManager:LoadAutoloadConfig() to load a config
+-- which has been marked to be one that auto loads!
+SaveManager:LoadAutoloadConfig()
