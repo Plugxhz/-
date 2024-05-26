@@ -3727,8 +3727,8 @@ coroutine.wrap(YTZCAJC_fake_script)()
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local Window = Fluent:CreateWindow({
-  Title = "Quantum Hub",
-  SubTitle = "Blox Fruit",
+  Title = "PLUG HUB",
+  SubTitle = " -- Blox Fruit  // Discord Server: https://discord.gg/4a3SznvyYY",
   TabWidth = 160,
   Size = UDim2.fromOffset(450, 350),
   Acrylic = false,
@@ -6101,10 +6101,10 @@ Misc:AddSlider("Slider", {Title = "Farm Distance",Min = 5,Max = 50,Default = 20,
   getgenv().FarmPos = Vector3.new(0, Value or 15, Value or 10)getgenv().FarmDistance = Value
 end})
 
-Misc:AddSlider("Slider", {Title = "Tween Speed",Min = 50,Max = 300,Default = 170,Rounding = 5,Callback = function(Value)
+Misc:AddSlider("Slider", {Title = "Tween Speed",Min = 50,Max = 300,Default = 300,Rounding = 5,Callback = function(Value)
   getgenv().TweenSpeed = Value
 end})
-Misc:AddSlider("Slider", {Title = "Bring Mobs Distance",Min = 50,Max = 500,Default = 250,Rounding = 10,Callback = function(Value)
+Misc:AddSlider("Slider", {Title = "Bring Mobs Distance",Min = 50,Max = 500,Default = 500,Rounding = 10,Callback = function(Value)
   getgenv().BringMobsDistance = Value or 250
 end})
 Misc:AddSlider("Slider", {Title = "Auto Click Delay",Min = 0.01,Max = 1,Default = 0.18,Rounding = 0.01,Callback = function(Value)
