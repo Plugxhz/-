@@ -57,55 +57,6 @@ object.UICorner = instance.new("UICorner", {
     Parent = object.Main;
 })
 
-object.GetKey = instance.new("TextButton", {
-    BackgroundColor3 = Color3.fromRGB(31, 41, 55);
-    BorderColor3 = Color3.fromRGB(0, 0, 0);
-    BorderSizePixel = 0;
-    Font = Enum.Font.Gotham;
-    Name = "GetKey";
-    Parent = object.Main;
-    Position = UDim2.new(0.51810205, 0, 0.742947996, 0);
-    Size = UDim2.new(0, 173, 0, 39);
-    Text = "Pegar Key";
-    TextColor3 = Color3.fromRGB(225, 225, 225);
-    TextSize = 14.000;
-})
-
-object.UICorner = instance.new("UICorner", {
-    CornerRadius = UDim.new(0, 5);
-    Parent = object.GetKey;
-})
-
-object.UIStroke = instance.new("UIStroke", {
-ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-Color = Color3.fromRGB(51, 61, 77);
-LineJoinMode = Enum.LineJoinMode.Round;
-Parent = object.GetKey;
-})
-
-object.TextBox = instance.new("TextBox", {
-    BackgroundColor3 = Color3.fromRGB(21, 31, 45);
-    BorderColor3 = Color3.fromRGB(0, 0, 0);
-    BorderSizePixel = 0;
-    Font = Enum.Font.SourceSans;
-    Parent = object.Main;
-    PlaceholderColor3 = Color3.fromRGB(178, 178, 178);
-    PlaceholderText = "Insira sua Key aqui..";
-    Position = UDim2.new(0.0331600793, 0, 0.414063871, 0);
-    Size = UDim2.new(0, 357, 0, 50);
-    Text = "";
-    TextColor3 = Color3.fromRGB(255, 255, 255);
-    TextSize = 14.000;
-    TextTruncate = Enum.TextTruncate.AtEnd;
-    ClearTextOnFocus = false;
-})
-pcall(function()
-    if true and isfile('tsuo.bin') and not getgenv().Key then
-        object.TextBox.Text = readfile("tsuo.bin")
-    elseif getgenv().Key then 
-        object.TextBox.Text = tostring(getgenv().Key)
-    end
-end)
 
 object.UIPadding = instance.new("UIPadding", {
     PaddingLeft = UDim.new(0, 15);
@@ -196,21 +147,6 @@ ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
 Color = Color3.fromRGB(51, 61, 77);
 LineJoinMode = Enum.LineJoinMode.Round;
 Parent = object.CheckKey;
-})
-
-object.Desc = instance.new("TextLabel", {
-    BackgroundColor3 = Color3.fromRGB(225, 225, 225);
-    BackgroundTransparency = 1.000;
-    BorderColor3 = Color3.fromRGB(0, 0, 0);
-    BorderSizePixel = 0;
-    Font = Enum.Font.Gotham;
-    Name = "Desc";
-    Parent = object.Main;
-    Position = UDim2.new(0.17368421, 0, 0.165000007, 0);
-    Size = UDim2.new(0, 247, 0, 50);
-    Text = "Clique no botão 'Pegar Key' para conseguir sua key!";
-    TextColor3 = Color3.fromRGB(61, 71, 85);
-    TextSize = 14.000;
 })
 
 function RemoveKeyUI() 
@@ -440,21 +376,6 @@ local function REQS(...)
         --while true do end
         return
     end
-    if decode_response.error ~= 0 then
-        if not decode_response.message:find('Token') then
-            RemoveKey()
-        end
-        Notify.New(decode_response.message, 5)
-        object.Desc.Text = decode_response.message
-        spawn(function()
-            delay(5, function()
-                object.Desc.Text = "Clique no botão 'Pegar Key' para conseguir sua key!"
-            end);
-        end)
-        print(decode_response.message)
-        return false
-    end
-    return data_req
 end
 
 local function wl(key)
@@ -543,15 +464,6 @@ local function wl(key)
                 }
             })
         })
-        RemoveKey()
-        Notify.New("Fail to verify signature", 5)
-        object.Desc.Text = 'Fail to verify signature'
-        spawn(function()
-            delay(5, function()
-                object.Desc.Text = "Clique no botão 'Pegar Key' para conseguir sua key!"
-            end);
-        end)
-        return
     end
     
     if sign_match == decode_response.sign then
@@ -9513,53 +9425,4 @@ local function wl(key)
                 Duration = 15
             }
         )
-            else
-        RemoveKey()
-        Notify.New('key expired / does not exist', 5)
-    	print('key expired / does not exist')
-        sign_match = nil
-        securekeyprivate = nil
-        response = nil
-        privatekeyclient = nil
-        client_id = nil
-        client_req = nil
-        client_hwid = nil
-        client_ip = nil 
-        server_time = nil
-        sp = nil
-        rndStr = nil
-        client_sign = nil
-        decode_response = nil
-    end
-end
-
--- Função para ler a chave de um link
-function ReadKeyFromLink(link)
-    local http = game:GetService("HttpService")
-    local response = http:GetAsync(link)
-    return response
-end
-
--- Link para pegar a chave
-local linkToKey = "https://pastebin.com/raw/ZCWiK6E2"
-
--- Função para definir a chave
-function SetKey(key)
-    object.Desc.Text = 'Successfully loaded key!'
-    Notify.New("Successfully loaded key!", 5)
-    wl(key)
-end
-
--- Modificando o evento de clique do botão para pegar a chave do link
-object.GetKey.MouseButton1Click:Connect(function()
-    print('Pegar Key')
-    local key = ReadKeyFromLink(linkToKey)
-    if key and #key >= 2 then
-        object.TextBox.Text = key
-        setclipboard(key)
-        SetKey(key)
-    else
-        print("Falha ao obter a chave do link.")
-    end
-end)
-
+        
