@@ -3728,7 +3728,7 @@ coroutine.wrap(YTZCAJC_fake_script)()
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local Window = Fluent:CreateWindow({
   Title = "PLUG HUB",
-  SubTitle = " -- Blox Fruit  // @enzokkj",
+  SubTitle = " -- Blox Fruit  // Discord Server: https://discord.gg/4a3SznvyYY",
   TabWidth = 160,
   Size = UDim2.fromOffset(450, 350),
   Acrylic = false,
@@ -6111,12 +6111,12 @@ Misc:AddSlider("Slider", {Title = "Auto Click Delay",Min = 0.01,Max = 1,Default 
   getgenv().AutoClickDelay = Value
 end})
 
-Misc:AddToggle("Toggle", {Title = "Fast Attack", true, Callback = function(Value)
+Misc:AddToggle("Toggle", {Title = "Fast Attack", Default = true, Callback = function(Value)
   getgenv().FastAttack = Value
   task.spawn(FastAttack)
 end})
 
-Misc:AddToggle("Toggle", {Title = "Increase Attack Distance", true, Callback = function(Value)
+Misc:AddToggle("Toggle", {Title = "Increase Attack Distance", Default = true, Callback = function(Value)
   getgenv().AttackDistance = Value
   task.spawn(AttackDistance)
 end})
