@@ -1,0 +1,215 @@
+local TweenService = game:GetService("TweenService")
+local teleportEnabled = true -- Defina isso conforme necessário
+local game = game
+
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
+
+local tween -- Variável  para armazenar o tween
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Valores Globais
+_G.FarmTrinket = false
+_G.CharacterSpeed = 16
+local NoClip = false
+_G.TweenSpeed = 20 -- Valor padrão para a velocidade do Tween
+
+
+-- FUNÇÃO TWEEN TP
+
+local function topos(Pos)
+    local humanoidRootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local Distance = (Pos.Position - humanoidRootPart.Position).Magnitude
+
+    if game.Players.LocalPlayer.Character.Humanoid.Sit then
+        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+    end
+
+    local tweenSpeed = 150 -- Valor recomendado para Blox Fruit
+    local tweenInfo = TweenInfo.new(Distance / tweenSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut)
+    
+    tween = TweenService:Create(humanoidRootPart, tweenInfo, { CFrame = Pos.CFrame })
+end
+
+-- Teleportar para a posição do primeiro trinket na pasta "Trinkets" do Workspace
+local trinketsFolder = game:GetService('Workspace').Trinkets
+for _, trinket in ipairs(trinketsFolder:GetChildren()) do
+    -- Verifica se o trinket é válido (por exemplo, se é uma instância de Part)
+    if trinket:IsA("Part") then
+        -- Chama a função topos para definir o tween para a posição do trinket
+        topos(trinket)
+    end
+end
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- FUNÇÃO SPAMAR TECLA "E"
+
+local function SpamKeyE()
+    while teleportEnabled do
+        game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.E, false, game)
+        wait(0.1) -- Espera 0.1 segundos antes de soltar a tecla "E"
+        game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.E, false, game)
+        wait(0.1) -- Espera 0.1 segundos antes de pressionar novamente
+    end
+end
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- FUNÇÃO PARA MODIFICAR A VELOCIDADE DO JOGADOR
+local function ModifySpeed(speed)
+    -- Validate speed within reasonable limits
+    if speed < 16 or speed > 120 then
+        return
+    end
+
+    local character = game.Players.LocalPlayer.Character
+    if character and character:FindFirstChildOfClass("Humanoid") then
+        character.Humanoid.WalkSpeed = speed
+    end
+end
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- FUNÇÃO DO NO CLIP
+local NoClip = false
+
+local function ToggleNoClip(Enabled)
+    NoClip = Enabled
+    if Enabled then
+        -- Habilitar NoClip: Desativar a colisão de todas as partes do personagem
+        game:GetService("RunService").Stepped:Connect(function()
+            if NoClip then
+                for _, part in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                    if part:IsA("BasePart") and part.CanCollide then
+                        part.CanCollide = false
+                    end
+                end
+            end
+        end)
+    else
+        -- Desativar NoClip: Restaurar a colisão de todas as partes do personagem
+        for _, part in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = true
+            end
+        end
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = _G.CharacterSpeed -- Restaurar a velocidade do jogador
+    end
+end
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+local function TweenToTrinket(trinket)
+    MoveTween(trinket, _G.TweenSpeed)
+end
+
+local Window = redzlib:MakeWindow({
+    Title = "PLUG'S HUB : Demonfall Script",
+    SubTitle = "    by @enzokkj",
+    SaveFolder = "Teste Folder | redz lib v5.lua"
+})
+
+local MainTab1 = Window:MakeTab({"Main Tab", "FARM"})
+local ModTab2 = Window:MakeTab({"Player Mod", "MODIFICAÇÕES"})
+local MiscTab3 = Window:MakeTab({"Miscellaneous", "DIVERSOS"})
+
+Window:SelectTab(MainTab1) -- Corrigido para MainTab1
+
+local Section = MainTab1:AddSection({"Auto Farm"})
+local Section = ModTab2:AddSection({"Modificações"})
+local Section = MiscTab3:AddSection({"Diversos"})
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- TUDO DA TAB 1
+
+
+local Tab1Toggle1 = MainTab1:AddToggle({
+    Name = "Auto Farm Trinket",
+    Description = "This will auto farm all <font color='rgb(88, 101, 242)'>trinkets</font> for you.",
+    Default = false
+})
+
+local Tab1Toggle2 = MainTab1:AddToggle({
+    Name = "Auto Collect",
+    Description = "This will collect all <font color='rgb(88, 101, 242)'>trinkets</font> for you.",
+    Default = false
+})
+
+Tab1Toggle1:Callback(function(Value)
+    if Value then
+        -- Inicia o tween apenas se Toggle1 for ativado
+        tween:Play()
+    else
+        -- Cancela o tween se Toggle1 for desativado
+        tween:Cancel()
+    end
+end)
+
+Tab1Toggle2:Callback(function(Value)
+    teleportEnabled = Value
+    if Value then
+        coroutine.wrap(SpamKeyE)()
+    end
+end)
+
+
+MainTab1:AddSlider({
+    Name = "Tween Farm Speed",
+    Min = 1,
+    Max = 120,
+    Increase = 10,
+    Default = 60,
+})
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- TUDO DA TAB 2
+
+local Tab2Toggle1 = ModTab2:AddToggle({
+    Name = "No Clip",
+    Description = "This will activate <font color='rgb(88, 101, 242)'>no clip</font> for you.",
+    Default = false
+})
+
+Tab2Toggle1:Callback(function(Value)
+    ToggleNoClip(Value)
+end)
+
+-- Adiciona um slider na aba de modificação do jogador para ajustar a velocidade de caminhada
+local WalkspeedSlider = ModTab2:AddSlider({
+    Name = "Walkspeed Power",
+    Min = 16,
+    Max = 120,
+    Step = 1, -- Ajuste de incremento
+    Default = _G.CharacterSpeed,
+    Callback = function(Value)
+        -- Chama a função para modificar a velocidade de caminhada com o valor do slider
+        ModifySpeed(Value)
+    end
+})
+
+local Tab2Toggle3 = ModTab2:AddToggle({
+    Name = "Auto Breath",
+    Description = "This will <font color='rgb(88, 101, 242)'>auto breath</font> for you.",
+    Default = false
+})
+
+Tab2Toggle3:Callback(function(Value)
+    if Value then
+        -- Se ativado, dispara o evento remoto com os argumentos
+        local args = {
+            [1] = "Character",
+            [2] = "Breath",
+            [3] = true
+        }
+        game:GetService("ReplicatedStorage").Remotes.Async:FireServer(unpack(args))
+    end
+end)
