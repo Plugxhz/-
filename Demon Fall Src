@@ -1,5 +1,5 @@
 local TweenService = game:GetService("TweenService")
-local teleportEnabled = true -- Defina isso conforme necessário
+local teleportEnabled = true
 local game = game
 
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
@@ -12,7 +12,7 @@ local tween -- Variável  para armazenar o tween
 _G.FarmTrinket = false
 _G.CharacterSpeed = 16
 local NoClip = false
-_G.TweenSpeed = 20 -- Valor padrão para a velocidade do Tween
+_G.TweenSpeed = 20 
 
 
 -- FUNÇÃO TWEEN TP
@@ -99,7 +99,7 @@ local function ToggleNoClip(Enabled)
                 part.CanCollide = true
             end
         end
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = _G.CharacterSpeed -- Restaurar a velocidade do jogador
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = _G.CharacterSpeed
     end
 end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -119,7 +119,7 @@ local MainTab1 = Window:MakeTab({"Main Tab", "FARM"})
 local ModTab2 = Window:MakeTab({"Player Mod", "MODIFICAÇÕES"})
 local MiscTab3 = Window:MakeTab({"Miscellaneous", "DIVERSOS"})
 
-Window:SelectTab(MainTab1) -- Corrigido para MainTab1
+Window:SelectTab(MainTab1) 
 
 local Section = MainTab1:AddSection({"Auto Farm"})
 local Section = ModTab2:AddSection({"Modificações"})
@@ -145,10 +145,8 @@ local Tab1Toggle2 = MainTab1:AddToggle({
 
 Tab1Toggle1:Callback(function(Value)
     if Value then
-        -- Inicia o tween apenas se Toggle1 for ativado
         tween:Play()
     else
-        -- Cancela o tween se Toggle1 for desativado
         tween:Cancel()
     end
 end)
@@ -183,7 +181,6 @@ Tab2Toggle1:Callback(function(Value)
     ToggleNoClip(Value)
 end)
 
--- Adiciona um slider na aba de modificação do jogador para ajustar a velocidade de caminhada
 local WalkspeedSlider = ModTab2:AddSlider({
     Name = "Walkspeed Power",
     Min = 16,
@@ -191,7 +188,6 @@ local WalkspeedSlider = ModTab2:AddSlider({
     Step = 1, -- Ajuste de incremento
     Default = _G.CharacterSpeed,
     Callback = function(Value)
-        -- Chama a função para modificar a velocidade de caminhada com o valor do slider
         ModifySpeed(Value)
     end
 })
@@ -204,7 +200,6 @@ local Tab2Toggle3 = ModTab2:AddToggle({
 
 Tab2Toggle3:Callback(function(Value)
     if Value then
-        -- Se ativado, dispara o evento remoto com os argumentos
         local args = {
             [1] = "Character",
             [2] = "Breath",
