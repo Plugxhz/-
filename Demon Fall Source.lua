@@ -196,9 +196,49 @@ end
 
 -- FUNÇÃO PARA MODIFICAR A WALKSPEED
 
-getgenv().Enabled = true -- change to false then execute again to turn off
-    getgenv().Speed = 100 -- change speed to the number you want
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/eclipsology/SimpleSpeed/main/SimpleSpeed.lua"))()
+getgenv().Enabled = true
+getgenv().Speed = 16
+
+local players = game:GetService("Players")
+
+local function bypassWalkSpeed()
+    if getgenv().executed then
+        print("Walkspeed Already Bypassed - Applying Settings Changes")
+        if not getgenv().Enabled then
+            return
+        end
+    else
+        getgenv().executed = true
+        print("Walkspeed Bypassed")
+
+        local mt = getrawmetatable(game)
+        setreadonly(mt, false)
+
+        local oldindex = mt.__index
+        mt.__index = newcclosure(function(self, b)
+            if b == 'WalkSpeed' then
+                return 16
+            end
+            return oldindex(self, b)
+        end)
+    end
+end
+
+bypassWalkSpeed()
+
+players.LocalPlayer.CharacterAdded:Connect(function(char)
+    bypassWalkSpeed()
+    char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
+end)
+
+local function updateWalkSpeed()
+    if getgenv().Enabled and players.LocalPlayer.Character then
+        local humanoid = players.LocalPlayer.Character:WaitForChild("Humanoid")
+        if humanoid then
+            humanoid.WalkSpeed = getgenv().Speed
+        end
+    end
+end
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -287,6 +327,10 @@ local Tab2Slider1 = ModTab2:AddSlider({
         updateWalkSpeed()
     end
 })
+
+while getgenv().Enabled and wait() do
+    updateWalkSpeed()
+end
 
 local Tab2Toggle1 = ModTab2:AddToggle({
     Name = "No Clip",
