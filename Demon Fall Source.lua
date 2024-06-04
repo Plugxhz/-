@@ -291,7 +291,7 @@ local Tab2Slider0 = ModTab2:AddSlider({
     Name = "Player Speed",
     Description = "Modifies the player's <font color='rgb(88, 101, 242)'>walk speed</font>.",
     Min = 16,
-    Max = 500,
+    Max = 150,
     Default = 16,
     Decimals = 1,
     Suffix = " WalkSpeed",
