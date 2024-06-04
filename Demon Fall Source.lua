@@ -212,23 +212,36 @@ local function bypassWalkSpeed()
         local oldindex = mt.__index
         mt.__index = newcclosure(function(self, b)
             if tostring(self) == "Humanoid" and b == "WalkSpeed" then
-                return getgenv().Speed
+                return getgenv().Speed or 16
             end
             return oldindex(self, b)
         end)
     end
 end
 
+bypassWalkSpeed()
+
 Players.LocalPlayer.CharacterAdded:Connect(function(char)
     bypassWalkSpeed()
     char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
 end)
 
-local function updateWalkSpeed(value)
-    getgenv().Speed = value
-    if player.Character and player.Character:FindFirstChild("Humanoid") then
-        player.Character.Humanoid.WalkSpeed = value
+local function updateWalkSpeed()
+    if Players.LocalPlayer.Character then
+        local humanoid = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid.WalkSpeed = getgenv().Speed
+        end
     end
+end
+
+local function onCharacterAdded(character)
+    character:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
+end
+
+Players.LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
+if Players.LocalPlayer.Character then
+    onCharacterAdded(Players.LocalPlayer.Character)
 end
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -245,7 +258,7 @@ local Window = redzlib:MakeWindow({
 local MainTab1 = Window:MakeTab({"Main Tab", "FARM"})
 local ModTab2 = Window:MakeTab({"Player Mod", "MODIFICAÇÕES"})
 local MiscTab3 = Window:MakeTab({"Miscellaneous", "DIVERSOS"})
-local SkillsTab4 = Window:MakeTab({"Skills", "BREATHING"})
+local SkillsTab4 = Window:MakeTab({"Auto Skills", "BREATHING"})
 local TeleportTab5 = Window:MakeTab({"Teleports", "Tp Service"})
 
 Window:SelectTab(MainTab1)
@@ -253,7 +266,7 @@ Window:SelectTab(MainTab1)
 local Section1 = MainTab1:AddSection({"Auto Farm"})
 local Section2 = ModTab2:AddSection({"Modificações"})
 local Section3 = MiscTab3:AddSection({"Diversos"})
-local Section4 = SkillsTab4:AddSection({"Skills"})
+local Section4 = SkillsTab4:AddSection({"Auto Skills"})
 local Section5 = TeleportTab5:AddSection({"Teleports"})
 
 
@@ -280,140 +293,87 @@ local Tab1Toggle1 = MainTab1:AddToggle({
     Default = false,
     Callback = function(Value)
         _G.FarmTrinket = Value
-        if Value then
-            spawn(TrinketFarm)
+        if _G.FarmTrinket then
+            TrinketFarm()
         end
     end
 })
 
-local Tab1Toggle2 = MainTab1:AddToggle({
-    Name = "Auto Collect",
-    Description = "This will collect all <font color='rgb(88, 101, 242)'>trinkets and drops</font> for you.",
-    Default = false,
-    Callback = function(Value)
-        teleportEnabled = Value
-        if Value then
-            coroutine.wrap(SpamKeyE)()
-        end
-    end
-})
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- TUDO DA TAB 2
+local Tab2Slider0 = ModTab2:AddSlider({
+    Name = "Tween Speed",
+    Description = "Speed",
+    Min = 75,
+    Max = 150,
+    Default = 75,
+    Save = true,
+    Flag = "TweenSlider0",
+    Callback = function(Value)
+        _G.TweenSpeed = Value
+    end
+})
+
+local Tab2Slider1 = ModTab2:AddSlider({
+    Name = "Walk Speed",
+    Description = "Speed Power",
+    Min = 16,
+    Max = 150,
+    Default = 16,
+    Save = true,
+    Flag = "WalkSlider1",
+    Callback = function(Value)
+        getgenv().Speed = Value
+        updateWalkSpeed()
+    end
+})
+
 local Tab2Toggle1 = ModTab2:AddToggle({
     Name = "No Clip",
-    Description = "This will activate <font color='rgb(88, 101, 242)'>no clip</font> for you.",
+    Description = "Noclip the player",
     Default = false,
-    Callback= function(Value)
+    Save = true,
+    Flag = "ModTab2_Toggle1",
+    Callback = function(Value)
         ToggleNoClip(Value)
     end
 })
 
-local Slider = ModTab2:AddSlider({
-    Name = "Speed Power",
-    Description = "Default speed value is: <font color='rgb(88, 101, 242)'>10</font>.",
-    Min = 1,
-    Max = 140,
-    Increase = 1,
-    Default = 16,
-    Callback = function(Value)
-        updateWalkSpeed(Value)
-        bypassWalkSpeed() -- Call bypassWalkSpeed to ensure metatable bypass is applied
-    end
-})
-
-local Tab2Toggle2 = ModTab2:AddToggle({
-    Name = "Auto Breath",
-    Description = "This will <font color='rgb(88, 101, 242)'>auto breath</font> for you.",
-    Default = false,
-    Callback = function(Value)
-        if Value then
-            local args = {
-                [1] = "Character",
-                [2] = "Breath",
-                [3] = true
-            }
-            ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-        end
-    end
-})
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- TUDO DA TAB 3
-local Tab3Button1 = MiscTab3:AddButton({
-    Name = "Server Hop",
-    Description = "This will teleport you to a new game.",
-    Callback = function()
-        print("Button clicked, teleporting...")
-        TeleportService:Teleport(5094651510)
-    end
-})
-
-local function EquipKatana()
-    local args = {
-        [1] = "Katana",
-        [2] = "EquippedEvents",
-        [3] = true,
-        [4] = true
-    }
-    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-end
-
 local Tab3Toggle0 = MiscTab3:AddToggle({
-    Name = "Equip Katana",
-    Description = "This will auto-equip the Katana for you.",
+    Name = "Auto Press Key E",
+    Description = "This will auto press <font color='rgb(88, 101, 242)'>Key E</font> for you.",
     Default = false,
+    Save = true,
+    Flag = "MiscTab3_Toggle0",
     Callback = function(Value)
-        if Value then
-            EquipKatana()
+        teleportEnabled = Value
+        if teleportEnabled then
+            SpamKeyE()
         end
     end
 })
 
 local Tab3Toggle1 = MiscTab3:AddToggle({
-    Name = "God Mode",
-    Description = "The power of imortality.",
+    Name = "Vida Nan",
+    Description = "This will make your vida = <font color='rgb(88, 101, 242)'>Nan</font>.",
     Default = false,
+    Save = true,
+    Flag = "MiscTab3_Toggle1",
     Callback = function(Value)
         if Value then
             definirVidaComoNan()
         else
             stopDefinirVidaComoNanFunction()
-        end
-    end
-})
-
-local Tab3Toggle2 = MiscTab3:AddToggle({
-    Name = "Auto Sell Trinkets",
-    Description = "This will auto-sell all your trinkets for you.",
-    Default = false,
-    Callback = function(Value)
-        if Value then
-            local args = {
-                [1] = "Dialogue",
-                [2] = "Talk"
-            }
-            ReplicatedStorage.Remotes.Sync:InvokeServer(unpack(args))
-
-            local args = {
-                [1] = "Dialogue",
-                [2] = "Answer",
-                [3] = Players.LocalPlayer.Character.Answers.Answer,
-                [4] = "Merchant"
-            }
-            ReplicatedStorage.Remotes.Sync:InvokeServer(unpack(args))
-
-            local args = {
-                [1] = "Dialogue",
-                [2] = "Untalk"
-            }
-            ReplicatedStorage.Remotes.Sync:InvokeServer(unpack(args))
         end
     end
 })
@@ -523,7 +483,6 @@ local function loopAutoSkill(autoSkillFunc)
     end
 end
 
-local SkillsTab4 = Window:MakeTab({"Skills", "BREATHING"})
 
 local Tab4Toggle1 = SkillsTab4:AddToggle({
     Name = "Auto Skill 1",
@@ -602,5 +561,49 @@ local Tab4Toggle5 = SkillsTab4:AddToggle({
                 loopAutoSkill(AutoSkill5_2)
             end)
         end 
+    end
+})
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- TUDO DA TAB 5
+local Tab5Button1 = TeleportTab5:AddButton({
+    Name = "Giro Mansion",
+    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the giro mansion.",
+    Callback = function()
+        topos(CFrame.new(257.881256, 391.078735, -2437.00317, 0.162389845, 0, 0.986723125, 0, 1, 0, -0.986723125, 0, 0.162389845))
+    end
+})
+
+local Tab5Button2 = TeleportTab5:AddButton({
+    Name = "Hayakawa Village",
+    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the hayakawa village.",
+    Callback = function()
+        topos(CFrame.new(106.074921, 283.121124, -1799.88562, 0.321393788, 0, -0.946930289, 0, 1, 0, 0.946930289, 0, 0.321393788))
+    end
+})
+
+local Tab5Button3 = TeleportTab5:AddButton({
+    Name = "Ouwbayashi Home",
+    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the ouwbayshi home.",
+    Callback = function()
+        topos(CFrame.new(468.192657, 341.474487, -2044.70154, -0.573575616, 0, 0.819152057, 0, 1, 0, -0.819152057, 0, -0.573575616))
+    end
+})
+
+local Tab5Button4 = TeleportTab5:AddButton({
+    Name = "Final Selection",
+    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the final selection.",
+    Callback = function()
+        topos(CFrame.new(275.529999, 316.785217, -3259.12012, -0.499999464, 0, 0.866025627, 0, 1, 0, -0.866025627, 0, -0.499999464))
+    end
+})
+
+local Tab5Button5 = TeleportTab5:AddButton({
+    Name = "Slasher Demon",
+    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the slasher demon.",
+    Callback = function()
+        topos(CFrame.new(29.0690937, 283.156342, -1775.2002, 0.74314481, 0, -0.669131756, 0, 1, 0, 0.669131756, 0, 0.74314481))
     end
 })
