@@ -297,10 +297,10 @@ local Tab1Toggle1 = MainTab1:AddToggle({
 
 -- TUDO DA TAB 2
 local Tab2Slider0 = ModTab2:AddSlider({
-    Name = "Choose Tween Speed",
+    Name = "Tween Speed",
     Description = "Speed",
     Min = 75,
-    Max = 1000,
+    Max = 150,
     Default = 75,
     Save = true,
     Flag = "TweenSlider0",
@@ -310,10 +310,10 @@ local Tab2Slider0 = ModTab2:AddSlider({
 })
 
 local Tab2Slider1 = ModTab2:AddSlider({
-    Name = "Choose Walk Speed",
-    Description = "Speed",
+    Name = "Walk Speed",
+    Description = "Speed Power",
     Min = 16,
-    Max = 1000,
+    Max = 150,
     Default = 16,
     Save = true,
     Flag = "WalkSlider1",
@@ -474,7 +474,6 @@ local function loopAutoSkill(autoSkillFunc)
     end
 end
 
-local SkillsTab4 = Window:MakeTab({"Skills", "BREATHING"})
 
 local Tab4Toggle1 = SkillsTab4:AddToggle({
     Name = "Auto Skill 1",
