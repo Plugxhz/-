@@ -205,14 +205,17 @@ local function bypassWalkSpeed()
     else
         getgenv().executed = true
         print("Walkspeed Bypassed")
-    end
 
-    -- Atualizar diretamente a velocidade de caminhada do Humanoid
-    if Players.LocalPlayer.Character then
-        local humanoid = Players.LocalPlayer.Character:FindFirstChild("Humanoid")
-        if humanoid then
-            humanoid.WalkSpeed = getgenv().Speed
-        end
+        local mt = getrawmetatable(game)
+        setreadonly(mt, false)
+
+        local oldindex = mt.__index
+        mt.__index = newcclosure(function(self, b)
+            if b == 'WalkSpeed' then
+                return 16
+            end
+            return oldindex(self, b)
+        end)
     end
 end
 
@@ -220,7 +223,6 @@ Players.LocalPlayer.CharacterAdded:Connect(function(char)
     bypassWalkSpeed()
     char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
 end)
-
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -236,7 +238,7 @@ local Window = redzlib:MakeWindow({
 local MainTab1 = Window:MakeTab({"Main Tab", "FARM"})
 local ModTab2 = Window:MakeTab({"Player Mod", "MODIFICAÇÕES"})
 local MiscTab3 = Window:MakeTab({"Miscellaneous", "DIVERSOS"})
-local SkillsTab4 = Window:MakeTab({"Auto Skills", "BREATHING"})
+local SkillsTab4 = Window:MakeTab({"Skills", "BREATHING"})
 local TeleportTab5 = Window:MakeTab({"Teleports", "Tp Service"})
 
 Window:SelectTab(MainTab1)
@@ -244,7 +246,7 @@ Window:SelectTab(MainTab1)
 local Section1 = MainTab1:AddSection({"Auto Farm"})
 local Section2 = ModTab2:AddSection({"Modificações"})
 local Section3 = MiscTab3:AddSection({"Diversos"})
-local Section4 = SkillsTab4:AddSection({"Auto Skills"})
+local Section4 = SkillsTab4:AddSection({"Skills"})
 local Section5 = TeleportTab5:AddSection({"Teleports"})
 
 
@@ -304,14 +306,14 @@ local Tab2Toggle1 = ModTab2:AddToggle({
 })
 
 local Slider = ModTab2:AddSlider({
-    Name = "Speed Power", 
-    Description = "Default speed value is: <font color='rgb(88, 101, 242)'>10</font>.",
+    Name = "Speed Power", Description = "Default speed value is: <font color='rgb(88, 101, 242)'>10</font>.",
     Min = 1,
     Max = 140,
-    Increase = 1,
+    Increase = 10,
     Default = 18,
     Callback = function(Value)
         getgenv().Speed = Value -- update the speed with the slider value
+        bypassWalkSpeed() -- Call bypassWalkSpeed when slider value changes
         if Players.LocalPlayer.Character then
             local humanoid = Players.LocalPlayer.Character:FindFirstChild("Humanoid")
             if humanoid then
@@ -320,7 +322,6 @@ local Slider = ModTab2:AddSlider({
         end
     end
 })
-
 
 local Tab2Toggle2 = ModTab2:AddToggle({
     Name = "Auto Breath",
