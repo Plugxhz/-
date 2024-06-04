@@ -22,7 +22,7 @@ _G.TweenSpeed = 75
 _G.CharacterSpeed = 16
 
 getgenv().Enabled = true
-getgenv().Speed = 100
+getgenv().Speed = 16
 getgenv().StopTween = false
 getgenv().executed = false
 local autoFarmKaigaku = false
@@ -196,11 +196,6 @@ end
 
 -- FUNÇÃO PARA MODIFICAR A WALKSPEED
 
-getgenv().Enabled = true
-getgenv().Speed = 16
-
-local players = game:GetService("Players")
-
 local function bypassWalkSpeed()
     if getgenv().executed then
         print("Walkspeed Already Bypassed - Applying Settings Changes")
@@ -224,16 +219,9 @@ local function bypassWalkSpeed()
     end
 end
 
-bypassWalkSpeed()
-
-players.LocalPlayer.CharacterAdded:Connect(function(char)
-    bypassWalkSpeed()
-    char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
-end)
-
 local function updateWalkSpeed()
-    if getgenv().Enabled and players.LocalPlayer.Character then
-        local humanoid = players.LocalPlayer.Character:WaitForChild("Humanoid")
+    if getgenv().Enabled and player.Character then
+        local humanoid = player.Character:WaitForChild("Humanoid")
         if humanoid then
             humanoid.WalkSpeed = getgenv().Speed
         end
@@ -265,7 +253,6 @@ local Section3 = MiscTab3:AddSection({"Diversos"})
 local Section4 = SkillsTab4:AddSection({"Auto Skills"})
 local Section5 = TeleportTab5:AddSection({"Teleports"})
 
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -295,85 +282,86 @@ local Tab1Toggle1 = MainTab1:AddToggle({
     end
 })
 
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- TUDO DA TAB 2
 local Tab2Slider0 = ModTab2:AddSlider({
-    Name = "Tween Speed",
-    Description = "Speed",
-    Min = 75,
-    Max = 150,
-    Default = 75,
-    Save = true,
-    Flag = "TweenSlider0",
-    Callback = function(Value)
-        _G.TweenSpeed = Value
-    end
-})
-
-local Tab2Slider1 = ModTab2:AddSlider({
-    Name = "Walk Speed",
-    Description = "Speed Power",
+    Name = "Player Speed",
+    Description = "Modifies the player's <font color='rgb(88, 101, 242)'>walk speed</font>.",
     Min = 16,
-    Max = 150,
+    Max = 500,
     Default = 16,
-    Save = true,
-    Flag = "WalkSlider1",
+    Decimals = 1,
+    Suffix = " WalkSpeed",
     Callback = function(Value)
         getgenv().Speed = Value
         updateWalkSpeed()
     end
 })
 
-while getgenv().Enabled and wait() do
-    updateWalkSpeed()
-end
-
 local Tab2Toggle1 = ModTab2:AddToggle({
     Name = "No Clip",
-    Description = "Noclip the player",
+    Description = "Allows the player to <font color='rgb(88, 101, 242)'>walk through walls</font>.",
     Default = false,
-    Save = true,
-    Flag = "ModTab2_Toggle1",
     Callback = function(Value)
         ToggleNoClip(Value)
     end
 })
 
+local Tab2Button2 = ModTab2:AddButton({
+    Name = "Infinite Life",
+    Description = "Sets the player's <font color='rgb(88, 101, 242)'>health to infinite</font>.",
+    Callback = function()
+        definirVidaComoNan()
+    end
+})
+
+local Tab2Button3 = ModTab2:AddButton({
+    Name = "Stop Infinite Life",
+    Description = "Stops setting the player's <font color='rgb(88, 101, 242)'>health to infinite</font>.",
+    Callback = function()
+        stopDefinirVidaComoNanFunction()
+    end
+})
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- TUDO DA TAB 3
-local Tab3Toggle0 = MiscTab3:AddToggle({
-    Name = "Auto Press Key E",
-    Description = "This will auto press <font color='rgb(88, 101, 242)'>Key E</font> for you.",
-    Default = false,
-    Save = true,
-    Flag = "MiscTab3_Toggle0",
-    Callback = function(Value)
-        teleportEnabled = Value
-        if teleportEnabled then
-            SpamKeyE()
+local Tab3Button0 = MiscTab3:AddButton({
+    Name = "Teleport to Player",
+    Description = "Teleport to a specific <font color='rgb(88, 101, 242)'>player</font>.",
+    Callback = function()
+        local targetPlayerName = "TargetPlayerName" -- Defina o nome do jogador alvo
+        local targetPlayer = game.Players:FindFirstChild(targetPlayerName)
+        if targetPlayer and targetPlayer.Character then
+            topos(targetPlayer.Character.HumanoidRootPart.CFrame)
+        else
+            warn("Jogador alvo não encontrado ou não está no jogo.")
         end
     end
 })
 
-local Tab3Toggle1 = MiscTab3:AddToggle({
-    Name = "Vida Nan",
-    Description = "This will make your vida = <font color='rgb(88, 101, 242)'>Nan</font>.",
+local Tab3Button1 = MiscTab3:AddButton({
+    Name = "Teleport to Position",
+    Description = "Teleport to a specific <font color='rgb(88, 101, 242)'>position</font>.",
+    Callback = function()
+        local targetPosition = Vector3.new(0, 0, 0) -- Defina a posição alvo
+        topos(CFrame.new(targetPosition))
+    end
+})
+
+local Tab3Toggle2 = MiscTab3:AddToggle({
+    Name = "Spam Key 'E'",
+    Description = "Continuously <font color='rgb(88, 101, 242)'>spams the 'E' key</font>.",
     Default = false,
-    Save = true,
-    Flag = "MiscTab3_Toggle1",
     Callback = function(Value)
-        if Value then
-            definirVidaComoNan()
-        else
-            stopDefinirVidaComoNanFunction()
+        teleportEnabled = Value
+        if teleportEnabled then
+            spawn(SpamKeyE)
         end
     end
 })
@@ -383,227 +371,46 @@ local Tab3Toggle1 = MiscTab3:AddToggle({
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- TUDO DA TAB 4
-
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-local function AutoSkill1_1()
-    local args = {
-        [1] = "First Form: Dust Claw",
-        [2] = "Server"
-    }
-    
-    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-end
-
-local function AutoSkill1_2()
-    local args = {
-        [1] = "First Form: Unknowing Fire",
-        [2] = "Server"
-    }
-    
-    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-end
-
-local function AutoSkill2_1()
-    local args = {
-        [1] = "Second Form: Purifying Wind",
-        [2] = "Server"
-    }
-    
-    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-end
-
-local function AutoSkill2_2()
-    local args = {
-        [1] = "Second Form: Rising Scorching Sun",
-        [2] = "Server"
-    }
-    
-    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-end
-
-local function AutoSkill3_1()
-    local args = {
-        [1] = "Third Form: Lotus Tempest",
-        [2] = "Server"
-    }
-    
-    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-end
-
-local function AutoSkill3_2()
-    local args = {
-        [1] = "Third Form: Flame Bend",
-        [2] = "Server"
-    }
-    
-    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-end
-
-local function AutoSkill4_1()
-    local args = {
-        [1] = "Fifth Form: Gale Slash",
-        [2] = "Server"
-    }
-    
-    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-end
-
-local function AutoSkill4_2()
-    local args = {
-        [1] = "Fourth Form: Blooming Flame Undulation",
-        [2] = "Server"
-    }
-    
-    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-end
-
-local function AutoSkill5_1()
-    local args = {
-        [1] = "Sixth Form: Wind Typhoon",
-        [2] = "Server"
-    }
-    
-    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-end
-
-local function AutoSkill5_2()
-    local args = {
-        [1] = "Fifth Form: Flame Tiger",
-        [2] = "Server"
-    }
-    
-    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
-end
-
-local function loopAutoSkill(autoSkillFunc)
-    while true do
-        autoSkillFunc()
-        wait(0.5) -- Intervalo entre a execução das habilidades, ajuste conforme necessário
-    end
-end
-
-
-local Tab4Toggle1 = SkillsTab4:AddToggle({
-    Name = "Auto Skill 1",
-    Description = "print the value",
-    Default = false,
-    Callback = function(Value)
-        if Value then
-            spawn(function()
-                loopAutoSkill(AutoSkill1_1)
-            end)
-            spawn(function()
-                loopAutoSkill(AutoSkill1_2)
-            end)
-        end 
+local Tab4Button0 = SkillsTab4:AddButton({
+    Name = "Auto Use Breathing",
+    Description = "Automatically uses the player's <font color='rgb(88, 101, 242)'>breathing skill</font>.",
+    Callback = function()
+        local args = {
+            [1] = "Breathing",
+            [2] = "Server"
+        }
+        ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
     end
 })
 
-local Tab4Toggle2 = SkillsTab4:AddToggle({
-    Name = "Auto Skill 2",
-    Description = "print the value",
-    Default = false,
-    Callback = function(Value)
-        if Value then
-            spawn(function()
-                loopAutoSkill(AutoSkill2_1)
-            end)
-            spawn(function()
-                loopAutoSkill(AutoSkill2_2)
-            end)
-        end 
-    end
-})
-
-local Tab4Toggle3 = SkillsTab4:AddToggle({
-    Name = "Auto Skill 3",
-    Description = "print the value",
-    Default = false,
-    Callback = function(Value)
-        if Value then
-            spawn(function()
-                loopAutoSkill(AutoSkill3_1)
-            end)
-            spawn(function()
-                loopAutoSkill(AutoSkill3_2)
-            end)
-        end 
-    end
-})
-
-local Tab4Toggle4 = SkillsTab4:AddToggle({
-    Name = "Auto Skill 4",
-    Description = "print the value",
-    Default = false,
-    Callback = function(Value)
-        if Value then
-            spawn(function()
-                loopAutoSkill(AutoSkill4_1)
-            end)
-            spawn(function()
-                loopAutoSkill(AutoSkill4_2)
-            end)
-        end 
-    end
-})
-
-local Tab4Toggle5 = SkillsTab4:AddToggle({
-    Name = "Auto Skill 5",
-    Description = "print the value",
-    Default = false,
-    Callback = function(Value)
-        if Value then
-            spawn(function()
-                loopAutoSkill(AutoSkill5_1)
-            end)
-            spawn(function()
-                loopAutoSkill(AutoSkill5_2)
-            end)
-        end 
-    end
-})
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- TUDO DA TAB 5
+local Tab5Button0 = TeleportTab5:AddButton({
+    Name = "Teleport to Arena",
+    Description = "Teleports the player to the <font color='rgb(88, 101, 242)'>arena</font>.",
+    Callback = function()
+        local targetPosition = Vector3.new(100, 100, 100) -- Defina a posição da arena
+        topos(CFrame.new(targetPosition))
+    end
+})
+
 local Tab5Button1 = TeleportTab5:AddButton({
-    Name = "Giro Mansion",
-    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the giro mansion.",
+    Name = "Teleport to Village",
+    Description = "Teleports the player to the <font color='rgb(88, 101, 242)'>village</font>.",
     Callback = function()
-        topos(CFrame.new(257.881256, 391.078735, -2437.00317, 0.162389845, 0, 0.986723125, 0, 1, 0, -0.986723125, 0, 0.162389845))
+        local targetPosition = Vector3.new(200, 200, 200) -- Defina a posição da vila
+        topos(CFrame.new(targetPosition))
     end
 })
 
-local Tab5Button2 = TeleportTab5:AddButton({
-    Name = "Hayakawa Village",
-    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the hayakawa village.",
-    Callback = function()
-        topos(CFrame.new(106.074921, 283.121124, -1799.88562, 0.321393788, 0, -0.946930289, 0, 1, 0, 0.946930289, 0, 0.321393788))
-    end
-})
+-- Inicializando o bypass do WalkSpeed após a configuração do hub
+bypassWalkSpeed()
 
-local Tab5Button3 = TeleportTab5:AddButton({
-    Name = "Ouwbayashi Home",
-    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the ouwbayshi home.",
-    Callback = function()
-        topos(CFrame.new(468.192657, 341.474487, -2044.70154, -0.573575616, 0, 0.819152057, 0, 1, 0, -0.819152057, 0, -0.573575616))
-    end
-})
+-- Certifique-se de atualizar a WalkSpeed quando a variável getgenv().Speed mudar
+updateWalkSpeed()
 
-local Tab5Button4 = TeleportTab5:AddButton({
-    Name = "Final Selection",
-    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the final selection.",
-    Callback = function()
-        topos(CFrame.new(275.529999, 316.785217, -3259.12012, -0.499999464, 0, 0.866025627, 0, 1, 0, -0.866025627, 0, -0.499999464))
-    end
-})
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-local Tab5Button5 = TeleportTab5:AddButton({
-    Name = "Slasher Demon",
-    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the slasher demon.",
-    Callback = function()
-        topos(CFrame.new(29.0690937, 283.156342, -1775.2002, 0.74314481, 0, -0.669131756, 0, 1, 0, 0.669131756, 0, 0.74314481))
-    end
-})
