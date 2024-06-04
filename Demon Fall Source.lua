@@ -143,7 +143,7 @@ local function startAutoFarmKaigaku()
             -- Ataca Kaigaku
             attackKaigaku()
         end
-        wait(0.2) -- Ajuste o intervalo conforme necessário
+        wait() -- Ajuste o intervalo conforme necessário
     end
 end
 
