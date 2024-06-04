@@ -196,6 +196,8 @@ end
 
 -- FUNÇÃO PARA MODIFICAR A WALKSPEED
 
+local Players = game:GetService("Players")
+
 local function bypassWalkSpeed()
     if getgenv().executed then
         print("Walkspeed Already Bypassed - Applying Settings Changes")
