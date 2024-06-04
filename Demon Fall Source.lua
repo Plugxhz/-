@@ -211,8 +211,8 @@ local function bypassWalkSpeed()
 
         local oldindex = mt.__index
         mt.__index = newcclosure(function(self, b)
-            if b == 'WalkSpeed' then
-                return 16
+            if tostring(self) == "Humanoid" and b == "WalkSpeed" then
+                return getgenv().Speed
             end
             return oldindex(self, b)
         end)
@@ -223,6 +223,13 @@ Players.LocalPlayer.CharacterAdded:Connect(function(char)
     bypassWalkSpeed()
     char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
 end)
+
+local function updateWalkSpeed(value)
+    getgenv().Speed = value
+    if player.Character and player.Character:FindFirstChild("Humanoid") then
+        player.Character.Humanoid.WalkSpeed = value
+    end
+end
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -306,20 +313,15 @@ local Tab2Toggle1 = ModTab2:AddToggle({
 })
 
 local Slider = ModTab2:AddSlider({
-    Name = "Speed Power", Description = "Default speed value is: <font color='rgb(88, 101, 242)'>10</font>.",
+    Name = "Speed Power",
+    Description = "Default speed value is: <font color='rgb(88, 101, 242)'>10</font>.",
     Min = 1,
     Max = 140,
-    Increase = 10,
-    Default = 18,
+    Increase = 1,
+    Default = 16,
     Callback = function(Value)
-        getgenv().Speed = Value -- update the speed with the slider value
-        bypassWalkSpeed() -- Call bypassWalkSpeed when slider value changes
-        if Players.LocalPlayer.Character then
-            local humanoid = Players.LocalPlayer.Character:FindFirstChild("Humanoid")
-            if humanoid then
-                humanoid.WalkSpeed = Value
-            end
-        end
+        updateWalkSpeed(Value)
+        bypassWalkSpeed() -- Call bypassWalkSpeed to ensure metatable bypass is applied
     end
 })
 
