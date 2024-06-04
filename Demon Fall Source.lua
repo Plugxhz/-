@@ -196,55 +196,9 @@ end
 
 -- FUNÇÃO PARA MODIFICAR A WALKSPEED
 
-local Players = game:GetService("Players")
-
-local function bypassWalkSpeed()
-    if getgenv().executed then
-        print("Walkspeed Already Bypassed - Applying Settings Changes")
-        if not getgenv().Enabled then
-            return
-        end
-    else
-        getgenv().executed = true
-        print("Walkspeed Bypassed")
-
-        local mt = getrawmetatable(game)
-        setreadonly(mt, false)
-
-        local oldindex = mt.__index
-        mt.__index = newcclosure(function(self, b)
-            if tostring(self) == "Humanoid" and b == "WalkSpeed" then
-                return getgenv().Speed or 16
-            end
-            return oldindex(self, b)
-        end)
-    end
-end
-
-bypassWalkSpeed()
-
-Players.LocalPlayer.CharacterAdded:Connect(function(char)
-    bypassWalkSpeed()
-    char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
-end)
-
-local function updateWalkSpeed()
-    if Players.LocalPlayer.Character then
-        local humanoid = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if humanoid then
-            humanoid.WalkSpeed = getgenv().Speed
-        end
-    end
-end
-
-local function onCharacterAdded(character)
-    character:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
-end
-
-Players.LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
-if Players.LocalPlayer.Character then
-    onCharacterAdded(Players.LocalPlayer.Character)
-end
+getgenv().Enabled = true -- change to false then execute again to turn off
+    getgenv().Speed = 100 -- change speed to the number you want
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/eclipsology/SimpleSpeed/main/SimpleSpeed.lua"))()
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
