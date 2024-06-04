@@ -211,8 +211,8 @@ local function bypassWalkSpeed()
 
         local oldindex = mt.__index
         mt.__index = newcclosure(function(self, b)
-            if b == 'WalkSpeed' then
-                return 16
+            if tostring(self) == "Humanoid" and b == "WalkSpeed" then
+                return getgenv().Speed or 16
             end
             return oldindex(self, b)
         end)
@@ -233,6 +233,15 @@ local function updateWalkSpeed()
             humanoid.WalkSpeed = getgenv().Speed
         end
     end
+end
+
+local function onCharacterAdded(character)
+    character:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
+end
+
+Players.LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
+if Players.LocalPlayer.Character then
+    onCharacterAdded(Players.LocalPlayer.Character)
 end
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
