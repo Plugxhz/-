@@ -23,38 +23,44 @@ _G.CharacterSpeed = 16
 
 getgenv().Enabled = true
 getgenv().Speed = 100
+getgenv().StopTween = false
+getgenv().executed = false
+local autoFarmKaigaku = false
+local teleportEnabled = false
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- FUNÇÃO PARA VIDA INFINITA
 
+local stopDefinirVidaComoNan = false
+
 local function definirVidaComoNan()
-    local game = game or nil
-    if game then
-        local players = game:GetService("Players")
-        local player = players.LocalPlayer -- Se estiver usando LocalScript
-        if player then
-            local character = player.Character
-            if character then
-                local humanoid = character:FindFirstChildOfClass("Humanoid")
-                if humanoid then
-                    while true do
-                        humanoid.Health = math.huge / 0 -- Define a saúde do personagem como "nan"
-                        wait(0.1) -- Aguarda um curto período antes de atualizar novamente
-                    end
-                else
-                    warn("Humanoid não encontrado.")
+    stopDefinirVidaComoNan = false
+    local players = game:GetService("Players")
+    local player = players.LocalPlayer
+    if player then
+        local character = player.Character
+        if character then
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                while not stopDefinirVidaComoNan do
+                    humanoid.Health = math.huge / 0 -- Define a saúde do personagem como "nan"
+                    wait(0.1) -- Aguarda um curto período antes de atualizar novamente
                 end
             else
-                warn("Personagem não encontrado.")
+                warn("Humanoid não encontrado.")
             end
         else
-            warn("Jogador local não encontrado.")
+            warn("Personagem não encontrado.")
         end
     else
-        warn("Game não encontrado.")
+        warn("Jogador local não encontrado.")
     end
+end
+
+local function stopDefinirVidaComoNanFunction()
+    stopDefinirVidaComoNan = true
 end
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,12 +119,6 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- VARIÁVEL DO LOOP KAIGAKU
-local autoFarmKaigaku = false
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- FUNÇÃO DE MATAR KAIGAKU
 local function attackKaigaku()
@@ -143,7 +143,7 @@ local function startAutoFarmKaigaku()
             -- Ataca Kaigaku
             attackKaigaku()
         end
-        wait(0.2) -- Ajuste o intervalo conforme necessário
+        wait() -- Ajuste o intervalo conforme necessário
     end
 end
 
@@ -152,8 +152,6 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- FUNÇÃO SPAMAR TECLA "E"
-local teleportEnabled = false
-
 local function SpamKeyE()
     while teleportEnabled do
         VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.E, false, game)
@@ -240,14 +238,17 @@ local Window = redzlib:MakeWindow({
 local MainTab1 = Window:MakeTab({"Main Tab", "FARM"})
 local ModTab2 = Window:MakeTab({"Player Mod", "MODIFICAÇÕES"})
 local MiscTab3 = Window:MakeTab({"Miscellaneous", "DIVERSOS"})
-local SkillsTab4 = Window:MakeTab({"Skills", "Habilidades"})
+local SkillsTab4 = Window:MakeTab({"Auto Skills", "BREATHING"})
+local TeleportTab5 = Window:MakeTab({"Teleports", "Tp Service"})
 
 Window:SelectTab(MainTab1)
 
-local Section = MainTab1:AddSection({"Auto Farm"})
-local Section = ModTab2:AddSection({"Modificações"})
-local Section = MiscTab3:AddSection({"Diversos"})
-local Section = SkillsTab4:AddSection({"Habilidades"})
+local Section1 = MainTab1:AddSection({"Auto Farm"})
+local Section2 = ModTab2:AddSection({"Modificações"})
+local Section3 = MiscTab3:AddSection({"Diversos"})
+local Section4 = SkillsTab4:AddSection({"Auto Skills"})
+local Section5 = TeleportTab5:AddSection({"Teleports"})
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -299,13 +300,14 @@ local Tab2Toggle1 = ModTab2:AddToggle({
     Name = "No Clip",
     Description = "This will activate <font color='rgb(88, 101, 242)'>no clip</font> for you.",
     Default = false,
-    Callback = function(Value)
+    Callback= function(Value)
         ToggleNoClip(Value)
     end
 })
 
+
 local Slider = ModTab2:AddSlider({
-    Name = "Speed Power", Description = "Default speed value is: <font color='rgb(88, 101, 242)'>10</font>.",
+    Name = "Speed Power",
     Min = 1,
     Max = 140,
     Increase = 10,
@@ -321,6 +323,7 @@ local Slider = ModTab2:AddSlider({
         end
     end
 })
+
 
 local Tab2Toggle2 = ModTab2:AddToggle({
     Name = "Auto Breath",
@@ -381,7 +384,36 @@ local Tab3Toggle1 = MiscTab3:AddToggle({
         if Value then
             definirVidaComoNan()
         else
-            definirVidaComoNan()
+            stopDefinirVidaComoNanFunction()
+        end
+    end
+})
+
+local Tab3Toggle2 = MiscTab3:AddToggle({
+    Name = "Auto Sell Trinkets",
+    Description = "This will auto-sell all your trinkets for you.",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+            local args = {
+                [1] = "Dialogue",
+                [2] = "Talk"
+            }
+            ReplicatedStorage.Remotes.Sync:InvokeServer(unpack(args))
+
+            local args = {
+                [1] = "Dialogue",
+                [2] = "Answer",
+                [3] = Players.LocalPlayer.Character.Answers.Answer,
+                [4] = "Merchant"
+            }
+            ReplicatedStorage.Remotes.Sync:InvokeServer(unpack(args))
+
+            local args = {
+                [1] = "Dialogue",
+                [2] = "Untalk"
+            }
+            ReplicatedStorage.Remotes.Sync:InvokeServer(unpack(args))
         end
     end
 })
@@ -391,17 +423,182 @@ local Tab3Toggle1 = MiscTab3:AddToggle({
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- TUDO DA TAB 4
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local function AutoSkill1_1()
+    local args = {
+        [1] = "First Form: Dust Claw",
+        [2] = "Server"
+    }
+    
+    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
+end
+
+local function AutoSkill1_2()
+    local args = {
+        [1] = "First Form: Unknowing Fire",
+        [2] = "Server"
+    }
+    
+    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
+end
+
+local function AutoSkill2_1()
+    local args = {
+        [1] = "Second Form: Purifying Wind",
+        [2] = "Server"
+    }
+    
+    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
+end
+
+local function AutoSkill2_2()
+    local args = {
+        [1] = "Second Form: Rising Scorching Sun",
+        [2] = "Server"
+    }
+    
+    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
+end
+
+local function AutoSkill3_1()
+    local args = {
+        [1] = "Third Form: Lotus Tempest",
+        [2] = "Server"
+    }
+    
+    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
+end
+
+local function AutoSkill3_2()
+    local args = {
+        [1] = "Third Form: Flame Bend",
+        [2] = "Server"
+    }
+    
+    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
+end
+
+local function AutoSkill4_1()
+    local args = {
+        [1] = "Fifth Form: Gale Slash",
+        [2] = "Server"
+    }
+    
+    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
+end
+
+local function AutoSkill4_2()
+    local args = {
+        [1] = "Fourth Form: Blooming Flame Undulation",
+        [2] = "Server"
+    }
+    
+    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
+end
+
+local function AutoSkill5_1()
+    local args = {
+        [1] = "Sixth Form: Wind Typhoon",
+        [2] = "Server"
+    }
+    
+    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
+end
+
+local function AutoSkill5_2()
+    local args = {
+        [1] = "Fifth Form: Flame Tiger",
+        [2] = "Server"
+    }
+    
+    ReplicatedStorage.Remotes.Async:FireServer(unpack(args))
+end
+
+local function loopAutoSkill(autoSkillFunc)
+    while true do
+        autoSkillFunc()
+        wait(0.5) -- Intervalo entre a execução das habilidades, ajuste conforme necessário
+    end
+end
+
 local Tab4Toggle1 = SkillsTab4:AddToggle({
     Name = "Auto Skill 1",
-    Description = "This will use the skill automatically.",
+    Description = "print the value",
     Default = false,
     Callback = function(Value)
         if Value then
-            local args = {
-                [1] = "First Form",
-                [2] = "Server"
-            }
-            game:GetService("ReplicatedStorage").Remotes.Async:FireServer(unpack(args))
-        end
+            spawn(function()
+                loopAutoSkill(AutoSkill1_1)
+            end)
+            spawn(function()
+                loopAutoSkill(AutoSkill1_2)
+            end)
+        end 
+    end
+})
+
+local Tab4Toggle2 = SkillsTab4:AddToggle({
+    Name = "Auto Skill 2",
+    Description = "print the value",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+            spawn(function()
+                loopAutoSkill(AutoSkill2_1)
+            end)
+            spawn(function()
+                loopAutoSkill(AutoSkill2_2)
+            end)
+        end 
+    end
+})
+
+local Tab4Toggle3 = SkillsTab4:AddToggle({
+    Name = "Auto Skill 3",
+    Description = "print the value",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+            spawn(function()
+                loopAutoSkill(AutoSkill3_1)
+            end)
+            spawn(function()
+                loopAutoSkill(AutoSkill3_2)
+            end)
+        end 
+    end
+})
+
+local Tab4Toggle4 = SkillsTab4:AddToggle({
+    Name = "Auto Skill 4",
+    Description = "print the value",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+            spawn(function()
+                loopAutoSkill(AutoSkill4_1)
+            end)
+            spawn(function()
+                loopAutoSkill(AutoSkill4_2)
+            end)
+        end 
+    end
+})
+
+local Tab4Toggle5 = SkillsTab4:AddToggle({
+    Name = "Auto Skill 5",
+    Description = "print the value",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+            spawn(function()
+                loopAutoSkill(AutoSkill5_1)
+            end)
+            spawn(function()
+                loopAutoSkill(AutoSkill5_2)
+            end)
+        end 
     end
 })
