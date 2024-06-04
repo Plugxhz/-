@@ -240,12 +240,14 @@ local Window = redzlib:MakeWindow({
 local MainTab1 = Window:MakeTab({"Main Tab", "FARM"})
 local ModTab2 = Window:MakeTab({"Player Mod", "MODIFICAÇÕES"})
 local MiscTab3 = Window:MakeTab({"Miscellaneous", "DIVERSOS"})
+local SkillsTab4 = Window:MakeTab({"Skills", "Habilidades"})
 
 Window:SelectTab(MainTab1)
 
 local Section = MainTab1:AddSection({"Auto Farm"})
 local Section = ModTab2:AddSection({"Modificações"})
 local Section = MiscTab3:AddSection({"Diversos"})
+local Section = SkillsTab4:AddSection({"Habilidades"})
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -384,31 +386,22 @@ local Tab3Toggle1 = MiscTab3:AddToggle({
     end
 })
 
-local Tab3Toggle2 = MiscTab3:AddToggle({
-    Name = "Auto Sell Trinkets",
-    Description = "This will auto-sell all your trinkets for you.",
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- TUDO DA TAB 4
+local Tab4Toggle1 = SkillsTab4:AddToggle({
+    Name = "Auto Skill 1",
+    Description = "This will use the skill automatically.",
     Default = false,
     Callback = function(Value)
         if Value then
             local args = {
-                [1] = "Dialogue",
-                [2] = "Talk"
+                [1] = "First Form",
+                [2] = "Server"
             }
-            ReplicatedStorage.Remotes.Sync:InvokeServer(unpack(args))
-
-            local args = {
-                [1] = "Dialogue",
-                [2] = "Answer",
-                [3] = Players.LocalPlayer.Character.Answers.Answer,
-                [4] = "Merchant"
-            }
-            ReplicatedStorage.Remotes.Sync:InvokeServer(unpack(args))
-
-            local args = {
-                [1] = "Dialogue",
-                [2] = "Untalk"
-            }
-            ReplicatedStorage.Remotes.Sync:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").Remotes.Async:FireServer(unpack(args))
         end
     end
 })
