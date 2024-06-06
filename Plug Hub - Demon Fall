@@ -26,6 +26,7 @@ getgenv().Speed = 100
 getgenv().StopTween = false
 getgenv().executed = false
 local autoFarmKaigaku = false
+local autoFarmGyutaro = false
 local teleportEnabled = false
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
