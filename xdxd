@@ -219,10 +219,24 @@ local function bypassWalkSpeed()
     end
 end
 
-Players.LocalPlayer.CharacterAdded:Connect(function(char)
-    bypassWalkSpeed()
-    char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
-end)
+local function startWalkSpeedLoop()
+    -- Conectar a função bypassWalkSpeed ao evento CharacterAdded
+    Players.LocalPlayer.CharacterAdded:Connect(function(char)
+        bypassWalkSpeed()
+        char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
+    end)
+
+    -- Loop para manter a velocidade atualizada
+    while getgenv().Enabled and wait() do
+        local character = Players.LocalPlayer.Character
+        if character then
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid.WalkSpeed = getgenv().Speed
+            end
+        end
+    end
+end
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -305,27 +319,40 @@ local Tab2Toggle1 = ModTab2:AddToggle({
     end
 })
 
+local Tab2Button1 = ModTab2:AddButton({
+    Name = "Character Speed",
+    Description = "This will <font color='rgb(88, 101, 242)'>change</font> your character speed.",
+    Callback = function()
+        player.Character.Humanoid.WalkSpeed = getgenv().Speed
+    end
+})
 
-local Slider = ModTab2:AddSlider({
-    Name = "Speed Power",
-    Min = 1,
-    Max = 140,
-    Increase = 10,
-    Default = 18,
+local Tab2Toggle1 = ModTab2:AddToggle({
+    Name = "WalkSpeed Bypass",
+    Description = "This will <font color='rgb(88, 101, 242)'>bypass and change</font> your walkspeed",
+    Default = false,
     Callback = function(Value)
-        getgenv().Speed = Value -- update the speed with the slider value
-        bypassWalkSpeed() -- Call bypassWalkSpeed when slider value changes
-        if Players.LocalPlayer.Character then
-            local humanoid = Players.LocalPlayer.Character:FindFirstChild("Humanoid")
-            if humanoid then
-                humanoid.WalkSpeed = Value
-            end
+        getgenv().Enabled = Value
+        if Value then
+            bypassWalkSpeed()
+            spawn(startWalkSpeedLoop)
         end
     end
 })
 
+local Slider = ModTab2:AddSlider({
+    Name = "Walk Speed",
+    Default = 100,
+    Min = 0,
+    Max = 500,
+    Increment = 10,
+    ValueName = "WalkSpeed",
+    Callback = function(Value)
+        getgenv().Speed = Value
+    end
+})
 
-local Tab2Toggle2 = ModTab2:AddToggle({
+local Tab2Toggle3 = ModTab2:AddToggle({
     Name = "Auto Breath",
     Description = "This will <font color='rgb(88, 101, 242)'>auto breath</font> for you.",
     Default = false,
