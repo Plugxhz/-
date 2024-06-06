@@ -426,7 +426,7 @@ local Slider = ModTab2:AddSlider({
 
 local Tab2Toggle3 = ModTab2:AddToggle({
     Name = "Auto Breath",
-    Description = "This will <font color='rgb(88, 101, 242)'>auto breath</font> for you.",
+    Description = "This will <font color='rgb(88, 101, 242)'>auto breath</font> for you (press G to normalize).",
     Default = false,
     Callback = function(Value)
         if Value then
@@ -749,7 +749,7 @@ local Tab4Toggle8 = SkillsTab4:AddToggle({
 
 local Tab5Button1 = TeleportTab5:AddButton({
     Name = "Kamakura Village",
-    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the Giro Mansion.",
+    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to Kamakura Village.",
     Callback = function()
         toposTP(CFrame.new(-2145.868896484375, 1161.6719970703125, -1687.411865234375))
     end
@@ -765,7 +765,7 @@ local Tab5Button2 = TeleportTab5:AddButton({
 
 local Tab5Button3 = TeleportTab5:AddButton({
     Name = "Okuyia Village",
-    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the Ouwbayashi Home.",
+    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the Okuyia Village.",
     Callback = function()
         toposTP(CFrame.new(-3306.818359375, 704.1032104492188, -1267.4078369140625))
     end
@@ -773,7 +773,7 @@ local Tab5Button3 = TeleportTab5:AddButton({
 
 local Tab5Button4 = TeleportTab5:AddButton({
     Name = "Slayer Corps",
-    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the Ouwbayashi Home.",
+    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the Slayer Corps.",
     Callback = function()
         toposTP(CFrame.new(-2381.958251953125, 871.4876098632812, -6297.939453125))
     end
@@ -789,7 +789,7 @@ local Tab5Button5 = TeleportTab5:AddButton({
 
 local Tab5Button6 = TeleportTab5:AddButton({
     Name = "Okuyia Hideout",
-    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the Slasher Demon.",
+    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the Okuyia Hideout.",
     Callback = function()
         toposTP(CFrame.new(-4396.66552734375, 839.512939453125, 539.9063720703125))
     end
@@ -797,7 +797,7 @@ local Tab5Button6 = TeleportTab5:AddButton({
 
 local Tab5Button7 = TeleportTab5:AddButton({
     Name = "Demon Sanctuary",
-    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the Slasher Demon.",
+    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the Demon Sanctuary.",
     Callback = function()
         toposTP(CFrame.new(2397.5654296875, 1166.50927734375, -7354.82177734375))
     end
@@ -805,7 +805,7 @@ local Tab5Button7 = TeleportTab5:AddButton({
 
 local Tab5Button8 = TeleportTab5:AddButton({
     Name = "Forest Hideout",
-    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the Slasher Demon.",
+    Description = "This will <font color='rgb(88, 101, 242)'>teleport</font> you to the Forest Hideout.",
     Callback = function()
         toposTP(CFrame.new(-733.1015625, 695.7652587890625, -1530.04541015625))
     end
