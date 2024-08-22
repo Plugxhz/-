@@ -1,0 +1,539 @@
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TeleportService = game:GetService("TeleportService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Source.Lua"))()
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Valores Globais
+
+_G.FarmTrinket = false
+_G.TweenSpeed = 150
+_G.CharacterSpeed = 16
+
+getgenv().Enabled = true
+getgenv().Speed = 100
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- FUNÇÃO PARA CHAKRA
+local function chargeChakra(enabled)
+    local args = {
+        [1] = {
+            [1] = "ChargeChakra",
+            [2] = enabled,
+            [3] = false
+        }
+    }
+    game:GetService("ReplicatedStorage").Modules.Services.RNet.Bridges.GameplayEvent_Event:FireServer(unpack(args))
+end
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- FUNÇÃO PARA AUTO SKILLS
+
+local skillToggles = {
+    Skill1 = false,
+    Skill2 = false,
+    Skill3 = false,
+    Skill4 = false,
+    Skill5 = false,
+    Skill6 = false,
+    Skill7 = false
+}
+
+local function autoUseSkills()
+    if getgenv().autoUseSkillConnection then
+        getgenv().autoUseSkillConnection:Disconnect()
+        getgenv().autoUseSkillConnection = nil
+    end
+
+    getgenv().autoUseSkillConnection = RunService.RenderStepped:Connect(function()
+        for skillIndex = 1, 7 do
+            if skillToggles["Skill" .. skillIndex] then
+                local args = {
+                    [1] = "KeyPressed",
+                    [2] = skillIndex
+                }
+                game:GetService("ReplicatedStorage").Modules.Services.RNet.Bridges.AbilityFunction_Function:InvokeServer(unpack(args))
+            end
+        end
+    end)
+end
+
+local function toggleSkill(skillIndex, state)
+    skillToggles["Skill" .. skillIndex] = state
+    autoUseSkills()
+end
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- FUNÇÃO PARA AUTO FAMR AGILITY
+
+-- Variável de controle do Auto Farm Agility
+    local autoFarmAgility = false
+    local agilityFarmConnection
+    
+    -- Função para farmar agilidade
+    local function farmAgility()
+        while autoFarmAgility do
+            -- Executa o primeiro código
+            local args1 = {
+                [1] = {
+                    [1] = "ChargeStepingJump",
+                    [2] = true
+                }
+            }
+            game:GetService("ReplicatedStorage").Modules.Services.RNet.Bridges.GameplayEvent_Event:FireServer(unpack(args1))
+    
+            -- Espera um pequeno intervalo (ajuste conforme necessário)
+            wait(0.5)
+    
+            -- Executa o segundo código
+            local args2 = {
+                [1] = {
+                    [1] = "ChargeStepingJump",
+                    [2] = false
+                }
+            }
+            game:GetService("ReplicatedStorage").Modules.Services.RNet.Bridges.GameplayEvent_Event:FireServer(unpack(args2))
+    
+            -- Espera outro pequeno intervalo antes de repetir o loop
+            wait(0.5)
+        end
+    end
+    
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- FUNÇÃO PARA MODIFICAR A WALKSPEED
+local function bypassWalkSpeed()
+    if getgenv().executed then
+        print("Walkspeed Already Bypassed - Applying Settings Changes")
+        if not getgenv().Enabled then
+            return
+        end
+    else
+        getgenv().executed = true
+        print("Walkspeed Bypassed")
+
+        local mt = getrawmetatable(game)
+        setreadonly(mt, false)
+
+        local oldindex = mt.__index
+        mt.__index = newcclosure(function(self, b)
+            if b == 'WalkSpeed' then
+                return 16
+            end
+            return oldindex(self, b)
+        end)
+    end
+end
+
+Players.LocalPlayer.CharacterAdded:Connect(function(char)
+    bypassWalkSpeed()
+    char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
+end)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- FUNÇÃO DO NO CLIP
+local NoClip = false
+
+local function ToggleNoClip(Enabled)
+    NoClip = Enabled
+    if Enabled then
+        RunService.Stepped:Connect(function()
+            if NoClip then
+                for _, part in pairs(player.Character:GetDescendants()) do
+                    if part:IsA("BasePart") and part.CanCollide then
+                        part.CanCollide = false
+                    end
+                end
+            end
+        end)
+    else
+        for _, part in pairs(player.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = true
+            end
+        end
+        player.Character.Humanoid.WalkSpeed = _G.CharacterSpeed
+    end
+end
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- FUNÇÃO ANTI AFK
+
+local VirtualUserService = game:service'VirtualUser'
+local PlayersService = game:service'Players'
+local antiAFKEnabled = false -- Estado inicial do Anti AFK
+local connection -- Variável para armazenar a conexão do evento
+
+-- Função para ativar/desativar o Anti AFK
+local function toggleAntiAFK(state)
+    if state then
+        -- Ativa o Anti AFK
+        connection = PlayersService.LocalPlayer.Idled:connect(function()
+            VirtualUserService:CaptureController()
+            VirtualUserService:ClickButton2(Vector2.new())
+            print("Roblox tentou te expulsar, mas o script impediu!")
+        end)
+        print("Anti AFK ativado.")
+    else
+        -- Desativa o Anti AFK se estiver ativado
+        if connection then
+            connection:Disconnect()
+            connection = nil
+        end
+        print("Anti AFK desativado.")
+    end
+end
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- FUNÇÃO ESP
+
+-- Variáveis globais para ESP
+local ESPEnabled = false
+local espInstances = {}
+
+-- Função para criar ESP para um jogador
+local function createPlayerESP(player)
+    if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
+        return
+    end
+
+    local humanoidRootPart = player.Character.HumanoidRootPart
+
+    local esp = Instance.new("BillboardGui")
+    esp.Name = "ESP"
+    esp.Adornee = humanoidRootPart
+    esp.Size = UDim2.new(0, 200, 0, 50)
+    esp.StudsOffset = Vector3.new(0, 3, 0)
+    esp.AlwaysOnTop = true
+    esp.Parent = humanoidRootPart
+
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabel.TextStrokeTransparency = 0.5
+    textLabel.Text = player.Name
+    textLabel.TextScaled = false
+    textLabel.TextSize = 14 -- Ajuste o tamanho do texto aqui
+    textLabel.Parent = esp
+
+    table.insert(espInstances, esp)
+end
+
+-- Função para atualizar o ESP
+local function updateESP()
+    if ESPEnabled then
+        -- Cria ESP para todos os jogadores
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= Players.LocalPlayer then
+                createPlayerESP(player)
+            end
+        end
+
+        -- Adiciona novos jogadores quando entram no jogo
+        Players.PlayerAdded:Connect(function(player)
+            if ESPEnabled then
+                createPlayerESP(player)
+            end
+        end)
+    else
+        -- Remove ESP de todos os jogadores
+        for _, esp in ipairs(espInstances) do
+            esp:Destroy()
+        end
+        espInstances = {}
+    end
+end
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- FUNÇÃO NOME OCULTO
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- TWEEN PARA MOVIMENTAÇÃO
+
+local function teleportToNPC(npc)
+    if npc and npc:IsA("Model") then
+        local distance = (npc.HumanoidRootPart.Position - hrp.Position).Magnitude
+        local tweenInfo = TweenInfo.new(distance / _G.TweenSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut)
+        local tween = TweenService:Create(hrp, tweenInfo, { CFrame = npc.HumanoidRootPart.CFrame })
+
+        tween:Play()
+        tween.Completed:Wait()
+
+        if distance <= 10 then
+            tween:Cancel()
+            hrp.CFrame = npc.HumanoidRootPart.CFrame
+        end
+    end
+end
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- TABS E SESSÕES
+
+local Window = redzlib:MakeWindow({
+    Title = "PLUG'S HUB [v0.1] : The Time Of Ninja",
+    SubTitle = "    by @enzokkj",
+    SaveFolder = "PLUG | redz lib v5.lua"
+})
+
+local MainTab1 = Window:MakeTab({"Main Tab", "FARM"})
+local ModTab2 = Window:MakeTab({"Player Mod", "MODIFICAÇÕES"})
+local MiscTab3 = Window:MakeTab({"Miscellaneous", "DIVERSOS"})
+local TeleportTab4 = Window:MakeTab({"NPC'S", "Teleports"})
+local SkillTab5 = Window:MakeTab({"Auto Skills", "Habilidades"})
+
+Window:SelectTab(MainTab1)
+
+local Section = MainTab1:AddSection({"Auto Farm"})
+local Section = ModTab2:AddSection({"Modificações"})
+local Section = MiscTab3:AddSection({"Diversos"})
+local section = TeleportTab4:AddSection({"Teleports"})
+local section = SkillTab5:AddSection({"Habilidades"})
+
+Window:AddMinimizeButton({
+    Button = {
+        BackgroundColor3 = Color3.fromRGB(0, 0, 255),  -- Define a cor de fundo como azul
+    },
+    Corner = {},
+    Stroke = {}
+})
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- BOTÕES DE TELEPORTS NA TAB 4
+
+TeleportTab4:AddButton({
+    Name = "Ishikage",
+    Callback = function()
+        teleportToNPC(workspace.NPCs.Ishikage)
+    end
+})
+
+TeleportTab4:AddButton({
+    Name = "Rodrigo",
+    Callback = function()
+        teleportToNPC(workspace.NPCs.Rodrigo)
+    end
+})
+
+TeleportTab4:AddButton({
+    Name = "Aruka",
+    Callback = function()
+        teleportToNPC(workspace.NPCs.Aruka)
+    end
+})
+
+TeleportTab4:AddButton({
+    Name = "Black Smith",
+    Callback = function()
+        teleportToNPC(workspace.NPCs.BlackSmith)
+    end
+})
+
+TeleportTab4:AddButton({
+    Name = "Chiraku",
+    Callback = function()
+        teleportToNPC(workspace.NPCs.Chiraku)
+    end
+})
+
+TeleportTab4:AddButton({
+    Name = "Stone Leo",
+    Callback = function()
+        teleportToNPC(workspace.NPCs["Stone Leo"])
+    end
+})
+
+TeleportTab4:AddButton({
+    Name = "Siewa",
+    Callback = function()
+        teleportToNPC(workspace.NPCs.Siewa)
+    end
+})
+
+TeleportTab4:AddButton({
+    Name = "Power",
+    Callback = function()
+        teleportToNPC(workspace.NPCs.Power)
+    end
+})
+
+TeleportTab4:AddButton({
+    Name = "High Muty",
+    Callback = function()
+        teleportToNPC(workspace.NPCs["High Muty"])
+    end
+})
+
+TeleportTab4:AddButton({
+    Name = "Kogei",
+    Callback = function()
+        teleportToNPC(workspace.NPCs.Kogei)
+    end
+})
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- TUDO DA TAB 1
+
+MainTab1:AddToggle({
+    Name = "Auto Farm Mops",
+    Description = "This will auto <font color='rgb(88, 101, 242)'>farm mops</font> for you.",
+    Default = false,
+    Callback = function(state)
+        toggleTween = state
+        if toggleTween then
+            print("Auto Farm Mops ativado!")
+            tweenAndPressF()
+        else
+            print("Auto Farm Mops desativado!")
+        end
+    end
+})
+
+MainTab1:AddToggle({
+    Name = "Auto Farm Agility",
+    Description = "Ativa o auto farm de agilidade.",
+    Default = false,
+    Callback = function(state)
+        autoFarmAgility = state
+        if autoFarmAgility then
+            print("Auto Farm Agility ativado!")
+            -- Inicia o farm em loop
+            agilityFarmConnection = RunService.RenderStepped:Connect(farmAgility)
+        else
+            print("Auto Farm Agility desativado!")
+            -- Encerra o loop
+            if agilityFarmConnection then
+                agilityFarmConnection:Disconnect()
+                agilityFarmConnection = nil
+            end
+        end
+    end
+})
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- TUDO DA TAB 2
+
+local Tab2Toggle1 = ModTab2:AddToggle({
+    Name = "Infinite Chakra",
+    Description = "This will auto <font color='rgb(88, 101, 242)'>charge chakra</font> for you.",
+    Default = false,
+    Callback = function(state)
+        chargeChakra(state)
+    end
+})
+
+local Tab2Toggle1 = ModTab2:AddToggle({
+    Name = "No Clip",
+    Description = "This will activate <font color='rgb(88, 101, 242)'>no clip</font> for you.",
+    Default = false,
+    Callback = function(Value)
+        ToggleNoClip(Value)
+    end
+})
+
+local Slider = ModTab2:AddSlider({
+    Name = "Speed Power",
+    Min = 10,
+    Max = 250,
+    Increase = 10,
+    Default = 18,
+    Callback = function(Value)
+        getgenv().Speed = Value
+        bypassWalkSpeed()
+        if Players.LocalPlayer.Character then
+            local humanoid = Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+            if humanoid then
+                humanoid.WalkSpeed = Value
+            end
+        end
+    end
+})
+
+local JumpPowerSlider = ModTab2:AddSlider({
+    Name = "Jump Power",
+    Min = 50,
+    Max = 250,
+    Increase = 10,
+    Default = 50,
+    Callback = function(Value)
+        getgenv().JumpPower = Value
+        if Players.LocalPlayer.Character then
+            local humanoid = Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+            if humanoid then
+                humanoid.JumpPower = Value
+            end
+        end
+    end
+})
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- TUDO DA TAB 3
+
+local Tab3Toggle1 = MiscTab3:AddToggle({
+    Name = "Anti AFK",
+    Description = "This will activate <font color='rgb(88, 101, 242)'>anti afk</font> for you.",
+    Default = false,
+    Callback = function(state)
+        antiAFKEnabled = state
+        toggleAntiAFK(antiAFKEnabled)
+    end
+})
+
+
+local Tab3ToggleESP = MiscTab3:AddToggle({
+    Name = "ESP Player Names",
+    Description = "Ativa/desativa o ESP com nomes dos jogadores.",
+    Default = false,
+    Callback = function(state)
+        ESPEnabled = state
+        updateESP()
+    end
+})
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- TUDO DA TAB 5
+
+for skillIndex = 1, 7 do
+    SkillTab5:AddToggle({
+        Name = "Auto Use Skill " .. skillIndex,
+        Description = "This will activate <font color='rgb(88, 101, 242)'>auto use skill " .. skillIndex .. "</font> for you.",
+        Default = false,
+        Callback = function(state)
+            toggleSkill(skillIndex, state)
+        end
+    })
+end
