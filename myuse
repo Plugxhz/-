@@ -3170,7 +3170,7 @@ local Toggle = SkillsTab:CreateToggle({
 })
 
 local Toggle = SkillsTab:CreateToggle({
-    Name = "Magma Farm (Use Ball To Active)",
+    Name = "Magma Farm (Use Magma Ball To Active)",
     CurrentValue = false,
     Callback = function(vcmmttb)
         getgenv().autofarmmag = vcmmttb
