@@ -3034,43 +3034,74 @@ local Toggle = SkillsTab:CreateToggle({
     end,
 })
 
--- Substituindo os toggles para o formato solicitado
-local Toggle = SkillsTab:CreateToggle({
-    Name = "Magma Camp",
+-- Toggle FARM KILL AURA (FARM ALL)
+local Toggle = SkillTab:CreateToggle({
+    Name = "FARM KILL AURA (FARM ALL)",
     CurrentValue = false,
-    Callback = function(bo12ol)
-        getgenv().pqwek = bo12ol
-        while getgenv().pqwek do
+    Callback = function(req)
+        getgenv().c = req
+        while getgenv().c do
             wait()
             pcall(function()
-                for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
-                    if v.Name == Choose2 then
-                        local args = {
-                            [1] = tonumber(serializeTable(remotes)),
-                            [2] = "MagmaPower1",
-                            [3] = "StartCharging",
-                            [4] = CFrame.new(-123.28974914550781, 213, -871.10595703125, 0.9992225766181946, -0.009072019718587399, 0.038368139415979385, -0, 0.9731666445732117, 0.23010201752185822, -0.03942607715725899, -0.22992312908172607, 0.9724099040031433),
-                            [5] = workspace:WaitForChild("IslandTown"):WaitForChild("Beach"):WaitForChild("Beach"),
-                            [7] = "Right"
-                        }
-                        game:GetService("Players").LocalPlayer.Character.Powers.Magma.RemoteEvent:FireServer(unpack(args))
-                        wait()
-                        local args = {
-                            [1] = tonumber(serializeTable(remotes)),
-                            [2] = "MagmaPower1",
-                            [3] = "StopCharging",
-                            [4] = v.HumanoidRootPart.CFrame,
-                            [5] = workspace:WaitForChild("IslandTown"):WaitForChild("Beach"):WaitForChild("Beach"),
-                            [6] = 100
-                        }
-                        game:GetService("Players").LocalPlayer.Character.Powers.Magma.RemoteEvent:FireServer(unpack(args))
-                        wait()
+                for _, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                    if (string.find(v.Name, "Crab") or string.find(v.Name, "Bandit") or string.find(v.Name, "Thief") or string.find(v.Name, "Bruno") or string.find(v.Name, "Bucky")
+                        or string.find(v.Name, "Fred") or string.find(v.Name, "Frey") or string.find(v.Name, "Fri") or string.find(v.Name, "Fru") or string.find(v.Name, "Angry")
+                        or string.find(v.Name, "Thug") or string.find(v.Name, "Gunslinger") or string.find(v.Name, "Gunner") or string.find(v.Name, "Buster") or string.find(v.Name, "Boar"))
+                        and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health ~= 0 then
+
+                        repeat
+                            wait(0.5)
+                            pcall(function()
+                                if getgenv().c == true then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(10, 0, 0)
+                                    wait(0.1)
+                                    v:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Dead)
+                                    wait(0.3)
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0)
+                                end
+                            end)
+                        until v.Humanoid.Health <= 0 or not getgenv().c
                     end
                 end
             end)
         end
-    end,
+    end
 })
+
+-- Toggle FARM KILL AURA (No Gunner)
+local Toggle = SkillsTab:CreateToggle({
+    Name = "FARM KILL AURA (No Gunner)",
+    CurrentValue = false,
+    Callback = function(mob)
+        getgenv().a = mob
+        while getgenv().a do
+            wait()
+            pcall(function()
+                for _, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                    if (string.find(v.Name, "Crab") or string.find(v.Name, "Bandit") or string.find(v.Name, "Thief")
+                        or string.find(v.Name, "Fred") or string.find(v.Name, "Frey") or string.find(v.Name, "Fri") or string.find(v.Name, "Fru") or string.find(v.Name, "Angry")
+                        or string.find(v.Name, "Thug") or string.find(v.Name, "Boar"))
+                        and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health ~= 0 then
+
+                        repeat
+                            wait(0.5)
+                            pcall(function()
+                                if getgenv().a == true then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(10, 0, 0)
+                                    wait(0.1)
+                                    v:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Dead)
+                                    wait(0.3)
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0)
+                                end
+                            end)
+                        until v.Humanoid.Health <= 0 or not getgenv().a
+                    end
+                end
+            end)
+        end
+    end
+})
+
 
 local Toggle = SkillsTab:CreateToggle({
     Name = "Teleport To All Spawned Player",
