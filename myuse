@@ -3017,8 +3017,6 @@ local namecall = mta.__namecall
 local setreadonly = setreadonly or make_writable
 
 
-setreadonly(mta, false)
-
 mta.__namecall = newcclosure(function(self, ...)
     local args = {...}
     local arguments = args
@@ -3135,42 +3133,8 @@ local Toggle = SkillsTab:CreateToggle({
     end,
 })
 
--- Toggle FARM KILL AURA (FARM ALL)
 local Toggle = SkillsTab:CreateToggle({
-    Name = "FARM KILL AURA (FARM ALL)",
-    CurrentValue = false,
-    Callback = function(req)
-        getgenv().c = req
-        while getgenv().c do
-            wait()
-            pcall(function()
-                for _, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                    if (string.find(v.Name, "Crab") or string.find(v.Name, "Bandit") or string.find(v.Name, "Thief") or string.find(v.Name, "Bruno") or string.find(v.Name, "Bucky")
-                        or string.find(v.Name, "Fred") or string.find(v.Name, "Frey") or string.find(v.Name, "Fri") or string.find(v.Name, "Fru") or string.find(v.Name, "Angry")
-                        or string.find(v.Name, "Thug") or string.find(v.Name, "Gunslinger") or string.find(v.Name, "Gunner") or string.find(v.Name, "Buster") or string.find(v.Name, "Boar"))
-                        and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health ~= 0 then
-
-                        repeat
-                            wait(0.5)
-                            pcall(function()
-                                if getgenv().c == true then
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(10, 0, 0)
-                                    wait(0.1)
-                                    v:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Dead)
-                                    wait(0.3)
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0)
-                                end
-                            end)
-                        until v.Humanoid.Health <= 0 or not getgenv().c
-                    end
-                end
-            end)
-        end
-    end
-})
-
-local Toggle = SkillsTab:CreateToggle({
-    Name = "Magma Farm (Use Magma Ball To Active)",
+    Name = "Magma Farm (Use Ball To Active)",
     CurrentValue = false,
     Callback = function(vcmmttb)
         getgenv().autofarmmag = vcmmttb
@@ -3206,86 +3170,6 @@ local Toggle = SkillsTab:CreateToggle({
         end
     end
 })
-
-
--- Toggle FARM KILL AURA (No Gunner)
-local Toggle = SkillsTab:CreateToggle({
-    Name = "FARM KILL AURA (No Gunner)",
-    CurrentValue = false,
-    Callback = function(mob)
-        getgenv().a = mob
-        while getgenv().a do
-            wait()
-            pcall(function()
-                for _, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                    if (string.find(v.Name, "Crab") or string.find(v.Name, "Bandit") or string.find(v.Name, "Thief")
-                        or string.find(v.Name, "Fred") or string.find(v.Name, "Frey") or string.find(v.Name, "Fri") or string.find(v.Name, "Fru") or string.find(v.Name, "Angry")
-                        or string.find(v.Name, "Thug") or string.find(v.Name, "Boar"))
-                        and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health ~= 0 then
-
-                        repeat
-                            wait(0.5)
-                            pcall(function()
-                                if getgenv().a == true then
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(10, 0, 0)
-                                    wait(0.1)
-                                    v:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Dead)
-                                    wait(0.3)
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0)
-                                end
-                            end)
-                        until v.Humanoid.Health <= 0 or not getgenv().a
-                    end
-                end
-            end)
-        end
-    end
-})
-
-
-local Toggle = SkillsTab:CreateToggle({
-    Name = "Teleport To All Spawned Player",
-    CurrentValue = false,
-    Callback = function(irendz)
-        getgenv().emladepnhat = irendz
-        while getgenv().emladepnhat do
-            wait()
-            pcall(function()
-                for i, v in pairs(game.Players:GetChildren()) do
-                    if v.Name ~= game.Players.LocalPlayer.Name then
-                        for i, c in pairs(game.Workspace:GetChildren()) do
-                            if c:IsA("Model") and c.Name == v.Name and c.Humanoid.Health > 0 and c.HumanoidRootPart.Position.Y < 211000 then
-                                repeat
-                                    wait()
-                                    pcall(function()
-                                        if getgenv().emladepnhat == true and c.Humanoid.Health > 0 and c.HumanoidRootPart.Position.Y < 211000 then
-                                            Choose2 = c.Name
-                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = c.HumanoidRootPart.CFrame * CFrame.new(0, distancetp, 0)
-                                        end
-                                    end)
-                                until c.Humanoid.Health <= 0 or not getgenv().emladepnhat or c.HumanoidRootPart.Position.Y > 211000 or c.Name ~= v.Name
-                            end
-                        end
-                    end
-                end
-            end)
-        end
-    end,
-})
-
--- Substituindo o slider para o formato solicitado
-local Slider = SkillsTab:CreateSlider({
-    Name = "TP Distance",
-    Range = {0, 200},
-    Increment = 1,
-    Suffix = "Studs",
-    CurrentValue = 15,
-    Flag = "TPDistance",
-    Callback = function(gooo)
-        distancetp = gooo
-    end,
-})
-
 
 -- Slider para controlar a velocidade do Yoru
 local Slider = SkillsTab:CreateSlider({
