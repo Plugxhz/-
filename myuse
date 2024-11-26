@@ -3035,7 +3035,7 @@ local Toggle = SkillsTab:CreateToggle({
 })
 
 -- Toggle FARM KILL AURA (FARM ALL)
-local Toggle = SkillTab:CreateToggle({
+local Toggle = SkillsTab:CreateToggle({
     Name = "FARM KILL AURA (FARM ALL)",
     CurrentValue = false,
     Callback = function(req)
