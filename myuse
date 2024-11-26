@@ -3043,44 +3043,55 @@ local ToggleAttackCannonUsers = SkillsTab:CreateToggle({
     end
 })
 
--- Função principal de monitoramento e ataque
+-- Função principal para monitoramento e ataque
 spawn(function()
     while task.wait(0.1) do
         pcall(function()
             if _G.autoAttackCannonUsers then
                 for _, player in pairs(game.Players:GetPlayers()) do
                     if player ~= game.Players.LocalPlayer and player.Character then
-                        local cannon = player.Backpack:FindFirstChild("Cannon Ball") or player.Character:FindFirstChild("Cannon Ball")
-                        if cannon then
+                        local character = player.Character
+                        local humanoid = character:FindFirstChild("Humanoid")
+                        local tool = character:FindFirstChildOfClass("Tool")
+
+                        -- Verifica se o jogador está segurando o "Cannon Ball"
+                        if humanoid and humanoid.Health > 0 and tool and tool.Name == "Cannon Ball" then
                             -- Salvar posição inicial do jogador
                             local initialPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-                            
-                            -- Teleportar para a posição do jogador inimigo
-                            local enemyHRP = player.Character:FindFirstChild("HumanoidRootPart")
+
+                            -- Teleportar para o jogador
+                            local enemyHRP = character:FindFirstChild("HumanoidRootPart")
                             if enemyHRP then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = enemyHRP.CFrame * CFrame.new(0, 5, 0)
                                 task.wait(0.2)
 
                                 -- Atacar com habilidades usando Auto 100% Skill
-                                local skillName = "MagmaPower1" -- Substituir pelo nome da habilidade desejada
-                                local args = {
-                                    [1] = "RemoteID", -- Substitua pelo ID correto do Remote Event
+                                local skillName = "MagmaPower1" -- Substitua pelo nome da habilidade desejada
+                                local argsStart = {
+                                    [1] = tonumber(serializeTable(remotes)), -- Utilizando serializeTable corretamente
                                     [2] = skillName,
                                     [3] = "StartCharging",
                                     [4] = enemyHRP.CFrame,
-                                    [5] = workspace,
-                                    [6] = 100
+                                    [5] = workspace, -- Substitua pelo alvo correto se necessário
+                                    [6] = "Right" -- Posição da skill, se aplicável
                                 }
-                                game:GetService("Players").LocalPlayer.Character.Powers.Magma.RemoteEvent:FireServer(unpack(args))
+                                game:GetService("Players").LocalPlayer.Character.Powers.Magma.RemoteEvent:FireServer(unpack(argsStart))
 
-                                task.wait(0.5) -- Pausa para execução do ataque
+                                task.wait(0.5) -- Tempo para carregar a habilidade
 
-                                -- Enviar comando de parar a skill com 100% de força
-                                args[3] = "StopCharging"
-                                game:GetService("Players").LocalPlayer.Character.Powers.Magma.RemoteEvent:FireServer(unpack(args))
+                                local argsStop = {
+                                    [1] = tonumber(serializeTable(remotes)),
+                                    [2] = skillName,
+                                    [3] = "StopCharging",
+                                    [4] = enemyHRP.CFrame,
+                                    [5] = workspace,
+                                    [6] = 100 -- Garante o ataque com 100% de força
+                                }
+                                game:GetService("Players").LocalPlayer.Character.Powers.Magma.RemoteEvent:FireServer(unpack(argsStop))
                             end
 
                             -- Retornar à posição inicial
+                            task.wait(0.2)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = initialPosition
                         end
                     end
