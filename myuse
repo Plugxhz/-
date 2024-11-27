@@ -3012,28 +3012,6 @@ local AquaStaffButton = OtherTab:CreateButton({
 
 local SkillsSection = SkillsTab:CreateSection("PvP Utilities")
 
-local Toggle = SkillsTab:CreateToggle({
-    Name = "100% Skill",
-    CurrentValue = false,
-    Flag = "Auto100Skill",
-    Callback = function(Value)
-        _G.auto100rate = Value
-        if _G.auto100rate then
-            aaxc = hookmetamethod(game, "__namecall", function(self, ...)
-                local args = { ... }
-                local method = getnamecallmethod()
-                if method == "FireServer" or method == "InvokeServer" then
-                    if self.Name == "RemoteEvent" and args[3] == "StopCharging" and _G.auto100rate then
-                        args[6] = 100 -- Define o valor como 100
-                        return aaxc(self, unpack(args))
-                    end
-                end
-                return aaxc(self, ...)
-            end)
-        end
-    end,
-})
-
 -- Slider para controlar a velocidade do Yoru
 local Slider = SkillsTab:CreateSlider({
     Name = "Yoru Speed",
@@ -3076,6 +3054,28 @@ local Toggle = SkillsTab:CreateToggle({
                 end)
                 wait()
             end
+        end
+    end,
+})
+
+local Toggle = SkillsTab:CreateToggle({
+    Name = "100% Skill",
+    CurrentValue = false,
+    Flag = "Auto100Skill",
+    Callback = function(Value)
+        _G.auto100rate = Value
+        if _G.auto100rate then
+            aaxc = hookmetamethod(game, "__namecall", function(self, ...)
+                local args = { ... }
+                local method = getnamecallmethod()
+                if method == "FireServer" or method == "InvokeServer" then
+                    if self.Name == "RemoteEvent" and args[3] == "StopCharging" and _G.auto100rate then
+                        args[6] = 100 -- Define o valor como 100
+                        return aaxc(self, unpack(args))
+                    end
+                end
+                return aaxc(self, ...)
+            end)
         end
     end,
 })
@@ -3125,6 +3125,49 @@ local Toggle = SkillsTab:CreateToggle({
         end
     end,
 })
+
+local SkillsTab = {} -- Supondo que SkillsTab seja seu objeto de aba
+
+-- Definição das habilidades em uma tabela
+local skillKeys = {
+    "Z", "X", "C", "V", "B", "N",  -- Auto Skill Devil Fruit 1
+    "F", "G", "H", "J", "K", "L"   -- Auto Skill Devil Fruit 2
+}
+
+local activeSkills = {} -- Tabela para armazenar o estado das habilidades
+
+-- Função para criar toggles dinamicamente
+local function createSkillToggles(skillGroup, skills)
+    local Section = SkillsTab:CreateSection(skillGroup)
+
+    for _, skill in ipairs(skills) do
+        SkillsTab:CreateToggle({
+            Name = "Auto Skill " .. skill,
+            CurrentValue = false,
+            Callback = function(Value)
+                activeSkills[skill] = Value
+            end,
+        })
+    end
+end
+
+-- Criar seções para habilidades
+createSkillToggles("┇ Auto Skill Devil Fruit 1 ┇", {"Z", "X", "C", "V", "B", "N"})
+createSkillToggles("┇ Auto Skill Devil Fruit 2 ┇", {"F", "G", "H", "J", "K", "L"})
+
+-- Criar spawn para verificar e ativar habilidades
+spawn(function()
+    while wait(0.1) do
+        for skill, isActive in pairs(activeSkills) do
+            if isActive then
+                pcall(function()
+                    Skill(skill)
+                end)
+            end
+        end
+    end
+end)
+
 
 local WebhookSection = WebHookTab:CreateSection("Webhook Utilities")
 
