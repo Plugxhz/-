@@ -1,6 +1,8 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+GlobalConfig = {}
 
-local Window = Rayfield:CreateWindow({
+GlobalConfig['Rayfield'] = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+GlobalConfig['Window'] = Rayfield:CreateWindow({
    Name = "Ascended Hub -- Premium Mobile | Last Update 11/24/24 |",
    LoadingTitle = "|-  I Always Back  -|",
    LoadingSubtitle = "by Plug 愛",
@@ -32,7 +34,7 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
-local Cache = { DevConfig = {} };
+GlobalConfig['Cache'] = { DevConfig = {} };
 
 
 Cache.DevConfig["ListOfDrink"] = {"Cider+", "Cider", "Lemonade+", "Lemonade", "Juice+", "Juice", "Smoothie+", "Smoothie"};
@@ -44,8 +46,8 @@ Cache.DevConfig["ListOfIsland"] = {"Grassy","Kaizu","Snow Mountains","Pursuer Bo
 Cache.DevConfig["ListOfMerchant"] = {"Rayleigh", "Better Drink", "Drink", "Flail", "QuestFish", "Krizma", "Sword", "Sniper", "Emote", "Affinity","Fish", "Expertise"};
 Cache.DevConfig["ListOfAffinities"] = {"Devil Fruit ( Left )", "Devil Fruit ( Right )"};
 
-_G.kick = false
-local Pedo = {
+GlobalConfig['kick'] = false
+GlobalConfig['Pedo'] = {
     1135910299, -- Havelic
     1619950875, -- Pixel_SkillzSPIN2
     1581720092, -- Pixel_SkillzSPIN
@@ -87,7 +89,7 @@ game:GetService("Players").PlayerAdded:Connect(function(r)
     end
 end)
 
-local listed = {
+GlobalConfig['listed'] = {
     902805881, -- SpinEnzo
     2299513524, -- CalangoBranco02
     211788923, -- pedrogames332006
@@ -101,31 +103,31 @@ local listed = {
     818470168, -- Traolaw10
 }
 
-_G.WhiteListed = false
+GlobalConfig['WhiteListed'] = false
 for _, v1 in pairs(listed) do
     if game.Players.LocalPlayer.UserId == v1 then
-        _G.WhiteListed = true
+GlobalConfig['WhiteListed'] = true
         break
     end
 end
 
 if _G.WhiteListed or _G.bypasschothgngukhoi then
-    _G.kick = true
+GlobalConfig['kick'] = true
     if game.PlaceId == 8569358381 or game.PlaceId == 3237168 then
-        local vu = game:GetService("VirtualUser")
+GlobalConfig['vu'] = game:GetService("VirtualUser")
         game:GetService("Players").LocalPlayer.Idled:Connect(function()
             vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
             task.wait(1)
             vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
         end)
 
-        local Players = game:GetService("Players")
-        local cache = {}
+GlobalConfig['Players'] = game:GetService("Players")
+GlobalConfig['cache'] = {}
 
         function lol(name)
             if cache[name] then return cache[name] end
             local id
-            local success, result = pcall(function()
+GlobalConfig['success, result'] = pcall(function()
                 return Players:GetUserIdFromNameAsync(name)
             end)
             if success then
@@ -141,42 +143,42 @@ else
     game.Players.LocalPlayer:Kick("KICKED      By Plug 愛    Warn: You Need Buy Script - discord.gg/mzuYhzfwv7")
 end
 
-local MainTab = Window:CreateTab("Main", "book-copy")
-local StorageTab = Window:CreateTab("Storage", "boxes")
-local FarmTab = Window:CreateTab("Farm", "box")
-local MiscTab = Window:CreateTab("Misc", "keyboard-music")
-local PlayerTab = Window:CreateTab("Players", "users")
-local ShopTab = Window:CreateTab("Shop", "shopping-cart")
-local NpcTab = Window:CreateTab("Npc", "bot")
-local IslandsTab = Window:CreateTab("Islands", "tree-palm")
-local OtherTab = Window:CreateTab("Others", "arrow-down-wide-narrow")
-local SkillsTab = Window:CreateTab("Skills", "bomb")
-local WebHookTab = Window:CreateTab("Webhook", "rss")
+GlobalConfig['MainTab'] = Window:CreateTab("Main", "book-copy")
+GlobalConfig['StorageTab'] = Window:CreateTab("Storage", "boxes")
+GlobalConfig['FarmTab'] = Window:CreateTab("Farm", "box")
+GlobalConfig['MiscTab'] = Window:CreateTab("Misc", "keyboard-music")
+GlobalConfig['PlayerTab'] = Window:CreateTab("Players", "users")
+GlobalConfig['ShopTab'] = Window:CreateTab("Shop", "shopping-cart")
+GlobalConfig['NpcTab'] = Window:CreateTab("Npc", "bot")
+GlobalConfig['IslandsTab'] = Window:CreateTab("Islands", "tree-palm")
+GlobalConfig['OtherTab'] = Window:CreateTab("Others", "arrow-down-wide-narrow")
+GlobalConfig['SkillsTab'] = Window:CreateTab("Skills", "bomb")
+GlobalConfig['WebHookTab'] = Window:CreateTab("Webhook", "rss")
 
 -- Main Tab - Section e Botões/Toggles
 
-local MainSection = MainTab:CreateSection("Main Utilities")
+GlobalConfig['MainSection'] = MainTab:CreateSection("Main Utilities")
 
-local Button = MainTab:CreateButton({
+GlobalConfig['Button'] = MainTab:CreateButton({
     Name = "Destroy Script",
     Callback = function()
         Rayfield:Destroy()
     end
 })
 
-local Toggle = MainTab:CreateToggle({
+GlobalConfig['Toggle'] = MainTab:CreateToggle({
     Name = "Auto Spawn",
     CurrentValue = false,
     Flag = "AutoSpawnToggle",
     Callback = function(Value)
-        _G.AutoSpawnn = Value
+GlobalConfig['AutoSpawnn'] = Value
         if _G.AutoSpawnn then
             spawn(function()
                 while _G.AutoSpawnn do
                     task.wait()
                     pcall(function()
-                        local Player = game:GetService("Players").LocalPlayer
-                        local LoadFrame = Player.PlayerGui:FindFirstChild("Load") and Player.PlayerGui.Load.Frame
+GlobalConfig['Player'] = game:GetService("Players").LocalPlayer
+GlobalConfig['LoadFrame'] = Player.PlayerGui:FindFirstChild("Load") and Player.PlayerGui.Load.Frame
                         if LoadFrame and LoadFrame.Visible then
                             repeat
                                 task.wait(3)
@@ -193,20 +195,20 @@ local Toggle = MainTab:CreateToggle({
 })
 
 
-local MainSection = MainTab:CreateSection("Sam Quest's Utilities")
+GlobalConfig['MainSection'] = MainTab:CreateSection("Sam Quest's Utilities")
 
 
-local Button = MainTab:CreateButton({
+GlobalConfig['Button'] = MainTab:CreateButton({
    Name = "Open Sam",
    Callback = function()
        fireclickdetector(game:GetService("Workspace").Merchants.QuestMerchant.Clickable.ClickDetector)
    end,
 })
 
-local Button = MainTab:CreateButton({
+GlobalConfig['Button'] = MainTab:CreateButton({
     Name = "Claim One Compass",
     Callback = function()
-        local args = {
+GlobalConfig['args'] = {
             [1] = "Claim1"
         }
         
@@ -214,10 +216,10 @@ local Button = MainTab:CreateButton({
     end
 })
 
-local Button = MainTab:CreateButton({
+GlobalConfig['Button'] = MainTab:CreateButton({
     Name = "Claim All Compass",
     Callback = function()
-        local args = {
+GlobalConfig['args'] = {
             [1] = "Claim10"
         }
         
@@ -225,7 +227,7 @@ local Button = MainTab:CreateButton({
     end
 })
 
-local Toggle = MainTab:CreateToggle({
+GlobalConfig['Toggle'] = MainTab:CreateToggle({
     Name = "Auto Claim Compass",
     CurrentValue = false,
     Callback = function(Value)
@@ -236,7 +238,7 @@ local Toggle = MainTab:CreateToggle({
 spawn(function()
     while wait() do
         if AutoClaimCompass then
-            local args = {
+GlobalConfig['args'] = {
                 [1] = "Claim10"
             }
             
@@ -245,9 +247,9 @@ spawn(function()
     end
 end)
 
-local AutoCompass = false
+GlobalConfig['AutoCompass'] = false
 
-local Toggle = MainTab:CreateToggle({
+GlobalConfig['Toggle'] = MainTab:CreateToggle({
     Name = "Auto Use Compass (Teleports to Position)",
     CurrentValue = false,
     Callback = function(Value)
@@ -260,9 +262,9 @@ spawn(function()
         if AutoCompass then
             pcall(function()
                 -- Referências do jogador e de seu personagem
-                local player = game.Players.LocalPlayer
-                local backpack = player.Backpack
-                local character = player.Character or player.CharacterAdded:Wait()
+GlobalConfig['player'] = game.Players.LocalPlayer
+GlobalConfig['backpack'] = player.Backpack
+GlobalConfig['character'] = player.Character or player.CharacterAdded:Wait()
 
                 -- Iterar pelos itens no inventário
                 for _, item in pairs(backpack:GetChildren()) do
@@ -273,7 +275,7 @@ spawn(function()
 
                         -- Verificar se o Compass foi equipado com sucesso
                         if character:FindFirstChild("Compass") then
-                            local compass = character.Compass
+GlobalConfig['compass'] = character.Compass
 
                             -- Teleportar para a posição do Compass
                             if compass:FindFirstChild("Poser") and compass.Poser.Value then
@@ -295,9 +297,9 @@ spawn(function()
     end
 end)
 
-local MainSection = StorageTab:CreateSection("Storage Utilities")
+GlobalConfig['MainSection'] = StorageTab:CreateSection("Storage Utilities")
 
-local rareFruits = {
+GlobalConfig['rareFruits'] = {
     "Vampire Fruit", "Quake Fruit", "Phoenix Fruit", "Dark Fruit",
     "Ope Fruit", "Venom Fruit", "Candy Fruit", "Hollow Fruit",
     "Chilly Fruit", "Gas Fruit", "Flare Fruit", "Light Fruit",
@@ -305,12 +307,12 @@ local rareFruits = {
     "Snow Fruit", "Gravity Fruit", "Plasma Fruit"
 }
 
-local Cache = {
+GlobalConfig['Cache'] = {
     Player = { Inputfruitlist = {}, Inputfruitname = "" },
     Boolean = { StorageUsingGroup = {}, StorageKeepShiny = false }
 }
 
-local Input = StorageTab:CreateInput({
+GlobalConfig['Input'] = StorageTab:CreateInput({
     Name = "Devil Fruit Name",
     CurrentValue = "",
     PlaceholderText = "Enter fruit name...",
@@ -321,7 +323,7 @@ local Input = StorageTab:CreateInput({
     end
 })
 
-local Button = StorageTab:CreateButton({
+GlobalConfig['Button'] = StorageTab:CreateButton({
     Name = "Add All Rare & Ultra DF To List",
     Callback = function()
         for _, value in pairs(rareFruits) do
@@ -330,24 +332,24 @@ local Button = StorageTab:CreateButton({
     end
 })
 
-local Button = StorageTab:CreateButton({
+GlobalConfig['Button'] = StorageTab:CreateButton({
     Name = "Add Devil Fruit To List",
     Callback = function()
         table.insert(Cache.Player.Inputfruitlist, Cache.Player.Inputfruitname)
     end
 })
 
-local Button = StorageTab:CreateButton({
+GlobalConfig['Button'] = StorageTab:CreateButton({
     Name = "Delete Last Devil Fruit From List",
     Callback = function()
         table.remove(Cache.Player.Inputfruitlist, #Cache.Player.Inputfruitlist)
     end
 })
 
-local Button = StorageTab:CreateButton({
+GlobalConfig['Button'] = StorageTab:CreateButton({
     Name = "Print Devil Fruit List",
     Callback = function()
-        local Content = ""
+GlobalConfig['Content'] = ""
         for Index, Value in pairs(Cache.Player.Inputfruitlist) do
             Content = string.format("%s Index: %s, Value: %s\n", Content, Index, Value)
         end
@@ -355,7 +357,7 @@ local Button = StorageTab:CreateButton({
     end
 })
 
-local Toggle = StorageTab:CreateToggle({
+GlobalConfig['Toggle'] = StorageTab:CreateToggle({
     Name = "Keep All Shiny",
     CurrentValue = Cache.Boolean.StorageKeepShiny,
     Flag = "KeepShiny",
@@ -365,7 +367,7 @@ local Toggle = StorageTab:CreateToggle({
 })
 
 for Index = 1, 12 do
-    local Toggle = StorageTab:CreateToggle({
+GlobalConfig['Toggle'] = StorageTab:CreateToggle({
         Name = "Storage No." .. Index,
         CurrentValue = Cache.Boolean.StorageUsingGroup[Index] or false,
         Flag = "StorageToggle" .. Index,
@@ -376,7 +378,7 @@ for Index = 1, 12 do
 end
 
 local function CheckStorage(Number)
-    local storageFrame = game.Players.LocalPlayer.PlayerGui.Storage.Frame["StoredDF"..Number]
+GlobalConfig['storageFrame'] = game.Players.LocalPlayer.PlayerGui.Storage.Frame["StoredDF"..Number]
     return storageFrame.Button.Text == "Store" and storageFrame.Visible == true
 end
 
@@ -404,14 +406,14 @@ spawn(function()
     end
 end)
 
-local MainSection = FarmTab:CreateSection("Farm Utilities")
+GlobalConfig['MainSection'] = FarmTab:CreateSection("Farm Utilities")
 
-local ToggleFarm = FarmTab:CreateToggle({ 
+GlobalConfig['ToggleFarm'] = FarmTab:CreateToggle({
     Name = "Cannon Ball Mobs | All |",
     CurrentValue = false,
     Flag = "ToggleAutoBringMobs",
     Callback = function(ACN)
-        _G.autocannon = ACN
+GlobalConfig['autocannon'] = ACN
     end    
     })
 
@@ -467,16 +469,16 @@ spawn(function()
 while task.wait(0.5) do
     pcall(function()
         if _G.autocannon then
-            local Plr = game.Players.LocalPlayer
-            local toolname = "Cannon Ball"
+GlobalConfig['Plr'] = game.Players.LocalPlayer
+GlobalConfig['toolname'] = "Cannon Ball"
 
             if Plr.Backpack:FindFirstChild(toolname) and not Plr.Character:FindFirstChild(toolname) and not Plr.Character:FindFirstChildOfClass("Tool") then
                 Plr.Character.Humanoid:EquipTool(Plr.Backpack:FindFirstChild(toolname))
             end
 
-            local cannon = Plr.Character:FindFirstChild(toolname)
+GlobalConfig['cannon'] = Plr.Character:FindFirstChild(toolname)
             if cannon then
-                local args = {
+GlobalConfig['args'] = {
                     [1] = CFrame.new(Vector3.new(Plr.Character.HumanoidRootPart.Position))
                 }
                 cannon.RemoteEvent:FireServer(unpack(args))
@@ -496,7 +498,7 @@ while task.wait(0.5) do
                     v.CFrame = game.Players.LocalPlayer.Character.Head.CFrame * CFrame.new(0, 2, -15)
                     v.CanCollide = false
                     if not v:FindFirstChild("BodyClip") then
-                        local Noclip = Instance.new("BodyVelocity")
+GlobalConfig['Noclip'] = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
                         Noclip.Parent = v
                         Noclip.MaxForce = Vector3.new(100000,100000,100000)
@@ -509,15 +511,15 @@ while task.wait(0.5) do
 end
 end)
 
-local ToggleBehindFarm = FarmTab:CreateToggle({
+GlobalConfig['ToggleBehindFarm'] = FarmTab:CreateToggle({
     Name = "Auto Farm Mobs | Sword |",
     CurrentValue = false,
     Callback = function(state)
-        _G.behindFarm = state -- Ativa ou desativa o autofarm
+GlobalConfig['behindFarm'] = state -- Ativa ou desativa o autofarm
     end
 })
 
-local MobList = { "Boar", "Crab", "Angry", "Thief", "Gunslinger", "Freddy" } -- Liste aqui os nomes dos mobs desejados.
+GlobalConfig['MobList'] = { "Boar", "Crab", "Angry", "Thief", "Gunslinger", "Freddy" } -- Liste aqui os nomes dos mobs desejados.
 
 -- Função para verificar se o mob está na lista
 local function IsMobAllowed(mobName)
@@ -552,14 +554,14 @@ spawn(function()
                        
                         -- Atacar o mob selecionado até que ele morra
                         while mob.Humanoid.Health > 0 and _G.behindFarm do
-                            local mobRoot = mob.HumanoidRootPart
-                            local playerRoot = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['mobRoot'] = mob.HumanoidRootPart
+GlobalConfig['playerRoot'] = game.Players.LocalPlayer.Character.HumanoidRootPart
 
                             -- Manter posição atrás do mob
                             playerRoot.CFrame = mobRoot.CFrame * CFrame.new(0, 0, 4)
 
                             -- Realizar ataques (sword ou melee)
-                            local tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+GlobalConfig['tool'] = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
                             if tool then
                                 tool:Activate() -- Atacar com a ferramenta equipada
                             else
@@ -578,7 +580,7 @@ spawn(function()
     end
 end)
 
-local Toggle = FarmTab:CreateToggle({
+GlobalConfig['Toggle'] = FarmTab:CreateToggle({
     Name = "Auto Collect Chest",
     CurrentValue = false,
     Flag = "AutoCollectChestToggle",
@@ -603,7 +605,7 @@ local Toggle = FarmTab:CreateToggle({
 })
 
  
-local Toggle = FarmTab:CreateToggle({
+GlobalConfig['Toggle'] = FarmTab:CreateToggle({
    Name = "Auto Package",
    CurrentValue = false,
    Flag = "Auto Pacotes",
@@ -619,7 +621,7 @@ while wait() do
         wait(0.6)
             game.workspace:WaitForChild("Merchants"):WaitForChild("Merchant"):WaitForChild("Clickable"):WaitForChild("Retum"):FireServer()
         wait(0.001)
-         local playernameuser = game.Players.LocalPlayer.Name
+GlobalConfig['playernameuser'] = game.Players.LocalPlayer.Name
         if  game.Players.LocalPlayer.Backpack:FindFirstChild("Package") or game.Players.LocalPlayer.Character:FindFirstChild("Package") or game.workspace.playernameuser:FindFirstChild("Package") then
             game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Package"))
                 wait(.5)
@@ -718,7 +720,7 @@ while wait() do
 end
 end)
 
-local Toggle = FarmTab:CreateToggle({
+GlobalConfig['Toggle'] = FarmTab:CreateToggle({
     Name = "Auto Stats Farm",
     CurrentValue = false,
     Flag = "AutoStatsFarmToggle",
@@ -728,9 +730,9 @@ local Toggle = FarmTab:CreateToggle({
         if getgenv().autostatsfarm then
             -- Auto Barrels Logic
             spawn(function()
-                local user = tostring(game.Players.LocalPlayer.Name)
-                local plrid = tostring(game.Players.LocalPlayer.UserId)
-                local plr = tostring(game.Players.LocalPlayer)
+GlobalConfig['user'] = tostring(game.Players.LocalPlayer.Name)
+GlobalConfig['plrid'] = tostring(game.Players.LocalPlayer.UserId)
+GlobalConfig['plr'] = tostring(game.Players.LocalPlayer)
 
                 while getgenv().autostatsfarm do
                     task.wait()
@@ -757,7 +759,7 @@ local Toggle = FarmTab:CreateToggle({
                     end
                 end
 
-                local user = tostring(game.Players.LocalPlayer.Name)
+GlobalConfig['user'] = tostring(game.Players.LocalPlayer.Name)
 
                 while getgenv().autostatsfarm do
                     pcall(function()
@@ -806,7 +808,7 @@ local Toggle = FarmTab:CreateToggle({
 })
 
 
-local Toggle = FarmTab:CreateToggle({
+GlobalConfig['Toggle'] = FarmTab:CreateToggle({
     Name = "Auto Fish Farm",
     CurrentValue = false,
     Callback = function(AFH)
@@ -819,12 +821,12 @@ spawn(function() -- fish farm
         pcall(function()
             if AutoFish then
                 wait(0.5)
-                local CharacterName = game.Players.LocalPlayer.Character
-                local position = CharacterName.HumanoidRootPart.CFrame * CFrame.new(0, 0, -15)
-                local char = CharacterName.HumanoidRootPart
+GlobalConfig['CharacterName'] = game.Players.LocalPlayer.Character
+GlobalConfig['position'] = CharacterName.HumanoidRootPart.CFrame * CFrame.new(0, 0, -15)
+GlobalConfig['char'] = CharacterName.HumanoidRootPart
                 char.CFrame = CFrame.new(-20000, 218, 20000)
         
-                local b1 = Instance.new("Part")
+GlobalConfig['b1'] = Instance.new("Part")
                 b1.Shape = "Block"
                 b1.Material = "Neon"
                 b1.BrickColor = BrickColor.new("Hot Pink")
@@ -850,14 +852,14 @@ spawn(function() -- fish farm
                                     if v:FindFirstChild("Bobber") then
                                         if v.Bobber.Effect.Enabled == true then
                                             wait(0.6)
-                                            local args = {
+GlobalConfig['args'] = {
                                                 [1] = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
                                             }
                                             game:GetService("Players").LocalPlayer.Character:FindFirstChild(x.Name).Click:FireServer(unpack(args))
                                         end
                                     elseif v.Name == "Cast" and not v:FindFirstChild("Bobber") then
                                         wait(0.6)
-                                        local args = {
+GlobalConfig['args'] = {
                                             [1] = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
                                         }
                                         game:GetService("Players").LocalPlayer.Character:FindFirstChild(x.Name).Click:FireServer(unpack(args))
@@ -873,7 +875,7 @@ spawn(function() -- fish farm
     end
 end);
 
-local Toggle = FarmTab:CreateToggle({
+GlobalConfig['Toggle'] = FarmTab:CreateToggle({
     Name = "Auto Get Haki (1000 Level)",
     CurrentValue = false,
     Callback = function(bool122)
@@ -892,10 +894,10 @@ local Toggle = FarmTab:CreateToggle({
     end,
 })
 
-local MainSection = FarmTab:CreateSection("Devil Fruits")
+GlobalConfig['MainSection'] = FarmTab:CreateSection("Devil Fruits")
 
 -- Toggle para Collect DF
-local CollectDFToggle = FarmTab:CreateToggle({
+GlobalConfig['CollectDFToggle'] = FarmTab:CreateToggle({
     Name = "Collect DF",
     CurrentValue = false,
     Flag = "CollectDF",
@@ -919,10 +921,10 @@ spawn(function()
     end
 end)
 
-local MainSection = FarmTab:CreateSection("Haki's Auto Farms")
+GlobalConfig['MainSection'] = FarmTab:CreateSection("Haki's Auto Farms")
 
-local hakitarget = 25
-local SliderHakiTarget = FarmTab:CreateSlider({
+GlobalConfig['hakitarget'] = 25
+GlobalConfig['SliderHakiTarget'] = FarmTab:CreateSlider({
     Name = "Haki Target %",
     Range = {1, 100},
     Increment = 1,
@@ -934,8 +936,8 @@ local SliderHakiTarget = FarmTab:CreateSlider({
     end,
 })
 
-local hakispeed = 5
-local SliderHakiSpeed = FarmTab:CreateSlider({
+GlobalConfig['hakispeed'] = 5
+GlobalConfig['SliderHakiSpeed'] = FarmTab:CreateSlider({
     Name = "Haki Speed",
     Range = {1, 20},
     Increment = 1,
@@ -947,25 +949,25 @@ local SliderHakiSpeed = FarmTab:CreateSlider({
     end,
 })
 
-local ToggleAutoFarmHaki = FarmTab:CreateToggle({
+GlobalConfig['ToggleAutoFarmHaki'] = FarmTab:CreateToggle({
     Name = "Auto Farm Haki",
     CurrentValue = false,
     Flag = "AutoFarmHakiToggle",
     Callback = function(vccl)
         getgenv().concuvm = vccl
-        local plrid = tostring(game.Players.LocalPlayer.UserId)
-        local plr = tostring(game.Players.LocalPlayer)
-        _G.concu = true
+GlobalConfig['plrid'] = tostring(game.Players.LocalPlayer.UserId)
+GlobalConfig['plr'] = tostring(game.Players.LocalPlayer)
+GlobalConfig['concu'] = true
         while _G.concu do
             wait()
-            local slv = game.Workspace.UserData["User_" .. plrid].Data.HakiLevel.Value
-            local sss = slv / 100 * hakitarget
+GlobalConfig['slv'] = game.Workspace.UserData["User_" .. plrid].Data.HakiLevel.Value
+GlobalConfig['sss'] = slv / 100 * hakitarget
             if game.Workspace.UserData["User_" .. plrid].HakiBar.Value > sss and getgenv().concuvm == true then
-                local Players = game:GetService("Players")
-                local cache = {}
+GlobalConfig['Players'] = game:GetService("Players")
+GlobalConfig['cache'] = {}
                 local function lol(name)
                     if cache[name] then return cache[name] end
-                    local player = Players:FindFirstChild(name)
+GlobalConfig['player'] = Players:FindFirstChild(name)
                     if player then
                         cache[name] = player.UserId
                         return player.UserId
@@ -979,23 +981,23 @@ local ToggleAutoFarmHaki = FarmTab:CreateToggle({
                     return id
                 end
 
-                local ehh = game.Players.LocalPlayer.Name
-                local Final = lol(ehh)
+GlobalConfig['ehh'] = game.Players.LocalPlayer.Name
+GlobalConfig['Final'] = lol(ehh)
                 for i = 1, hakispeed do
-                    local args = { [1] = "Off", [2] = 1 }
+GlobalConfig['args'] = { [1] = "Off", [2] = 1 }
                     workspace.UserData["User_" .. Final].III:FireServer(unpack(args))
                     
-                    local args = { [1] = "On", [2] = 1 }
+GlobalConfig['args'] = { [1] = "On", [2] = 1 }
                     workspace.UserData["User_" .. Final].III:FireServer(unpack(args))
                 end
             elseif game.Workspace.UserData["User_" .. plrid].HakiBar.Value <= sss and getgenv().concuvm == true then
-                local args = { [1] = "Off", [2] = 1 }
+GlobalConfig['args'] = { [1] = "Off", [2] = 1 }
                 workspace.UserData["User_" .. plrid].III:FireServer(unpack(args))
                 repeat task.wait() until game.Workspace.UserData["User_" .. plrid].HakiBar.Value >= slv
-                _G.concu = true
+GlobalConfig['concu'] = true
             elseif getgenv().concuvm == false then
-                _G.concu = false
-                local args = { [1] = "Off", [2] = 1 }
+GlobalConfig['concu'] = false
+GlobalConfig['args'] = { [1] = "Off", [2] = 1 }
                 workspace.UserData["User_" .. plrid].III:FireServer(unpack(args))
             end
         end
@@ -1004,18 +1006,18 @@ local ToggleAutoFarmHaki = FarmTab:CreateToggle({
 
 
 
-local MainSection = FarmTab:CreateSection("Safe Places Creation")
+GlobalConfig['MainSection'] = FarmTab:CreateSection("Safe Places Creation")
 
 -- Botão para "Create Part"
-local CreatePartButton = FarmTab:CreateButton({
+GlobalConfig['CreatePartButton'] = FarmTab:CreateButton({
     Name = "Create Basic Safe Place",
     Callback = function()
-        local CharacterName = game.Players.LocalPlayer.Character
-        local position = CharacterName.HumanoidRootPart.CFrame * CFrame.new(0, 0, -15)
-        local char = CharacterName.HumanoidRootPart
+GlobalConfig['CharacterName'] = game.Players.LocalPlayer.Character
+GlobalConfig['position'] = CharacterName.HumanoidRootPart.CFrame * CFrame.new(0, 0, -15)
+GlobalConfig['char'] = CharacterName.HumanoidRootPart
         char.CFrame = CFrame.new(-169, 640, -54)
 
-        local b1 = Instance.new("Part")
+GlobalConfig['b1'] = Instance.new("Part")
         b1.Shape = "Block"
         b1.Material = "Neon"
         b1.BrickColor = BrickColor.new("Hot Pink")
@@ -1027,13 +1029,13 @@ local CreatePartButton = FarmTab:CreateButton({
 })
 
 -- Botão para "Create Part Permanent"
-local CreatePartPermanentButton = FarmTab:CreateButton({
+GlobalConfig['CreatePartPermanentButton'] = FarmTab:CreateButton({
     Name = "Create Improved Safe Place",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-169, 12050, -54)
 
-        local b1 = Instance.new("Part")
+GlobalConfig['b1'] = Instance.new("Part")
         b1.Shape = "Block"
         b1.Material = "Neon"
         b1.BrickColor = BrickColor.new("White")
@@ -1046,15 +1048,15 @@ local CreatePartPermanentButton = FarmTab:CreateButton({
 
 
 -- Misc Tab - Inputs e Botões para Rejoin e Hop Server
-local MiscSection = MiscTab:CreateSection("Player Utilities")
+GlobalConfig['MiscSection'] = MiscTab:CreateSection("Player Utilities")
 
-local Input = MiscTab:CreateInput({
+GlobalConfig['Input'] = MiscTab:CreateInput({
     Name = "WalkSpeed",
     CurrentValue = "",
     PlaceholderText = "Enter WalkSpeed",
     RemoveTextAfterFocusLost = false,
     Callback = function(txt)
-        local player = game.Players.LocalPlayer
+GlobalConfig['player'] = game.Players.LocalPlayer
         if player and player.Character and player.Character:FindFirstChild("CharacterTrait") then
             player.Character.CharacterTrait.WS.Value = tonumber(txt) or 1  -- Defina um valor padrão de 1 se o input for inválido
         end
@@ -1062,26 +1064,26 @@ local Input = MiscTab:CreateInput({
 })
 
 
-local Input = MiscTab:CreateInput({
+GlobalConfig['Input'] = MiscTab:CreateInput({
     Name = "Jump Power",
     CurrentValue = "",
     PlaceholderText = "Enter Jump Power",
     RemoveTextAfterFocusLost = false,
     Callback = function(txt)
-        local player = game.Players.LocalPlayer
+GlobalConfig['player'] = game.Players.LocalPlayer
         if player and player.Character and player.Character:FindFirstChild("Humanoid") then
             player.Character.Humanoid.JumpPower = tonumber(txt) or player.Character.Humanoid.JumpPower
         end
     end
 })
 
-local Input = MiscTab:CreateInput({
+GlobalConfig['Input'] = MiscTab:CreateInput({
     Name = "Hip Height | Default 0 |",
     CurrentValue = "",
     PlaceholderText = "Enter Hip Height",
     RemoveTextAfterFocusLost = false,
     Callback = function(txt)
-        local player = game.Players.LocalPlayer
+GlobalConfig['player'] = game.Players.LocalPlayer
         if player and player.Character and player.Character:FindFirstChild("Humanoid") then
             player.Character.Humanoid.HipHeight = tonumber(txt) or player.Character.Humanoid.HipHeight
         end
@@ -1089,7 +1091,7 @@ local Input = MiscTab:CreateInput({
 })
 
 -- Toggle para Auto Turn ON Haki com intervalo
-local HakiToggle = MiscTab:CreateToggle({
+GlobalConfig['HakiToggle'] = MiscTab:CreateToggle({
     Name = "Auto Turn On Buso Haki",
     CurrentValue = false,
     Flag = "Auto Haki",
@@ -1121,12 +1123,12 @@ spawn(function()
     end
 end)
 
-local Toggle = MiscTab:CreateToggle({
+GlobalConfig['Toggle'] = MiscTab:CreateToggle({
     Name = "Enable Black Screen",
     CurrentValue = false,
     Callback = function(Value)
-        local lighting = game:GetService("Lighting")
-        local colorCorrection = lighting:FindFirstChildOfClass("ColorCorrectionEffect")
+GlobalConfig['lighting'] = game:GetService("Lighting")
+GlobalConfig['colorCorrection'] = lighting:FindFirstChildOfClass("ColorCorrectionEffect")
         
         if not colorCorrection then
             colorCorrection = Instance.new("ColorCorrectionEffect")
@@ -1138,12 +1140,12 @@ local Toggle = MiscTab:CreateToggle({
 })
 
 
-local Toggle = MiscTab:CreateToggle({
+GlobalConfig['Toggle'] = MiscTab:CreateToggle({
     Name = "Low Graphic Mode",  -- Nome do toggle
     CurrentValue = false,
     Callback = function(Value)
         -- Configurações do modo gráfico baixo
-        local terrain = workspace:FindFirstChildOfClass('Terrain')
+GlobalConfig['terrain'] = workspace:FindFirstChildOfClass('Terrain')
         if terrain then
             terrain.WaterWaveSize = Value and 0 or 10
             terrain.WaterWaveSpeed = Value and 0 or 10
@@ -1203,10 +1205,10 @@ local Toggle = MiscTab:CreateToggle({
 })
 
 
-local AfkButton = MiscTab:CreateButton({
+GlobalConfig['AfkButton'] = MiscTab:CreateButton({
     Name = "Anti Afk",
     Callback = function()
-        local vu = game:GetService("VirtualUser") -- ibraham moizoos
+GlobalConfig['vu'] = game:GetService("VirtualUser") -- ibraham moizoos
         print("ANTIAFK ENABLED")
         game:GetService("Players").LocalPlayer.Idled:Connect(function()
             vu:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
@@ -1217,33 +1219,33 @@ local AfkButton = MiscTab:CreateButton({
 })
 
 
-local MiscSection = MiscTab:CreateSection("Anchor Options")
+GlobalConfig['MiscSection'] = MiscTab:CreateSection("Anchor Options")
 
 -- Toggle para Anchor
-local ToggleAnchored = MiscTab:CreateToggle({
+GlobalConfig['ToggleAnchored'] = MiscTab:CreateToggle({
     Name = "Anchor Your Self",
     CurrentValue = false,
     Flag = "ToggleAnchored",
     Callback = function(value)
-        local Player = game.Players.LocalPlayer.Character
+GlobalConfig['Player'] = game.Players.LocalPlayer.Character
         if Player and Player:FindFirstChild("HumanoidRootPart") then
             Player.HumanoidRootPart.Anchored = value
         end
     end
 })
 
-local MiscSection = MiscTab:CreateSection("Jesus Mode")
+GlobalConfig['MiscSection'] = MiscTab:CreateSection("Jesus Mode")
 
 -- Toggle para Jesus Mode
-local jesusModeEnabled = false
-local ToggleJesusMode = MiscTab:CreateToggle({
+GlobalConfig['jesusModeEnabled'] = false
+GlobalConfig['ToggleJesusMode'] = MiscTab:CreateToggle({
     Name = "Soft Fall / Float",
     CurrentValue = false,
     Flag = "ToggleJesusMode",
     Callback = function(jesusModeEnabled)
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local rootPart = character:WaitForChild("HumanoidRootPart")
+GlobalConfig['player'] = game.Players.LocalPlayer
+GlobalConfig['character'] = player.Character or player.CharacterAdded:Wait()
+GlobalConfig['rootPart'] = character:WaitForChild("HumanoidRootPart")
 
         if jesusModeEnabled then
             jesusModeConnection = game:GetService("RunService").Heartbeat:Connect(function()
@@ -1260,16 +1262,16 @@ local ToggleJesusMode = MiscTab:CreateToggle({
     end
 })
 
-local MiscSection = MiscTab:CreateSection("Server Utilities")
+GlobalConfig['MiscSection'] = MiscTab:CreateSection("Server Utilities")
 
-local Button = MiscTab:CreateButton({
+GlobalConfig['Button'] = MiscTab:CreateButton({
     Name = "Rejoin",
     Callback = function()
-        local TeleportService = game:GetService("TeleportService")
-        local Players = game:GetService("Players")
-        local LocalPlayer = Players.LocalPlayer
+GlobalConfig['TeleportService'] = game:GetService("TeleportService")
+GlobalConfig['Players'] = game:GetService("Players")
+GlobalConfig['LocalPlayer'] = Players.LocalPlayer
 
-        local Success, ErrorMessage = pcall(function()
+GlobalConfig['Success, ErrorMessage'] = pcall(function()
             TeleportService:Teleport(game.PlaceId, LocalPlayer)
         end)
 
@@ -1279,14 +1281,14 @@ local Button = MiscTab:CreateButton({
     end
 })
 
-local ServerHopButton = MiscTab:CreateButton({
+GlobalConfig['ServerHopButton'] = MiscTab:CreateButton({
     Name = "Server Hop",
     Callback = function()
-        local PlaceID = game.PlaceId
-        local AllIDs = {}
-        local foundAnything = ""
-        local actualHour = os.date("!*t").hour
-        local Deleted = false
+GlobalConfig['PlaceID'] = game.PlaceId
+GlobalConfig['AllIDs'] = {}
+GlobalConfig['foundAnything'] = ""
+GlobalConfig['actualHour'] = os.date("!*t").hour
+GlobalConfig['Deleted'] = false
 
         function TPReturner()
             local Site
@@ -1296,13 +1298,13 @@ local ServerHopButton = MiscTab:CreateButton({
                 Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
             end
 
-            local ID = ""
+GlobalConfig['ID'] = ""
             if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
                 foundAnything = Site.nextPageCursor
             end
-            local num = 0
+GlobalConfig['num'] = 0
             for i, v in pairs(Site.data) do
-                local Possible = true
+GlobalConfig['Possible'] = true
                 ID = tostring(v.id)
                 if tonumber(v.maxPlayers) > tonumber(v.playing) then
                     for _, Existing in pairs(AllIDs) do
@@ -1312,7 +1314,7 @@ local ServerHopButton = MiscTab:CreateButton({
                             end
                         else
                             if tonumber(actualHour) ~= tonumber(Existing) then
-                                local delFile = pcall(function()
+GlobalConfig['delFile'] = pcall(function()
                                     -- delfile("NotSameServers.json")
                                     AllIDs = {}
                                     table.insert(AllIDs, actualHour)
@@ -1352,18 +1354,18 @@ local ServerHopButton = MiscTab:CreateButton({
 
 
 
-local MiscSection = PlayerTab:CreateSection("Player Utilities")
+GlobalConfig['MiscSection'] = PlayerTab:CreateSection("Player Utilities")
 
 -- Função de ir para o jogador
-local GoToPlayerInput = PlayerTab:CreateInput({
+GlobalConfig['GoToPlayerInput'] = PlayerTab:CreateInput({
     Name = "Go to Player",
     CurrentValue = "",
     PlaceholderText = "Digite o nome do jogador",
     RemoveTextAfterFocusLost = false,
     Flag = "Input1",
     Callback = function(txt)
-        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
-        local p2 = txt
+GlobalConfig['p1'] = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['p2'] = txt
 
         if game.Players:FindFirstChild(p2) then
             p1.CFrame = game.Players[p2].Character.HumanoidRootPart.CFrame
@@ -1374,16 +1376,16 @@ local GoToPlayerInput = PlayerTab:CreateInput({
 })
 
 -- Função de ir e voltar
-local GoAndBackInput = PlayerTab:CreateInput({
+GlobalConfig['GoAndBackInput'] = PlayerTab:CreateInput({
     Name = "Go and Back",
     CurrentValue = "",
     PlaceholderText = "Digite o nome do jogador",
     RemoveTextAfterFocusLost = false,
     Flag = "Input2",
     Callback = function(txt)
-        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
-        local p2 = txt
-        local pos = p1.CFrame
+GlobalConfig['p1'] = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['p2'] = txt
+GlobalConfig['pos'] = p1.CFrame
 
         if game.Players:FindFirstChild(p2) then
             p1.CFrame = game.Players[p2].Character.HumanoidRootPart.CFrame
@@ -1396,14 +1398,14 @@ local GoAndBackInput = PlayerTab:CreateInput({
 })
 
 
-local Button = PlayerTab:CreateButton({
+GlobalConfig['Button'] = PlayerTab:CreateButton({
     Name = "All Seeing Eye - ( ESP )",
     Callback = function()
-        local players = game:GetService("Players")
-        local runService = game:GetService("RunService")
-        local starterGui = game:GetService("StarterGui")  
-        local localPlayer = players.LocalPlayer
-        local distanceThreshold = 20
+GlobalConfig['players'] = game:GetService("Players")
+GlobalConfig['runService'] = game:GetService("RunService")
+GlobalConfig['starterGui'] = game:GetService("StarterGui")
+GlobalConfig['localPlayer'] = players.LocalPlayer
+GlobalConfig['distanceThreshold'] = 20
         
         local function showNotification(title, text)
             starterGui:SetCore("SendNotification", {
@@ -1415,7 +1417,7 @@ local Button = PlayerTab:CreateButton({
         
         local function createESP(player)
             -- Criar Highlight para ESP
-            local highlight = Instance.new("Highlight")
+GlobalConfig['highlight'] = Instance.new("Highlight")
             highlight.Name = "ESPHighlight"
             highlight.FillTransparency = 0.5
             highlight.OutlineTransparency = 0.5
@@ -1428,14 +1430,14 @@ local Button = PlayerTab:CreateButton({
                 highlight.Parent = character
         
                 -- Criar BillboardGui para o nome do jogador
-                local billboardGui = Instance.new("BillboardGui")
+GlobalConfig['billboardGui'] = Instance.new("BillboardGui")
                 billboardGui.Name = "PlayerName"
                 billboardGui.Adornee = character:FindFirstChild("HumanoidRootPart")
                 billboardGui.Size = UDim2.new(0, 200, 0, 50)
                 billboardGui.StudsOffset = Vector3.new(0, 2, 0)
                 billboardGui.AlwaysOnTop = true
         
-                local textLabel = Instance.new("TextLabel", billboardGui)
+GlobalConfig['textLabel'] = Instance.new("TextLabel", billboardGui)
                 textLabel.Size = UDim2.new(1, 0, 1, 0)
                 textLabel.BackgroundTransparency = 1
                 textLabel.Text = player.Name
@@ -1461,14 +1463,14 @@ local Button = PlayerTab:CreateButton({
                 highlight.Parent = player.Character
         
                 -- Criar BillboardGui se o personagem já estiver carregado
-                local billboardGui = Instance.new("BillboardGui")
+GlobalConfig['billboardGui'] = Instance.new("BillboardGui")
                 billboardGui.Name = "PlayerName"
                 billboardGui.Adornee = player.Character:FindFirstChild("HumanoidRootPart")
                 billboardGui.Size = UDim2.new(0, 200, 0, 50)
                 billboardGui.StudsOffset = Vector3.new(0, 2, 0)
                 billboardGui.AlwaysOnTop = true
         
-                local textLabel = Instance.new("TextLabel", billboardGui)
+GlobalConfig['textLabel'] = Instance.new("TextLabel", billboardGui)
                 textLabel.Size = UDim2.new(1, 0, 1, 0)
                 textLabel.BackgroundTransparency = 1
                 textLabel.Text = player.Name
@@ -1484,7 +1486,7 @@ local Button = PlayerTab:CreateButton({
         local function updateESP()
             for _, player in pairs(players:GetPlayers()) do
                 if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                    local highlight = player.Character:FindFirstChild("ESPHighlight")
+GlobalConfig['highlight'] = player.Character:FindFirstChild("ESPHighlight")
                     if not highlight then
                         createESP(player)
                         highlight = player.Character:FindFirstChild("ESPHighlight")
@@ -1536,14 +1538,14 @@ local Button = PlayerTab:CreateButton({
     end,
  })
 
-local MiscSection = PlayerTab:CreateSection("Player Farming")
+GlobalConfig['MiscSection'] = PlayerTab:CreateSection("Player Farming")
 
-local ToggleFarmPlayers = PlayerTab:CreateToggle({ 
+GlobalConfig['ToggleFarmPlayers'] = PlayerTab:CreateToggle({
     Name = "Cannon Ball Players | All |",
     CurrentValue = false,
     Flag = "ToggleAutoFarmPlayers",
     Callback = function(AFP)
-        _G.autofarmplayers = AFP
+GlobalConfig['autofarmplayers'] = AFP
     end    
 })
 
@@ -1569,7 +1571,7 @@ spawn(function()
                     -- Verificar se o jogador não é o próprio jogador e se está presente na Workspace
                     if player ~= game.Players.LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
                         -- Configurar para trazer o jogador para uma posição próxima
-                        local humanoidRootPart = player.Character.HumanoidRootPart
+GlobalConfig['humanoidRootPart'] = player.Character.HumanoidRootPart
                         humanoidRootPart.CanCollide = false
                         humanoidRootPart.Anchored = true
                         humanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 4, -15)
@@ -1590,16 +1592,16 @@ spawn(function()
     while task.wait(0.5) do
         pcall(function()
             if _G.autofarmplayers then
-                local Plr = game.Players.LocalPlayer
-                local toolname = "Cannon Ball"
+GlobalConfig['Plr'] = game.Players.LocalPlayer
+GlobalConfig['toolname'] = "Cannon Ball"
 
                 if Plr.Backpack:FindFirstChild(toolname) and not Plr.Character:FindFirstChild(toolname) and not Plr.Character:FindFirstChildOfClass("Tool") then
                     Plr.Character.Humanoid:EquipTool(Plr.Backpack:FindFirstChild(toolname))
                 end
 
-                local cannon = Plr.Character:FindFirstChild(toolname)
+GlobalConfig['cannon'] = Plr.Character:FindFirstChild(toolname)
                 if cannon then
-                    local args = {
+GlobalConfig['args'] = {
                         [1] = CFrame.new(Vector3.new(Plr.Character.HumanoidRootPart.Position))
                     }
                     cannon.RemoteEvent:FireServer(unpack(args))
@@ -1619,7 +1621,7 @@ spawn(function()
                         v.CFrame = game.Players.LocalPlayer.Character.Head.CFrame * CFrame.new(0, 2, -15)
                         v.CanCollide = false
                         if not v:FindFirstChild("BodyClip") then
-                            local Noclip = Instance.new("BodyVelocity")
+GlobalConfig['Noclip'] = Instance.new("BodyVelocity")
                             Noclip.Name = "BodyClip"
                             Noclip.Parent = v
                             Noclip.MaxForce = Vector3.new(100000,100000,100000)
@@ -1632,7 +1634,7 @@ spawn(function()
     end
 end)
 
-local Toggle = PlayerTab:CreateToggle({ 
+GlobalConfig['Toggle'] = PlayerTab:CreateToggle({
     Name = "Auto Click",
     CurrentValue = false,
   
@@ -1653,11 +1655,11 @@ local Toggle = PlayerTab:CreateToggle({
  end);
 
 
-local SelectPlayer = ""
-local Tpplr = false
+GlobalConfig['SelectPlayer'] = ""
+GlobalConfig['Tpplr'] = false
 
 -- Obtenha a lista de jogadores atuais
-local PlayerList = {}
+GlobalConfig['PlayerList'] = {}
 for _, player in pairs(game:GetService("Players"):GetPlayers()) do
     table.insert(PlayerList, player.Name)
 end
@@ -1665,7 +1667,7 @@ end
 local function forcePlayerDeath(player)
     -- Verifica se o jogador existe e tem um personagem
     if player and player.Character then
-        local humanoid = player.Character:FindFirstChild("Humanoid")
+GlobalConfig['humanoid'] = player.Character:FindFirstChild("Humanoid")
         if humanoid then
             -- Força a morte do jogador, definindo a saúde para 0
             humanoid.Health = 0
@@ -1674,16 +1676,16 @@ local function forcePlayerDeath(player)
     end
 end
 
-local SelectPlayer = ""
+GlobalConfig['SelectPlayer'] = ""
 
 -- Obtenha a lista de jogadores atuais
-local PlayerList = {}
+GlobalConfig['PlayerList'] = {}
 for _, player in pairs(game:GetService("Players"):GetPlayers()) do
     table.insert(PlayerList, player.Name)
 end
 
 -- Dropdown para selecionar o jogador
-local Dropdown = PlayerTab:CreateDropdown({
+GlobalConfig['Dropdown'] = PlayerTab:CreateDropdown({
     Name = "Select Player",
     Options = PlayerList,  -- Usa a lista de jogadores como opções do dropdown
     CurrentOption = PlayerList[1] or "",  -- Define o primeiro jogador como padrão, se houver
@@ -1696,11 +1698,11 @@ local Dropdown = PlayerTab:CreateDropdown({
 })
 
 -- Toggle para ativar/desativar a funcionalidade
-local ToggleFarmSelectedPlayer = PlayerTab:CreateToggle({
+GlobalConfig['ToggleFarmSelectedPlayer'] = PlayerTab:CreateToggle({
     Name = "Cannon Ball Selected Player",
     CurrentValue = false,
     Callback = function(AFP)
-        _G.autofarmSelectedPlayer = AFP -- Controla o estado do autofarm para o jogador selecionado
+GlobalConfig['autofarmSelectedPlayer'] = AFP -- Controla o estado do autofarm para o jogador selecionado
     end
 })
 
@@ -1721,10 +1723,10 @@ spawn(function()
     while task.wait(0.5) do
         pcall(function()
             if _G.autofarmSelectedPlayer and SelectPlayer ~= "" then
-                local targetPlayer = game.Players:FindFirstChild(SelectPlayer)
+GlobalConfig['targetPlayer'] = game.Players:FindFirstChild(SelectPlayer)
                 if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
                     -- Configurar para trazer o jogador para perto
-                    local humanoidRootPart = targetPlayer.Character.HumanoidRootPart
+GlobalConfig['humanoidRootPart'] = targetPlayer.Character.HumanoidRootPart
                     humanoidRootPart.CanCollide = false
                     humanoidRootPart.Anchored = true
                     humanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 4, -15)
@@ -1744,9 +1746,9 @@ spawn(function()
     while task.wait(0.5) do
         pcall(function()
             if _G.autofarmSelectedPlayer and SelectPlayer ~= "" then
-                local Plr = game.Players.LocalPlayer
-                local targetPlayer = game.Players:FindFirstChild(SelectPlayer)
-                local toolname = "Cannon Ball"
+GlobalConfig['Plr'] = game.Players.LocalPlayer
+GlobalConfig['targetPlayer'] = game.Players:FindFirstChild(SelectPlayer)
+GlobalConfig['toolname'] = "Cannon Ball"
 
                 -- Verificar se o Cannon Ball está no Backpack e equipá-lo
                 if Plr.Backpack:FindFirstChild(toolname) and not Plr.Character:FindFirstChild(toolname) and not Plr.Character:FindFirstChildOfClass("Tool") then
@@ -1754,9 +1756,9 @@ spawn(function()
                 end
 
                 -- Usar o Cannon Ball no jogador selecionado
-                local cannon = Plr.Character:FindFirstChild(toolname)
+GlobalConfig['cannon'] = Plr.Character:FindFirstChild(toolname)
                 if cannon and targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                    local args = {
+GlobalConfig['args'] = {
                         [1] = targetPlayer.Character.HumanoidRootPart.CFrame -- Atacar o jogador-alvo
                     }
                     cannon.RemoteEvent:FireServer(unpack(args))
@@ -1767,7 +1769,7 @@ spawn(function()
 end)
 
 -- Toggle para ativar a função Behind Player com movimento constante
-local Toggle = PlayerTab:CreateToggle({
+GlobalConfig['Toggle'] = PlayerTab:CreateToggle({
     Name = "Behind Player",
     CurrentValue = false,
     Callback = function(TP)
@@ -1777,17 +1779,17 @@ local Toggle = PlayerTab:CreateToggle({
         if Tpplr and SelectPlayer ~= "" then
             spawn(function()
                 while Tpplr do
-                    local localPlayer = game.Players.LocalPlayer
-                    local targetPlayer = game.Players:FindFirstChild(SelectPlayer)
+GlobalConfig['localPlayer'] = game.Players.LocalPlayer
+GlobalConfig['targetPlayer'] = game.Players:FindFirstChild(SelectPlayer)
 
                     if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
                         -- Calcula a posição atrás do jogador selecionado
-                        local targetHRP = targetPlayer.Character.HumanoidRootPart
-                        local targetPosition = targetHRP.Position
-                        local behindPosition = targetPosition - targetHRP.CFrame.LookVector * 5
+GlobalConfig['targetHRP'] = targetPlayer.Character.HumanoidRootPart
+GlobalConfig['targetPosition'] = targetHRP.Position
+GlobalConfig['behindPosition'] = targetPosition - targetHRP.CFrame.LookVector * 5
 
                         -- Define a orientação (rotação) do jogador local para igualar a do jogador alvo
-                        local targetOrientation = targetHRP.CFrame - targetHRP.Position
+GlobalConfig['targetOrientation'] = targetHRP.CFrame - targetHRP.Position
 
                         -- Move e orienta o jogador local para ficar alinhado atrás do jogador selecionado
                         localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(behindPosition) * targetOrientation.Rotation
@@ -1823,7 +1825,7 @@ end)
 
 -- Atualiza a lista de jogadores
 local function updatePlayerList()
-    local players = {}
+GlobalConfig['players'] = {}
     for _, player in pairs(game.Players:GetPlayers()) do
         if player.Name ~= game.Players.LocalPlayer.Name then  -- Exclui o jogador local
             table.insert(players, player.Name)
@@ -1833,7 +1835,7 @@ local function updatePlayerList()
 end
 
 -- Toggle para espectar o jogador
-local Toggle = PlayerTab:CreateToggle({
+GlobalConfig['Toggle'] = PlayerTab:CreateToggle({
     Name = "Spectate Player",
     CurrentValue = false,
     Callback = function(Value)
@@ -1856,7 +1858,7 @@ end
 spawn(function()
     while task.wait(0.5) do
         if SpectatePlayer and SelectPlayer then
-            local targetPlayer = game.Players:FindFirstChild(SelectPlayer)
+GlobalConfig['targetPlayer'] = game.Players:FindFirstChild(SelectPlayer)
             if targetPlayer then
                 spectate(targetPlayer)
             else
@@ -1883,9 +1885,9 @@ game.Players.PlayerRemoving:Connect(function(player)
 end)
 
 
-local ShopSection = ShopTab:CreateSection("Drink Utilities - Bar")
+GlobalConfig['ShopSection'] = ShopTab:CreateSection("Drink Utilities - Bar")
 
-local Button = ShopTab:CreateButton({
+GlobalConfig['Button'] = ShopTab:CreateButton({
     Name = "Instant Drink",
     Callback = function()
         for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
@@ -1903,12 +1905,12 @@ local Button = ShopTab:CreateButton({
     end,
 })
 
-local ShopSection = ShopTab:CreateSection("Buy Separate Drinks")
+GlobalConfig['ShopSection'] = ShopTab:CreateSection("Buy Separate Drinks")
 
-local Button = ShopTab:CreateButton({
+GlobalConfig['Button'] = ShopTab:CreateButton({
     Name = "Buy Cider+ Drink",
     Callback = function()
-        local args = {
+GlobalConfig['args'] = {
             [1] = "Cider+"
         }
         
@@ -1916,10 +1918,10 @@ local Button = ShopTab:CreateButton({
     end
 })
 
-local Button = ShopTab:CreateButton({
+GlobalConfig['Button'] = ShopTab:CreateButton({
     Name = "Buy Lemonade+ Drink",
     Callback = function()
-        local args = {
+GlobalConfig['args'] = {
             [1] = "Lemonade+"
         }
         
@@ -1927,10 +1929,10 @@ local Button = ShopTab:CreateButton({
     end
 })
 
-local Button = ShopTab:CreateButton({
+GlobalConfig['Button'] = ShopTab:CreateButton({
     Name = "Buy Juice+ Drink",
     Callback = function()
-        local args = {
+GlobalConfig['args'] = {
             [1] = "Juice+"
         }
         
@@ -1938,10 +1940,10 @@ local Button = ShopTab:CreateButton({
     end
 })
 
-local Button = ShopTab:CreateButton({
+GlobalConfig['Button'] = ShopTab:CreateButton({
     Name = "Buy Smoothie+ Drink",
     Callback = function()
-        local args = {
+GlobalConfig['args'] = {
             [1] = "Smoothie+"
         }
         
@@ -1950,15 +1952,15 @@ local Button = ShopTab:CreateButton({
 })
 
 
-local ShopSection = ShopTab:CreateSection("Auto Buy Drinks")
+GlobalConfig['ShopSection'] = ShopTab:CreateSection("Auto Buy Drinks")
 
-local AutoCider = false
-local AutoLemonade = false
-local AutoJuice = false
-local AutoSmoothie = false
+GlobalConfig['AutoCider'] = false
+GlobalConfig['AutoLemonade'] = false
+GlobalConfig['AutoJuice'] = false
+GlobalConfig['AutoSmoothie'] = false
 
 -- Toggling Auto Buy for each drink
-local ToggleCider = ShopTab:CreateToggle({
+GlobalConfig['ToggleCider'] = ShopTab:CreateToggle({
     Name = "Auto Buy Cider+ Drink",
     CurrentValue = false,
     Callback = function(value)
@@ -1966,7 +1968,7 @@ local ToggleCider = ShopTab:CreateToggle({
     end
 })
 
-local ToggleLemonade = ShopTab:CreateToggle({
+GlobalConfig['ToggleLemonade'] = ShopTab:CreateToggle({
     Name = "Auto Buy Lemonade+ Drink",
     CurrentValue = false,
     Callback = function(value)
@@ -1974,7 +1976,7 @@ local ToggleLemonade = ShopTab:CreateToggle({
     end
 })
 
-local ToggleJuice = ShopTab:CreateToggle({
+GlobalConfig['ToggleJuice'] = ShopTab:CreateToggle({
     Name = "Auto Buy Juice+ Drink",
     CurrentValue = false,
     Callback = function(value)
@@ -1982,7 +1984,7 @@ local ToggleJuice = ShopTab:CreateToggle({
     end
 })
 
-local ToggleSmoothie = ShopTab:CreateToggle({
+GlobalConfig['ToggleSmoothie'] = ShopTab:CreateToggle({
     Name = "Auto Buy Smoothie+ Drink",
     CurrentValue = false,
     Callback = function(value)
@@ -1995,7 +1997,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if AutoCider then
-                local args = {
+GlobalConfig['args'] = {
                     [1] = "Cider+"
                 }
                 workspace.Merchants.BetterDrinkMerchant.Clickable.Retum:FireServer(unpack(args))
@@ -2008,7 +2010,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if AutoLemonade then
-                local args = {
+GlobalConfig['args'] = {
                     [1] = "Lemonade+"
                 }
                 workspace.Merchants.BetterDrinkMerchant.Clickable.Retum:FireServer(unpack(args))
@@ -2021,7 +2023,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if AutoJuice then
-                local args = {
+GlobalConfig['args'] = {
                     [1] = "Juice+"
                 }
                 workspace.Merchants.BetterDrinkMerchant.Clickable.Retum:FireServer(unpack(args))
@@ -2034,7 +2036,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if AutoSmoothie then
-                local args = {
+GlobalConfig['args'] = {
                     [1] = "Smoothie+"
                 }
                 workspace.Merchants.BetterDrinkMerchant.Clickable.Retum:FireServer(unpack(args))
@@ -2043,486 +2045,486 @@ spawn(function()
     end
 end)
 
-local ShopSection = ShopTab:CreateSection("Weapons Utilities - Store")
+GlobalConfig['ShopSection'] = ShopTab:CreateSection("Weapons Utilities - Store")
 
-local ShopSection = ShopTab:CreateSection("Gun's")
+GlobalConfig['ShopSection'] = ShopTab:CreateSection("Gun's")
 
 -- Weapons Buttons
-local SlingshotButton = ShopTab:CreateButton({
+GlobalConfig['SlingshotButton'] = ShopTab:CreateButton({
     Name = "Slingshot (1,000 beli)",
     Callback = function()
-        local A_1 = "Slingshot"
-        local A_2 = 1000
-        local Event = game:GetService("Workspace").Merchants.SniperMerchant.Clickable.Retum
+GlobalConfig['A_1'] = "Slingshot"
+GlobalConfig['A_2'] = 1000
+GlobalConfig['Event'] = game:GetService("Workspace").Merchants.SniperMerchant.Clickable.Retum
         Event:FireServer(A_1, A_2)
     end,
 })
 
-local StarsButton = ShopTab:CreateButton({
+GlobalConfig['StarsButton'] = ShopTab:CreateButton({
     Name = "Stars (5,000 beli)",
     Callback = function()
-        local A_1 = "Stars"
-        local A_2 = 5000
-        local Event = game:GetService("Workspace").Merchants.SniperMerchant.Clickable.Retum
+GlobalConfig['A_1'] = "Stars"
+GlobalConfig['A_2'] = 5000
+GlobalConfig['Event'] = game:GetService("Workspace").Merchants.SniperMerchant.Clickable.Retum
         Event:FireServer(A_1, A_2)
     end,
 })
 
-local CrossbowButton = ShopTab:CreateButton({
+GlobalConfig['CrossbowButton'] = ShopTab:CreateButton({
     Name = "Crossbow (7,500 beli)",
     Callback = function()
-        local A_1 = "Crossbow"
-        local A_2 = 7500
-        local Event = game:GetService("Workspace").Merchants.SniperMerchant.Clickable.Retum
+GlobalConfig['A_1'] = "Crossbow"
+GlobalConfig['A_2'] = 7500
+GlobalConfig['Event'] = game:GetService("Workspace").Merchants.SniperMerchant.Clickable.Retum
         Event:FireServer(A_1, A_2)
     end,
 })
 
-local FlintlockButton = ShopTab:CreateButton({
+GlobalConfig['FlintlockButton'] = ShopTab:CreateButton({
     Name = "Flintlock (10,000 beli)",
     Callback = function()
-        local A_1 = "Flintlock"
-        local A_2 = 10000
-        local Event = game:GetService("Workspace").Merchants.SniperMerchant.Clickable.Retum
+GlobalConfig['A_1'] = "Flintlock"
+GlobalConfig['A_2'] = 10000
+GlobalConfig['Event'] = game:GetService("Workspace").Merchants.SniperMerchant.Clickable.Retum
         Event:FireServer(A_1, A_2)
     end,
 })
 
-local CannonButton = ShopTab:CreateButton({
+GlobalConfig['CannonButton'] = ShopTab:CreateButton({
     Name = "Cannon (400,000 beli)",
     Callback = function()
-        local A_1 = "Cannon Ball"
-        local A_2 = 400000
-        local Event = game:GetService("Workspace").Merchants.HeavyWeaponsMerchant.Clickable.Retum
+GlobalConfig['A_1'] = "Cannon Ball"
+GlobalConfig['A_2'] = 400000
+GlobalConfig['Event'] = game:GetService("Workspace").Merchants.HeavyWeaponsMerchant.Clickable.Retum
         Event:FireServer(A_1, A_2)
     end,
 })
 
 -- Divider
-local ShopSection = ShopTab:CreateSection("Swords")
+GlobalConfig['ShopSection'] = ShopTab:CreateSection("Swords")
 
 -- Swords Buttons
-local DaggerButton = ShopTab:CreateButton({
+GlobalConfig['DaggerButton'] = ShopTab:CreateButton({
     Name = "Dagger Sword (1,000 beli)",
     Callback = function()
-        local A_1 = "Dagger"
-        local A_2 = 1000
-        local Event = game:GetService("Workspace").Merchants.SwordMerchant.Clickable.Retum
+GlobalConfig['A_1'] = "Dagger"
+GlobalConfig['A_2'] = 1000
+GlobalConfig['Event'] = game:GetService("Workspace").Merchants.SwordMerchant.Clickable.Retum
         Event:FireServer(A_1, A_2)
     end,
 })
 
-local WakizashiButton = ShopTab:CreateButton({
+GlobalConfig['WakizashiButton'] = ShopTab:CreateButton({
     Name = "Wakizashi Sword (5,000 beli)",
     Callback = function()
-        local A_1 = "Wakizashi"
-        local A_2 = 5000
-        local Event = game:GetService("Workspace").Merchants.SwordMerchant.Clickable.Retum
+GlobalConfig['A_1'] = "Wakizashi"
+GlobalConfig['A_2'] = 5000
+GlobalConfig['Event'] = game:GetService("Workspace").Merchants.SwordMerchant.Clickable.Retum
         Event:FireServer(A_1, A_2)
     end,
 })
 
-local TachiButton = ShopTab:CreateButton({
+GlobalConfig['TachiButton'] = ShopTab:CreateButton({
     Name = "Tachi Sword (7,500 beli)",
     Callback = function()
-        local A_1 = "Tachi"
-        local A_2 = 75000
-        local Event = game:GetService("Workspace").Merchants.SwordMerchant.Clickable.Retum
+GlobalConfig['A_1'] = "Tachi"
+GlobalConfig['A_2'] = 75000
+GlobalConfig['Event'] = game:GetService("Workspace").Merchants.SwordMerchant.Clickable.Retum
         Event:FireServer(A_1, A_2)
     end,
 })
 
-local KatanaButton = ShopTab:CreateButton({
+GlobalConfig['KatanaButton'] = ShopTab:CreateButton({
     Name = "Katana Sword (10,000 beli)",
     Callback = function()
-        local A_1 = "Katana"
-        local A_2 = 10000
-        local Event = game:GetService("Workspace").Merchants.SwordMerchant.Clickable.Retum
+GlobalConfig['A_1'] = "Katana"
+GlobalConfig['A_2'] = 10000
+GlobalConfig['Event'] = game:GetService("Workspace").Merchants.SwordMerchant.Clickable.Retum
         Event:FireServer(A_1, A_2)
     end,
 })
 
-local FlailButton = ShopTab:CreateButton({
+GlobalConfig['FlailButton'] = ShopTab:CreateButton({
     Name = "Flail Sword (50,000 beli)",
     Callback = function()
-        local A_1 = "Flail"
-        local A_2 = 50000
-        local Event = game:GetService("Workspace").Merchants.FlailMerchant.Clickable.Retum
+GlobalConfig['A_1'] = "Flail"
+GlobalConfig['A_2'] = 50000
+GlobalConfig['Event'] = game:GetService("Workspace").Merchants.FlailMerchant.Clickable.Retum
         Event:FireServer(A_1, A_2)
     end,
 })
 
-local KrizmaButton = ShopTab:CreateButton({
+GlobalConfig['KrizmaButton'] = ShopTab:CreateButton({
     Name = "Krizma Sword (80,000 beli)",
     Callback = function()
-        local A_1 = "Krizma"
-        local A_2 = 80000
-        local Event = game:GetService("Workspace").Merchants.KrizmaMerch.Clickable.Retum
+GlobalConfig['A_1'] = "Krizma"
+GlobalConfig['A_2'] = 80000
+GlobalConfig['Event'] = game:GetService("Workspace").Merchants.KrizmaMerch.Clickable.Retum
         Event:FireServer(A_1, A_2)
     end,
 })
 
-local NpcSection = NpcTab:CreateSection("Npc's to Go")
+GlobalConfig['NpcSection'] = NpcTab:CreateSection("Npc's to Go")
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "Rayleigh",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = game.workspace.Merchants.QuestHakiMerchant.HumanoidRootPart.CFrame
     end
 })
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "Better Drink",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(1493, 260, 2171)
     end
 })
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "Drink",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-1282, 218, -1368)
     end
 })
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "Flail",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(1110, 217, 3369)
     end
 })
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "QuestFish",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-1702, 216, -325)
     end
 })
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "Krizma",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-1072, 361, 1669)
     end
 })
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "Sword",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(1005, 224, -3339)
     end
 })
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "Sniper",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-1843, 222, 3416)
     end
 })
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "Emote",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(1522, 265, 2165)
     end
 })
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "Affinity",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(113, 278, 4952)
     end
 })
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "Fish",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(1983, 218, 566)
     end
 })
 
-local Button = NpcTab:CreateButton({
+GlobalConfig['Button'] = NpcTab:CreateButton({
     Name = "Expertise",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(903, 270, 1219)
     end
 })
 
 -- Islands Tab
 
-local IslandsSection = IslandsTab:CreateSection("Islands to Go")
+GlobalConfig['IslandsSection'] = IslandsTab:CreateSection("Islands to Go")
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Grassy",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(737, 241, 1209)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Kaizu",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-1526.0230712891, 364.99990844727, 10510.020507812)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Snow Mountains",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(6501, 408, -1261)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Pursuer Boss",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(4847, 570, -7143)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Bar",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(1522, 260, 2188)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Cliffs",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(4598, 217, 4964)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Windmill",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-7, 224, -91)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Cave",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-280, 217, -831)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Krizma",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-1109, 341, 1645)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Sam",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-1283, 218, -1348)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Green",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-2727, 253, 1041)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Trees",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(1068, 217, 3351)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Pyramid",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(118, 216, 4773)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Merlin Fish",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-1668, 217, -300)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Snowy",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-1896, 222, 3385)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Mountain",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(2052, 488, -701)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Marine Ford",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-3164, 296, -3780)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Sand Castle",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(1020, 224, -3277)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Forest",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-5781, 216, 114)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Evil",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-5169, 523, -7803)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Crescent",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(3193, 357, 1670)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Islands",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-4319, 245, 5252)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Town",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(1818, 218, 755)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Rocky",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-37, 229, 2149)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Palm",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(766, 216, -1374)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Sand",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-2747, 216, -942)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Sand 2",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(162, 216, -2265)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Small",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(1237, 240, -244)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Tiny",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-1235, 223, 623)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Super Tiny",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(-4007, 216, -2190)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Grass",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = CFrame.new(2096, 217, -1884)
     end
 })
 
-local Button = IslandsTab:CreateButton({
+GlobalConfig['Button'] = IslandsTab:CreateButton({
     Name = "Atlar",
     Callback = function()
-        local char = game.Players.LocalPlayer.Character.HumanoidRootPart
+GlobalConfig['char'] = game.Players.LocalPlayer.Character.HumanoidRootPart
         char.CFrame = game.workspace.Altar.RecepticalEffect.CFrame * CFrame.new(0, 5, 0)
     end
 })
 
-local OthersSection = OtherTab:CreateSection("Claim Utilities")
+GlobalConfig['OthersSection'] = OtherTab:CreateSection("Claim Utilities")
 
-local Toggle = OtherTab:CreateToggle({ 
+GlobalConfig['Toggle'] = OtherTab:CreateToggle({
     Name = "Auto Claim Mission",
     CurrentValue = false,
     Flag = "Noone",
@@ -2541,12 +2543,12 @@ end
 end 
 end);
 
-local Toggle = OtherTab:CreateToggle({ 
+GlobalConfig['Toggle'] = OtherTab:CreateToggle({
     Name = "Auto Claim Beri Gift",
     CurrentValue = false,
     Flag = "Noone",
     Callback = function(ACG)
-		_G.autoclaimgift = ACG
+GlobalConfig['autoclaimgift'] = ACG
 	end    
 })
 
@@ -2554,20 +2556,20 @@ spawn(function()
     while wait(0) do
         pcall(function()
             if _G.autoclaimgift then
-local A_1 = "RewardMark"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ClaimRewardHourly
+GlobalConfig['A_1'] = "RewardMark"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ClaimRewardHourly
     Event:FireServer(A_1)
             end
         end)
     end
 end);
 
-local Toggle = OtherTab:CreateToggle({ 
+GlobalConfig['Toggle'] = OtherTab:CreateToggle({
     Name = "Auto Claim Gems Gift",
     CurrentValue = false,
     Flag = "Noone",
     Callback = function(ACG)
-		_G.autoclaimgift = ACG
+GlobalConfig['autoclaimgift'] = ACG
 	end    
 })
 
@@ -2575,20 +2577,20 @@ spawn(function()
     while wait(0) do
         pcall(function()
             if _G.autoclaimgift then
-local A_1 = "RewardMark"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ClaimRewardDaily
+GlobalConfig['A_1'] = "RewardMark"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ClaimRewardDaily
     Event:FireServer(A_1)
             end
         end)
     end
 end)
 
-local Toggle = OtherTab:CreateToggle({ 
+GlobalConfig['Toggle'] = OtherTab:CreateToggle({
     Name = "Auto Challenges",
     CurrentValue = false,
     Flag = "Noone",
     Callback = function(ACLL)
-		_G.autoclaim = ACLL
+GlobalConfig['autoclaim'] = ACLL
 	end    
 })
 
@@ -2596,48 +2598,24 @@ spawn(function()
     while wait(0) do
         pcall(function()
             if _G.autoclaim then
-local A_1 = "Claim"
-local A_2 = "Daily1"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Daily1"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
     Event:FireServer(A_1,A_2)
 wait(.8)
-local A_1 = "Claim"
-local A_2 = "Daily2"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Daily2"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
     Event:FireServer(A_1,A_2)
 wait(.8)
-local A_1 = "Claim"
-local A_2 = "Daily3"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Daily3"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
     Event:FireServer(A_1,A_2)
 wait(.8)
-local A_1 = "Claim"
-local A_2 = "Daily4"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-            end
-        end)
-    end
-end)
-
-spawn(function()
-    while wait(0) do
-        pcall(function()
-            if _G.autoclaim then
-local A_1 = "Claim"
-local A_2 = "Weekly1"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Weekly2"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Weekly3"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Daily4"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
     Event:FireServer(A_1,A_2)
 wait(.8)
             end
@@ -2649,14 +2627,19 @@ spawn(function()
     while wait(0) do
         pcall(function()
             if _G.autoclaim then
-local A_1 = "Claim"
-local A_2 = "Monthly1"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Weekly1"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
     Event:FireServer(A_1,A_2)
 wait(.8)
-local A_1 = "Claim"
-local A_2 = "Monthly2"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Weekly2"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Weekly3"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
     Event:FireServer(A_1,A_2)
 wait(.8)
             end
@@ -2668,74 +2651,14 @@ spawn(function()
     while wait(0) do
         pcall(function()
             if _G.autoclaim then
-local A_1 = "Claim"
-local A_2 = "Challenge1"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Monthly1"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
     Event:FireServer(A_1,A_2)
 wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge2"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge3"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge4"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge5"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge6"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge7"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge8"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge9"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge10"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge11"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge12"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge13"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
-    Event:FireServer(A_1,A_2)
-wait(.8)
-local A_1 = "Claim"
-local A_2 = "Challenge14"
-    local Event = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Monthly2"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
     Event:FireServer(A_1,A_2)
 wait(.8)
             end
@@ -2743,10 +2666,89 @@ wait(.8)
     end
 end)
 
-local OthersSection = OtherTab:CreateSection("Auto Reroll Affinities")
+spawn(function()
+    while wait(0) do
+        pcall(function()
+            if _G.autoclaim then
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge1"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge2"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge3"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge4"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge5"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge6"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge7"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge8"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge9"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge10"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge11"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge12"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge13"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+GlobalConfig['A_1'] = "Claim"
+GlobalConfig['A_2'] = "Challenge14"
+GlobalConfig['Event'] = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote
+    Event:FireServer(A_1,A_2)
+wait(.8)
+            end
+        end)
+    end
+end)
+
+GlobalConfig['OthersSection'] = OtherTab:CreateSection("Auto Reroll Affinities")
 
 local Toggle
-local isRunning = false -- Variável para controlar o loop
+GlobalConfig['isRunning'] = false -- Variável para controlar o loop
 
 -- Criando o Toggle
 ToggleGems = OtherTab:CreateToggle({
@@ -2759,21 +2761,21 @@ ToggleGems = OtherTab:CreateToggle({
             spawn(function()
                 while isRunning1 do
                     wait(8) -- Intervalo do loop
-                    local player = game.Players.LocalPlayer
-                    local playerId = player.UserId
-                    local userDataName = game.Workspace.UserData["User_" .. playerId]
+GlobalConfig['player'] = game.Players.LocalPlayer
+GlobalConfig['playerId'] = player.UserId
+GlobalConfig['userDataName'] = game.Workspace.UserData["User_" .. playerId]
 
                     -- DFT1 Variables
-                    local AffMelee1 = userDataName.Data.DFT1Melee.Value
-                    local AffSniper1 = userDataName.Data.DFT1Sniper.Value
-                    local AffDefense1 = userDataName.Data.DFT1Defense.Value
-                    local AffSword1 = userDataName.Data.DFT1Sword.Value
+GlobalConfig['AffMelee1'] = userDataName.Data.DFT1Melee.Value
+GlobalConfig['AffSniper1'] = userDataName.Data.DFT1Sniper.Value
+GlobalConfig['AffDefense1'] = userDataName.Data.DFT1Defense.Value
+GlobalConfig['AffSword1'] = userDataName.Data.DFT1Sword.Value
 
                     -- DFT2 Variables
-                    local AffMelee2 = userDataName.Data.DFT2Melee.Value
-                    local AffSniper2 = userDataName.Data.DFT2Sniper.Value
-                    local AffDefense2 = userDataName.Data.DFT2Defense.Value
-                    local AffSword2 = userDataName.Data.DFT2Sword.Value
+GlobalConfig['AffMelee2'] = userDataName.Data.DFT2Melee.Value
+GlobalConfig['AffSniper2'] = userDataName.Data.DFT2Sniper.Value
+GlobalConfig['AffDefense2'] = userDataName.Data.DFT2Defense.Value
+GlobalConfig['AffSword2'] = userDataName.Data.DFT2Sword.Value
 
                     -- Check for DFT1
                     if AffSniper1 == 2 and AffSword1 == 2 and AffMelee1 == 2 and AffDefense1 == 2 then
@@ -2785,7 +2787,7 @@ ToggleGems = OtherTab:CreateToggle({
                         script.Parent:Destroy()
                     end
 
-                    local args1 = {
+GlobalConfig['args1'] = {
                         [1] = "DFT1",
                         [2] = false, -- defense
                         [3] = false, -- melee
@@ -2794,7 +2796,7 @@ ToggleGems = OtherTab:CreateToggle({
                         [6] = "Gems"
                     }
 
-                    local args2 = {
+GlobalConfig['args2'] = {
                         [1] = "DFT2",
                         [2] = false, -- defense
                         [3] = false, -- melee
@@ -2846,7 +2848,7 @@ ToggleGems = OtherTab:CreateToggle({
 
 
 local ToggleBeri
-local isRunning2 = false -- Variável para controlar o loop
+GlobalConfig['isRunning2'] = false -- Variável para controlar o loop
 
 -- Criando o Toggle
 ToggleBeri = OtherTab:CreateToggle({
@@ -2859,21 +2861,21 @@ ToggleBeri = OtherTab:CreateToggle({
             spawn(function()
                 while isRunning2 do
                     wait(8) -- Intervalo do loop
-                    local player = game.Players.LocalPlayer
-                    local playerId = player.UserId
-                    local userDataName = game.Workspace.UserData["User_" .. playerId]
+GlobalConfig['player'] = game.Players.LocalPlayer
+GlobalConfig['playerId'] = player.UserId
+GlobalConfig['userDataName'] = game.Workspace.UserData["User_" .. playerId]
 
                     -- DFT1 Variables
-                    local AffMelee1 = userDataName.Data.DFT1Melee.Value
-                    local AffSniper1 = userDataName.Data.DFT1Sniper.Value
-                    local AffDefense1 = userDataName.Data.DFT1Defense.Value
-                    local AffSword1 = userDataName.Data.DFT1Sword.Value
+GlobalConfig['AffMelee1'] = userDataName.Data.DFT1Melee.Value
+GlobalConfig['AffSniper1'] = userDataName.Data.DFT1Sniper.Value
+GlobalConfig['AffDefense1'] = userDataName.Data.DFT1Defense.Value
+GlobalConfig['AffSword1'] = userDataName.Data.DFT1Sword.Value
 
                     -- DFT2 Variables
-                    local AffMelee2 = userDataName.Data.DFT2Melee.Value
-                    local AffSniper2 = userDataName.Data.DFT2Sniper.Value
-                    local AffDefense2 = userDataName.Data.DFT2Defense.Value
-                    local AffSword2 = userDataName.Data.DFT2Sword.Value
+GlobalConfig['AffMelee2'] = userDataName.Data.DFT2Melee.Value
+GlobalConfig['AffSniper2'] = userDataName.Data.DFT2Sniper.Value
+GlobalConfig['AffDefense2'] = userDataName.Data.DFT2Defense.Value
+GlobalConfig['AffSword2'] = userDataName.Data.DFT2Sword.Value
 
                     -- Check for DFT1
                     if AffSniper1 == 2 and AffSword1 == 2 and AffMelee1 == 2 and AffDefense1 == 2 then
@@ -2885,7 +2887,7 @@ ToggleBeri = OtherTab:CreateToggle({
                         script.Parent:Destroy()
                     end
 
-                    local args1 = {
+GlobalConfig['args1'] = {
                         [1] = "DFT1",
                         [2] = false, -- defense
                         [3] = false, -- melee
@@ -2894,7 +2896,7 @@ ToggleBeri = OtherTab:CreateToggle({
                         [6] = "Cash"
                     }
 
-                    local args2 = {
+GlobalConfig['args2'] = {
                         [1] = "DFT2",
                         [2] = false, -- defense
                         [3] = false, -- melee
@@ -2943,18 +2945,18 @@ ToggleBeri = OtherTab:CreateToggle({
     end,
 })
 
-local OthersSection = OtherTab:CreateSection("Fake Weapons")
+GlobalConfig['OthersSection'] = OtherTab:CreateSection("Fake Weapons")
 
 -- Seastone Cestus Button
-local SeastoneButton = OtherTab:CreateButton({
+GlobalConfig['SeastoneButton'] = OtherTab:CreateButton({
     Name = "Seastone Cestus (500 melee requirement)",
     Callback = function()
-        local Players = game:GetService("Players")
-        local cache = {}
+GlobalConfig['Players'] = game:GetService("Players")
+GlobalConfig['cache'] = {}
 
         local function getUserId(name)
             if cache[name] then return cache[name] end
-            local player = Players:FindFirstChild(name)
+GlobalConfig['player'] = Players:FindFirstChild(name)
             if player then
                 cache[name] = player.UserId
                 return player.UserId
@@ -2968,25 +2970,25 @@ local SeastoneButton = OtherTab:CreateButton({
             return id
         end
 
-        local playerName = game.Players.LocalPlayer.Name
-        local userId = getUserId(playerName)
-        local weaponName = "Seastone Cestus"
-        local event = game:GetService("Workspace").UserData["User_" .. userId].UpdateMelee
+GlobalConfig['playerName'] = game.Players.LocalPlayer.Name
+GlobalConfig['userId'] = getUserId(playerName)
+GlobalConfig['weaponName'] = "Seastone Cestus"
+GlobalConfig['event'] = game:GetService("Workspace").UserData["User_" .. userId].UpdateMelee
 
         event:FireServer(weaponName)
     end,
 })
 
 -- Aqua Staff Button
-local AquaStaffButton = OtherTab:CreateButton({
+GlobalConfig['AquaStaffButton'] = OtherTab:CreateButton({
     Name = "Aqua Staff (500 melee requirement)",
     Callback = function()
-        local Players = game:GetService("Players")
-        local cache = {}
+GlobalConfig['Players'] = game:GetService("Players")
+GlobalConfig['cache'] = {}
 
         local function getUserId(name)
             if cache[name] then return cache[name] end
-            local player = Players:FindFirstChild(name)
+GlobalConfig['player'] = Players:FindFirstChild(name)
             if player then
                 cache[name] = player.UserId
                 return player.UserId
@@ -3000,20 +3002,20 @@ local AquaStaffButton = OtherTab:CreateButton({
             return id
         end
 
-        local playerName = game.Players.LocalPlayer.Name
-        local userId = getUserId(playerName)
-        local weaponName = "Aqua Staff"
-        local event = game:GetService("Workspace").UserData["User_" .. userId].UpdateMelee
+GlobalConfig['playerName'] = game.Players.LocalPlayer.Name
+GlobalConfig['userId'] = getUserId(playerName)
+GlobalConfig['weaponName'] = "Aqua Staff"
+GlobalConfig['event'] = game:GetService("Workspace").UserData["User_" .. userId].UpdateMelee
 
         event:FireServer(weaponName)
     end,
 })
 
 
-local SkillsSection = SkillsTab:CreateSection("PvP Utilities")
+GlobalConfig['SkillsSection'] = SkillsTab:CreateSection("PvP Utilities")
 
 -- Slider para controlar a velocidade do Yoru
-local Slider = SkillsTab:CreateSlider({
+GlobalConfig['Slider'] = SkillsTab:CreateSlider({
     Name = "Yoru Speed",
     Range = {0, 10000}, -- Define o intervalo do slider
     Increment = 1, -- Aumentos em passos de 1
@@ -3025,19 +3027,19 @@ local Slider = SkillsTab:CreateSlider({
 })
 
 -- Toggle para ativar/desativar o Yoru Spam
-local Toggle = SkillsTab:CreateToggle({
+GlobalConfig['Toggle'] = SkillsTab:CreateToggle({
     Name = "Yoru Spam",
     CurrentValue = false,
     Flag = "ToggleYoruSpam", -- Identificador único para a configuração
     Callback = function(Value)
-        _G.Yoru = Value -- Ativa ou desativa o loop com base no valor do toggle
+GlobalConfig['Yoru'] = Value -- Ativa ou desativa o loop com base no valor do toggle
         if _G.Yoru then
             while _G.Yoru do
                 wait()
-                local Players = game:GetService("Players")
-                local Plr = Players.LocalPlayer
-                local Character = Plr.Character
-                local Yoru = Character:FindFirstChild("Yoru")
+GlobalConfig['Players'] = game:GetService("Players")
+GlobalConfig['Plr'] = Players.LocalPlayer
+GlobalConfig['Character'] = Plr.Character
+GlobalConfig['Yoru'] = Character:FindFirstChild("Yoru")
                 local Environment
 
                 wait()
@@ -3058,16 +3060,16 @@ local Toggle = SkillsTab:CreateToggle({
     end,
 })
 
-local Toggle = SkillsTab:CreateToggle({
+GlobalConfig['Toggle'] = SkillsTab:CreateToggle({
     Name = "100% Skill",
     CurrentValue = false,
     Flag = "Auto100Skill",
     Callback = function(Value)
-        _G.auto100rate = Value
+GlobalConfig['auto100rate'] = Value
         if _G.auto100rate then
             aaxc = hookmetamethod(game, "__namecall", function(self, ...)
-                local args = { ... }
-                local method = getnamecallmethod()
+GlobalConfig['args'] = { ... }
+GlobalConfig['method'] = getnamecallmethod()
                 if method == "FireServer" or method == "InvokeServer" then
                     if self.Name == "RemoteEvent" and args[3] == "StopCharging" and _G.auto100rate then
                         args[6] = 100 -- Define o valor como 100
@@ -3080,7 +3082,7 @@ local Toggle = SkillsTab:CreateToggle({
     end,
 })
 
-local Toggle = SkillsTab:CreateToggle({
+GlobalConfig['Toggle'] = SkillsTab:CreateToggle({
     Name = "Anti Stun",
     CurrentValue = false,
     Flag = "AntiStunToggle",
@@ -3091,7 +3093,7 @@ local Toggle = SkillsTab:CreateToggle({
                 while getgenv().antistun do
                     wait()
                     pcall(function()
-                        local plr = game.Players.LocalPlayer.Character
+GlobalConfig['plr'] = game.Players.LocalPlayer.Character
                         repeat
                             -- Definindo os valores necessários para evitar "stun"
                             plr.BurnMagmaOverTime.Value = true
@@ -3126,161 +3128,15 @@ local Toggle = SkillsTab:CreateToggle({
     end,
 })
 
-local Section1 = SkillsTab:CreateSection("Auto Skill Devil Fruit 1")
+GlobalConfig['WebhookSection'] = WebHookTab:CreateSection("Webhook Utilities")
 
--- Tabela para armazenar os estados das habilidades
-local activeSkills = {
-    Z = false,
-    X = false,
-    C = false,
-    V = false,
-    B = false,
-    N = false,
-    F = false,
-    G = false,
-    H = false,
-    J = false,
-    K = false,
-    L = false
-}
-
--- Criação dos toggles do grupo 1
-local ToggleZ = SkillsTab:CreateToggle({
-    Name = "Auto Skill Z",
-    CurrentValue = false,
-    Flag = "ToggleZ",
-    Callback = function(state)
-        activeSkills.Z = state
-    end,
-})
-
-local ToggleX = SkillsTab:CreateToggle({
-    Name = "Auto Skill X",
-    CurrentValue = false,
-    Flag = "ToggleX",
-    Callback = function(state)
-        activeSkills.X = state
-    end,
-})
-
-local ToggleC = SkillsTab:CreateToggle({
-    Name = "Auto Skill C",
-    CurrentValue = false,
-    Flag = "ToggleC",
-    Callback = function(state)
-        activeSkills.C = state
-    end,
-})
-
-local ToggleV = SkillsTab:CreateToggle({
-    Name = "Auto Skill V",
-    CurrentValue = false,
-    Flag = "ToggleV",
-    Callback = function(state)
-        activeSkills.V = state
-    end,
-})
-
-local ToggleB = SkillsTab:CreateToggle({
-    Name = "Auto Skill B",
-    CurrentValue = false,
-    Flag = "ToggleB",
-    Callback = function(state)
-        activeSkills.B = state
-    end,
-})
-
-local ToggleN = SkillsTab:CreateToggle({
-    Name = "Auto Skill N",
-    CurrentValue = false,
-    Flag = "ToggleN",
-    Callback = function(state)
-        activeSkills.N = state
-    end,
-})
-
-local Section2 = SkillsTab:CreateSection("Auto Skill Devil Fruit 2")
-
--- Criação dos toggles do grupo 2
-local ToggleF = SkillsTab:CreateToggle({
-    Name = "Auto Skill F",
-    CurrentValue = false,
-    Flag = "ToggleF",
-    Callback = function(state)
-        activeSkills.F = state
-    end,
-})
-
-local ToggleG = SkillsTab:CreateToggle({
-    Name = "Auto Skill G",
-    CurrentValue = false,
-    Flag = "ToggleG",
-    Callback = function(state)
-        activeSkills.G = state
-    end,
-})
-
-local ToggleH = SkillsTab:CreateToggle({
-    Name = "Auto Skill H",
-    CurrentValue = false,
-    Flag = "ToggleH",
-    Callback = function(state)
-        activeSkills.H = state
-    end,
-})
-
-local ToggleJ = SkillsTab:CreateToggle({
-    Name = "Auto Skill J",
-    CurrentValue = false,
-    Flag = "ToggleJ",
-    Callback = function(state)
-        activeSkills.J = state
-    end,
-})
-
-local ToggleK = SkillsTab:CreateToggle({
-    Name = "Auto Skill K",
-    CurrentValue = false,
-    Flag = "ToggleK",
-    Callback = function(state)
-        activeSkills.K = state
-    end,
-})
-
-local ToggleL = SkillsTab:CreateToggle({
-    Name = "Auto Skill L",
-    CurrentValue = false,
-    Flag = "ToggleL",
-    Callback = function(state)
-        activeSkills.L = state
-    end,
-})
-
--- Loop para executar as habilidades ativas
-spawn(function()
-    while wait(0.1) do
-        for skill, isActive in pairs(activeSkills) do
-            if isActive then
-                pcall(function()
-                    Skill(skill)
-                end)
-            end
-        end
-    end
-end)
-
-
-
-
-local WebhookSection = WebHookTab:CreateSection("Webhook Utilities")
-
-local HttpService = game:GetService("HttpService")
+GlobalConfig['HttpService'] = game:GetService("HttpService")
 
 -- Variáveis globais
-local webhookEnabled = false
-local webhookURL = ""
-local sendInterval = 1 -- Intervalo padrão em minutos
-local sendLoopActive = false
+GlobalConfig['webhookEnabled'] = false
+GlobalConfig['webhookURL'] = ""
+GlobalConfig['sendInterval'] = 1 -- Intervalo padrão em minutos
+GlobalConfig['sendLoopActive'] = false
 
 -- Função para enviar dados para o webhook
 local function sendWebhookData()
@@ -3289,19 +3145,19 @@ local function sendWebhookData()
         return
     end
 
-    local player = game.Players.LocalPlayer
-    local userData = game.Workspace.UserData:FindFirstChild("User_" .. player.UserId)
+GlobalConfig['player'] = game.Players.LocalPlayer
+GlobalConfig['userData'] = game.Workspace.UserData:FindFirstChild("User_" .. player.UserId)
     if not userData or not userData:FindFirstChild("Data") then
         warn("Dados do jogador não encontrados.")
         return
     end
 
-    local Data = userData.Data
-    local userData = game.Workspace.UserData:FindFirstChild("User_" .. player.UserId)
-    local totalLevel = userData.TotalLevel.Value
+GlobalConfig['Data'] = userData.Data
+GlobalConfig['userData'] = game.Workspace.UserData:FindFirstChild("User_" .. player.UserId)
+GlobalConfig['totalLevel'] = userData.TotalLevel.Value
 
     -- Seções do embed
-    local generalPlayer = {
+GlobalConfig['generalPlayer'] = {
         { ["name"] = "Name", ["value"] = player.Name, ["inline"] = false },
         { ["name"] = "\n", ["value"] = "─────────────────────────────", ["inline"] = false },
         { ["name"] = "Beri", ["value"] = tostring(Data.Cash.Value), ["inline"] = true },
@@ -3312,7 +3168,7 @@ local function sendWebhookData()
         { ["name"] = "Compass Tokens", ["value"] = tostring(Data.CompassTokens.Value), ["inline"] = true },
     }
 
-    local playerStats = {
+GlobalConfig['playerStats'] = {
         { ["name"] = "Defense Level", ["value"] = tostring(Data.DefenseLevel.Value), ["inline"] = true },
         { ["name"] = "Melee Level", ["value"] = tostring(Data.MeleeLevel.Value), ["inline"] = true },
         { ["name"] = "Sniper Level", ["value"] = tostring(Data.SniperLevel.Value), ["inline"] = true },
@@ -3321,7 +3177,7 @@ local function sendWebhookData()
         { ["name"] = "Total Level", ["value"] = tostring(totalLevel), ["inline"] = true },
     }
 
-    local playerDFStats = {
+GlobalConfig['playerDFStats'] = {
         { ["name"] = "DF1", ["value"] = Data.DevilFruit.Value, ["inline"] = true },
         { ["name"] = "DF2", ["value"] = Data.DevilFruit2.Value, ["inline"] = true },
         { ["name"] = "\n", ["value"] = "─────────────────────────────", ["inline"] = false },
@@ -3336,7 +3192,7 @@ local function sendWebhookData()
         { ["name"] = "DFT2 Sword", ["value"] = tostring(Data.DFT2Sword.Value), ["inline"] = true },
     }
     
-    local storedDevilFruits = {}
+GlobalConfig['storedDevilFruits'] = {}
     for i = 1, 12 do
         table.insert(storedDevilFruits, {
             ["name"] = "StoredDF" .. i,
@@ -3396,7 +3252,7 @@ local function startWebhookLoop()
 end
 
 -- Controle de Input
-local Input = WebHookTab:CreateInput({
+GlobalConfig['Input'] = WebHookTab:CreateInput({
     Name = "Webhook URL",
     CurrentValue = "",
     PlaceholderText = "Insira o link da Webhook",
@@ -3409,7 +3265,7 @@ local Input = WebHookTab:CreateInput({
 })
 
 -- Controle de Toggle
-local Toggle = WebHookTab:CreateToggle({
+GlobalConfig['Toggle'] = WebHookTab:CreateToggle({
     Name = "Ativar Webhook",
     CurrentValue = false,
     Flag = "WebhookToggle",
@@ -3426,7 +3282,7 @@ local Toggle = WebHookTab:CreateToggle({
 })
 
 -- Controle de Slider
-local Slider = WebHookTab:CreateSlider({
+GlobalConfig['Slider'] = WebHookTab:CreateSlider({
     Name = "Intervalo de Envio (min)",
     Range = {1, 60},
     Increment = 1,
