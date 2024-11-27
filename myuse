@@ -3128,19 +3128,29 @@ local Toggle = SkillsTab:CreateToggle({
 
 local SkillsTab = {} -- Supondo que SkillsTab seja seu objeto de aba
 
--- Definição das habilidades em uma tabela
+-- Definição das teclas de habilidade
 local skillKeys = {
     "Z", "X", "C", "V", "B", "N",  -- Auto Skill Devil Fruit 1
     "F", "G", "H", "J", "K", "L"   -- Auto Skill Devil Fruit 2
 }
 
-local activeSkills = {} -- Tabela para armazenar o estado das habilidades
+local activeSkills = {} -- Tabela para armazenar o estado dos toggles das teclas
 
--- Função para criar toggles dinamicamente
-local function createSkillToggles(skillGroup, skills)
-    local Section = SkillsTab:CreateSection(skillGroup)
+-- Função para criar seções e toggles dinamicamente
+local function createSkillToggles()
+    local Section1 = SkillsTab:CreateSection("┇ Auto Skill Devil Fruit 1 ┇")
+    for _, skill in ipairs({"Z", "X", "C", "V", "B", "N"}) do
+        SkillsTab:CreateToggle({
+            Name = "Auto Skill " .. skill,
+            CurrentValue = false,
+            Callback = function(Value)
+                activeSkills[skill] = Value
+            end,
+        })
+    end
 
-    for _, skill in ipairs(skills) do
+    local Section2 = SkillsTab:CreateSection("┇ Auto Skill Devil Fruit 2 ┇")
+    for _, skill in ipairs({"F", "G", "H", "J", "K", "L"}) do
         SkillsTab:CreateToggle({
             Name = "Auto Skill " .. skill,
             CurrentValue = false,
@@ -3151,11 +3161,10 @@ local function createSkillToggles(skillGroup, skills)
     end
 end
 
--- Criar seções para habilidades
-createSkillToggles("┇ Auto Skill Devil Fruit 1 ┇", {"Z", "X", "C", "V", "B", "N"})
-createSkillToggles("┇ Auto Skill Devil Fruit 2 ┇", {"F", "G", "H", "J", "K", "L"})
+-- Chama a função para criar os toggles
+createSkillToggles()
 
--- Criar spawn para verificar e ativar habilidades
+-- Criar um loop para verificar as teclas ativas e executar habilidades
 spawn(function()
     while wait(0.1) do
         for skill, isActive in pairs(activeSkills) do
@@ -3167,6 +3176,7 @@ spawn(function()
         end
     end
 end)
+
 
 
 local WebhookSection = WebHookTab:CreateSection("Webhook Utilities")
