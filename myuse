@@ -3126,45 +3126,137 @@ local Toggle = SkillsTab:CreateToggle({
     end,
 })
 
-local SkillsTab = {} -- Supondo que SkillsTab seja seu objeto de aba
+local Section1 = SkillsTab:CreateSection("Auto Skill Devil Fruit 1")
 
--- Definição das teclas de habilidade
-local skillKeys = {
-    "Z", "X", "C", "V", "B", "N",  -- Auto Skill Devil Fruit 1
-    "F", "G", "H", "J", "K", "L"   -- Auto Skill Devil Fruit 2
+-- Tabela para armazenar os estados das habilidades
+local activeSkills = {
+    Z = false,
+    X = false,
+    C = false,
+    V = false,
+    B = false,
+    N = false,
+    F = false,
+    G = false,
+    H = false,
+    J = false,
+    K = false,
+    L = false
 }
 
-local activeSkills = {} -- Tabela para armazenar o estado dos toggles das teclas
+-- Criação dos toggles do grupo 1
+local ToggleZ = SkillsTab:CreateToggle({
+    Name = "Auto Skill Z",
+    CurrentValue = false,
+    Flag = "ToggleZ",
+    Callback = function(state)
+        activeSkills.Z = state
+    end,
+})
 
--- Função para criar seções e toggles dinamicamente
-local function createSkillToggles()
-    local Section1 = SkillsTab:CreateSection("┇ Auto Skill Devil Fruit 1 ┇")
-    for _, skill in ipairs({"Z", "X", "C", "V", "B", "N"}) do
-        SkillsTab:CreateToggle({
-            Name = "Auto Skill " .. skill,
-            CurrentValue = false,
-            Callback = function(Value)
-                activeSkills[skill] = Value
-            end,
-        })
-    end
+local ToggleX = SkillsTab:CreateToggle({
+    Name = "Auto Skill X",
+    CurrentValue = false,
+    Flag = "ToggleX",
+    Callback = function(state)
+        activeSkills.X = state
+    end,
+})
 
-    local Section2 = SkillsTab:CreateSection("┇ Auto Skill Devil Fruit 2 ┇")
-    for _, skill in ipairs({"F", "G", "H", "J", "K", "L"}) do
-        SkillsTab:CreateToggle({
-            Name = "Auto Skill " .. skill,
-            CurrentValue = false,
-            Callback = function(Value)
-                activeSkills[skill] = Value
-            end,
-        })
-    end
-end
+local ToggleC = SkillsTab:CreateToggle({
+    Name = "Auto Skill C",
+    CurrentValue = false,
+    Flag = "ToggleC",
+    Callback = function(state)
+        activeSkills.C = state
+    end,
+})
 
--- Chama a função para criar os toggles
-createSkillToggles()
+local ToggleV = SkillsTab:CreateToggle({
+    Name = "Auto Skill V",
+    CurrentValue = false,
+    Flag = "ToggleV",
+    Callback = function(state)
+        activeSkills.V = state
+    end,
+})
 
--- Criar um loop para verificar as teclas ativas e executar habilidades
+local ToggleB = SkillsTab:CreateToggle({
+    Name = "Auto Skill B",
+    CurrentValue = false,
+    Flag = "ToggleB",
+    Callback = function(state)
+        activeSkills.B = state
+    end,
+})
+
+local ToggleN = SkillsTab:CreateToggle({
+    Name = "Auto Skill N",
+    CurrentValue = false,
+    Flag = "ToggleN",
+    Callback = function(state)
+        activeSkills.N = state
+    end,
+})
+
+local Section2 = SkillsTab:CreateSection("Auto Skill Devil Fruit 2")
+
+-- Criação dos toggles do grupo 2
+local ToggleF = SkillsTab:CreateToggle({
+    Name = "Auto Skill F",
+    CurrentValue = false,
+    Flag = "ToggleF",
+    Callback = function(state)
+        activeSkills.F = state
+    end,
+})
+
+local ToggleG = SkillsTab:CreateToggle({
+    Name = "Auto Skill G",
+    CurrentValue = false,
+    Flag = "ToggleG",
+    Callback = function(state)
+        activeSkills.G = state
+    end,
+})
+
+local ToggleH = SkillsTab:CreateToggle({
+    Name = "Auto Skill H",
+    CurrentValue = false,
+    Flag = "ToggleH",
+    Callback = function(state)
+        activeSkills.H = state
+    end,
+})
+
+local ToggleJ = SkillsTab:CreateToggle({
+    Name = "Auto Skill J",
+    CurrentValue = false,
+    Flag = "ToggleJ",
+    Callback = function(state)
+        activeSkills.J = state
+    end,
+})
+
+local ToggleK = SkillsTab:CreateToggle({
+    Name = "Auto Skill K",
+    CurrentValue = false,
+    Flag = "ToggleK",
+    Callback = function(state)
+        activeSkills.K = state
+    end,
+})
+
+local ToggleL = SkillsTab:CreateToggle({
+    Name = "Auto Skill L",
+    CurrentValue = false,
+    Flag = "ToggleL",
+    Callback = function(state)
+        activeSkills.L = state
+    end,
+})
+
+-- Loop para executar as habilidades ativas
 spawn(function()
     while wait(0.1) do
         for skill, isActive in pairs(activeSkills) do
@@ -3176,6 +3268,7 @@ spawn(function()
         end
     end
 end)
+
 
 
 
