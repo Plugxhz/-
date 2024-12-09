@@ -2693,7 +2693,12 @@ Rayfield:Notify({
 
 local Section = WelcomeTab:CreateSection("Update")
 
-WelcomeTab:AddLabel("[+] Ascended Hub is HERE!")
-WelcomeTab:AddLabel("[+] Best AutoFarm!")
-WelcomeTab:AddLabel("[+] Up and Growing")
-WelcomeTab:AddLabel("[+] Smooth")
+local Divider = WelcomeTab:CreateDivider()
+
+local Label = WelcomeTab:CreateLabel("Join 👑")
+local Button = Tab1Premium:CreateButton({
+    Name = "Copy Discord 👑 ",
+    Callback = function(Value)
+        setclipboard("Enter URL")
+    end,
+ })
