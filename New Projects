@@ -2690,13 +2690,10 @@ Rayfield:Notify({
     Image = "rewind",
 })
 
-
-local Section = WelcomeTab:CreateSection("Update")
-
 local Divider = WelcomeTab:CreateDivider()
 
 local Label = WelcomeTab:CreateLabel("Join 👑")
-local Button = Tab1Premium:CreateButton({
+local Button = WelcomeTab:CreateButton({
     Name = "Copy Discord 👑 ",
     Callback = function(Value)
         setclipboard("Enter URL")
